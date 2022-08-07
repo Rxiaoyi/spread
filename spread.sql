@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 04/08/2022 21:32:25
+ Date: 07/08/2022 22:15:44
 */
 
 SET NAMES utf8mb4;
@@ -4487,29 +4487,37 @@ CREATE TABLE `shop_order_send`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `spread_android`;
 CREATE TABLE `spread_android`  (
-  `id` int(20) NOT NULL COMMENT 'ID',
+  `id` int(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '应用名称',
   `icon` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '应用图标',
   `packageName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '应用包名',
-  `status` tinyint(1) NULL DEFAULT 1 COMMENT '状态(0禁用,1启用)',
+  `status` tinyint(1) NULL DEFAULT 1 COMMENT '状态(0待审核 ,1审核完成,2审核拒绝)',
   `sort` bigint(20) NULL DEFAULT 0 COMMENT '排序权重',
   `categoryId` int(20) NULL DEFAULT NULL COMMENT '分类Id',
-  `is_deleted` tinyint(1) NULL DEFAULT 0 COMMENT '删除(1删除,0未删)',
+  `deleted` tinyint(1) NULL DEFAULT 0 COMMENT '删除(1删除,0未删)',
   `create_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `slider` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '资质图片',
+  `files` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '文件',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '安卓' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '安卓' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of spread_android
+-- ----------------------------
+INSERT INTO `spread_android` VALUES (1, '家加按摩', 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg', 'uni.UNIB9FC978', 1, 0, 2, 0, '2022-08-06 14:23:03', NULL, NULL);
+INSERT INTO `spread_android` VALUES (2, '家加按摩', 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg', 'uni.UNIB9FC978', 1, 0, 2, 0, '2022-08-06 14:23:56', 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg|http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg|http://127.0.0.1:8000/upload/a4/371d06df7752ff19cd64aa1ac5e6a7.png', 'e3/422573c05e2820c300f9be34e2dca5.docx');
 
 -- ----------------------------
 -- Table structure for spread_annex
 -- ----------------------------
 DROP TABLE IF EXISTS `spread_annex`;
 CREATE TABLE `spread_annex`  (
-  `id` int(20) NOT NULL COMMENT 'ID',
+  `id` int(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '链接',
   `is_deleted` tinyint(1) NULL DEFAULT 0 COMMENT '删除(1删除,0未删)',
   `create_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '资质附件' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '资质附件' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for spread_balance
@@ -4532,19 +4540,54 @@ CREATE TABLE `spread_balance`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `spread_category`;
 CREATE TABLE `spread_category`  (
-  `id` int(20) NOT NULL COMMENT 'ID',
+  `id` int(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '应用名称',
+  `deleted` tinyint(1) NULL DEFAULT 0 COMMENT '删除(1删除,0未删)',
+  `create_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '分类' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of spread_category
+-- ----------------------------
+INSERT INTO `spread_category` VALUES (1, '经融理财', 0, '2022-08-06 14:01:34');
+INSERT INTO `spread_category` VALUES (2, '竞彩体育', 0, '2022-08-06 14:02:29');
+
+-- ----------------------------
+-- Table structure for spread_code
+-- ----------------------------
+DROP TABLE IF EXISTS `spread_code`;
+CREATE TABLE `spread_code`  (
+  `id` int(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `mobile` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '手机号码',
+  `code` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '验证码',
   `is_deleted` tinyint(1) NULL DEFAULT 0 COMMENT '删除(1删除,0未删)',
   `create_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '分类' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员-手机短信验证' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for spread_invoicing
+-- ----------------------------
+DROP TABLE IF EXISTS `spread_invoicing`;
+CREATE TABLE `spread_invoicing`  (
+  `id` int(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `amount` tinyint(20) NULL DEFAULT NULL COMMENT '开票金额',
+  `company` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '快递公司',
+  `numbers` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '快递单号',
+  `hostIds` json NULL COMMENT '开票订单',
+  `create_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `status` tinyint(1) NULL DEFAULT 1 COMMENT '状态(0待审核,1待发货,2待收货)',
+  `ticket_id` tinyint(20) NULL DEFAULT NULL COMMENT '开票信息',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员-开票记录' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for spread_ios
 -- ----------------------------
 DROP TABLE IF EXISTS `spread_ios`;
 CREATE TABLE `spread_ios`  (
-  `id` int(20) NOT NULL COMMENT 'ID',
+  `id` int(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '应用名称',
   `icon` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '应用图标',
   `status` tinyint(1) NULL DEFAULT 1 COMMENT '状态(0禁用,1启用)',
@@ -4552,7 +4595,7 @@ CREATE TABLE `spread_ios`  (
   `is_deleted` tinyint(1) NULL DEFAULT 0 COMMENT '删除(1删除,0未删)',
   `create_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'ios' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'ios' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for spread_order
@@ -4599,6 +4642,28 @@ CREATE TABLE `spread_recharge`  (
   INDEX `idx_data_user_balance_deleted`(`deleted`) USING BTREE,
   INDEX `idx_data_user_balance_uuid`(`uuid`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '用户-账务-充值' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Table structure for spread_ticket
+-- ----------------------------
+DROP TABLE IF EXISTS `spread_ticket`;
+CREATE TABLE `spread_ticket`  (
+  `id` int(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `type` tinyint(1) NULL DEFAULT NULL COMMENT '类型（0：增值税普通发票 1：增值税专用发票）',
+  `Invoice` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '发票抬头',
+  `number` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '纳税人识别号',
+  `collector` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收票人',
+  `mobile` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系电话',
+  `address` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '收货地址',
+  `bank` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '开户银行名称',
+  `card` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '银行卡号',
+  `place` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '注册场所地址',
+  `telephone` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '固定电话',
+  `annex` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '一般纳税人证明-附件',
+  `is_deleted` tinyint(1) NULL DEFAULT 0 COMMENT '删除(1删除,0未删)',
+  `create_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员-开票信息' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Table structure for system_auth
@@ -4681,7 +4746,7 @@ INSERT INTO `system_config` VALUES (9, 'base', 'site_icon', 'https://v6.thinkadm
 INSERT INTO `system_config` VALUES (10, 'base', 'site_name', 'ThinkAdmin');
 INSERT INTO `system_config` VALUES (12, 'base', 'xpath', 'admin');
 INSERT INTO `system_config` VALUES (15, 'storage', 'alioss_http_protocol', 'http');
-INSERT INTO `system_config` VALUES (16, 'storage', 'allow_exts', 'doc,gif,ico,jpg,mp3,mp4,p12,pem,png,rar,xls,xlsx');
+INSERT INTO `system_config` VALUES (16, 'storage', 'allow_exts', 'doc,gif,ico,jpg,mp3,mp4,p12,pem,png,rar,xls,xlsx,docx');
 INSERT INTO `system_config` VALUES (17, 'storage', 'link_type', 'none');
 INSERT INTO `system_config` VALUES (18, 'storage', 'local_http_domain', '');
 INSERT INTO `system_config` VALUES (19, 'storage', 'local_http_protocol', 'follow');
@@ -4730,7 +4795,24 @@ CREATE TABLE `system_file`  (
   INDEX `idx_system_file_status`(`status`) USING BTREE,
   INDEX `idx_system_file_issafe`(`issafe`) USING BTREE,
   INDEX `idx_system_file_isfast`(`isfast`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统-文件' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 14 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统-文件' ROW_FORMAT = Compact;
+
+-- ----------------------------
+-- Records of system_file
+-- ----------------------------
+INSERT INTO `system_file` VALUES (1, 'local', 'a4371d06df7752ff19cd64aa1ac5e6a7', 'login_img@3x.png', 'png', 'http://127.0.0.1:8000/upload/a4/371d06df7752ff19cd64aa1ac5e6a7.png', 'a4/371d06df7752ff19cd64aa1ac5e6a7.png', 'image/png', 87772, 10000, 0, 0, 2, '2022-08-06 14:20:23', '2022-08-06 14:20:23');
+INSERT INTO `system_file` VALUES (2, 'local', '6294e9f8a6ece604323f0323246ceac0', 'login.png', 'png', 'http://127.0.0.1:8000/upload/62/94e9f8a6ece604323f0323246ceac0.png', '62/94e9f8a6ece604323f0323246ceac0.png', 'image/png', 4905, 10000, 0, 0, 2, '2022-08-06 14:20:31', '2022-08-06 14:20:32');
+INSERT INTO `system_file` VALUES (3, 'local', '6294e9f8a6ece604323f0323246ceac0', 'login.png', 'png', 'http://127.0.0.1:8000/upload/62/94e9f8a6ece604323f0323246ceac0.png', '62/94e9f8a6ece604323f0323246ceac0.png', 'image/png', 4905, 10000, 1, 0, 2, '2022-08-06 14:22:55', '2022-08-06 14:22:55');
+INSERT INTO `system_file` VALUES (4, 'local', '6294e9f8a6ece604323f0323246ceac0', 'login.png', 'png', 'http://127.0.0.1:8000/upload/62/94e9f8a6ece604323f0323246ceac0.png', '62/94e9f8a6ece604323f0323246ceac0.png', 'image/png', 4905, 10000, 1, 0, 2, '2022-08-06 14:23:39', '2022-08-06 14:23:39');
+INSERT INTO `system_file` VALUES (5, 'local', '0ed8fe0c88190f394366f1e983641895', 'd8fe0c88190f394366f1e983641895.jpg', 'jpg', 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg', '0e/d8fe0c88190f394366f1e983641895.jpg', 'image/jpeg', 204714, 10000, 0, 0, 2, '2022-08-06 14:42:24', '2022-08-06 14:42:24');
+INSERT INTO `system_file` VALUES (6, 'local', '0ed8fe0c88190f394366f1e983641895', 'd8fe0c88190f394366f1e983641895.jpg', 'jpg', 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg', '0e/d8fe0c88190f394366f1e983641895.jpg', 'image/jpeg', 204714, 10000, 1, 0, 2, '2022-08-06 14:42:31', '2022-08-06 14:42:31');
+INSERT INTO `system_file` VALUES (7, 'local', '0ed8fe0c88190f394366f1e983641895', 'd8fe0c88190f394366f1e983641895.jpg', 'jpg', '0e/d8fe0c88190f394366f1e983641895.jpg', '0e/d8fe0c88190f394366f1e983641895.jpg', 'image/jpeg', 204714, 10000, 0, 1, 2, '2022-08-06 15:49:54', '2022-08-06 15:49:55');
+INSERT INTO `system_file` VALUES (8, 'local', '73cd700b35b9fc70fa1cc5389781a690', '提供资料.docx', 'docx', '73/cd700b35b9fc70fa1cc5389781a690.docx', '73/cd700b35b9fc70fa1cc5389781a690.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 10843, 10000, 0, 1, 1, '2022-08-06 15:50:12', '2022-08-06 15:50:12');
+INSERT INTO `system_file` VALUES (9, 'local', '0ed8fe0c88190f394366f1e983641895', 'd8fe0c88190f394366f1e983641895.jpg', 'jpg', '0e/d8fe0c88190f394366f1e983641895.jpg', '0e/d8fe0c88190f394366f1e983641895.jpg', 'image/jpeg', 204714, 10000, 1, 1, 2, '2022-08-06 15:50:17', '2022-08-06 15:50:17');
+INSERT INTO `system_file` VALUES (10, 'local', '73cd700b35b9fc70fa1cc5389781a690', '提供资料.docx', 'docx', '73/cd700b35b9fc70fa1cc5389781a690.docx', '73/cd700b35b9fc70fa1cc5389781a690.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 10843, 10000, 0, 1, 1, '2022-08-06 15:51:27', '2022-08-06 15:51:27');
+INSERT INTO `system_file` VALUES (11, 'local', '73cd700b35b9fc70fa1cc5389781a690', '提供资料.docx', 'docx', '73/cd700b35b9fc70fa1cc5389781a690.docx', '73/cd700b35b9fc70fa1cc5389781a690.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 10843, 10000, 0, 1, 1, '2022-08-06 15:51:36', '2022-08-06 15:51:36');
+INSERT INTO `system_file` VALUES (12, 'local', 'e3422573c05e2820c300f9be34e2dca5', '推广网站建设系统需求说明.docx', 'docx', 'e3/422573c05e2820c300f9be34e2dca5.docx', 'e3/422573c05e2820c300f9be34e2dca5.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 14043, 10000, 0, 1, 1, '2022-08-06 15:52:22', '2022-08-06 15:52:22');
+INSERT INTO `system_file` VALUES (13, 'local', 'e3422573c05e2820c300f9be34e2dca5', '推广网站建设系统需求说明.docx', 'docx', 'e3/422573c05e2820c300f9be34e2dca5.docx', 'e3/422573c05e2820c300f9be34e2dca5.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 14043, 10000, 0, 1, 2, '2022-08-06 15:53:52', '2022-08-06 15:53:52');
 
 -- ----------------------------
 -- Table structure for system_menu
@@ -4750,7 +4832,7 @@ CREATE TABLE `system_menu`  (
   `create_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_system_menu_status`(`status`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 48 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统-菜单' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 51 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统-菜单' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of system_menu
@@ -4802,6 +4884,9 @@ INSERT INTO `system_menu` VALUES (44, 38, '系统菜单管理', 'layui-icon layu
 INSERT INTO `system_menu` VALUES (45, 37, '权限管理', '', '', '#', '', '_self', 0, 1, '2022-06-27 14:29:17');
 INSERT INTO `system_menu` VALUES (46, 45, '访问权限管理', 'layui-icon layui-icon-vercode', '', 'admin/auth/index', '', '_self', 0, 1, '2022-06-27 14:29:17');
 INSERT INTO `system_menu` VALUES (47, 45, '系统用户管理', 'layui-icon layui-icon-username', '', 'admin/user/index', '', '_self', 0, 1, '2022-06-27 14:29:17');
+INSERT INTO `system_menu` VALUES (48, 1, '安卓推广', 'layui-icon layui-icon-cols', '', '#', '', '_self', 0, 1, '2022-08-06 13:40:15');
+INSERT INTO `system_menu` VALUES (49, 48, '应用列表', 'layui-icon layui-icon-cols', 'spread/android/index', 'spread/android/index', '', '_self', 0, 1, '2022-08-06 13:43:21');
+INSERT INTO `system_menu` VALUES (50, 48, '订单查询', 'layui-icon layui-icon-cols', 'spread/order/index', 'spread/order/index', '', '_self', 0, 1, '2022-08-06 15:55:09');
 
 -- ----------------------------
 -- Table structure for system_oplog
@@ -4816,7 +4901,7 @@ CREATE TABLE `system_oplog`  (
   `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '操作人用户名',
   `create_at` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 7 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统-日志' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统-日志' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of system_oplog
@@ -4827,6 +4912,14 @@ INSERT INTO `system_oplog` VALUES (3, 'admin/user/add', '127.0.0.1', '系统用�
 INSERT INTO `system_oplog` VALUES (4, 'admin/user/pass', '127.0.0.1', '系统用户管理', '修改用户[10001]密码成功', 'admin', '2022-08-04 20:16:23');
 INSERT INTO `system_oplog` VALUES (5, 'admin/login/index', '127.0.0.1', '系统用户登录', '登录系统后台成功', '17823617122', '2022-08-04 20:16:45');
 INSERT INTO `system_oplog` VALUES (6, 'admin/login/index', '127.0.0.1', '系统用户登录', '登录系统后台成功', 'admin', '2022-08-04 20:17:13');
+INSERT INTO `system_oplog` VALUES (7, 'admin/login/index', '127.0.0.1', '系统用户登录', '登录系统后台成功', 'admin', '2022-08-06 13:26:22');
+INSERT INTO `system_oplog` VALUES (8, 'admin/menu/add', '127.0.0.1', '系统菜单管理', '增加系统菜单[48]成功', 'admin', '2022-08-06 13:40:15');
+INSERT INTO `system_oplog` VALUES (9, 'admin/menu/edit', '127.0.0.1', '系统菜单管理', '更新系统菜单[48]记录', 'admin', '2022-08-06 13:42:58');
+INSERT INTO `system_oplog` VALUES (10, 'admin/menu/add', '127.0.0.1', '系统菜单管理', '增加系统菜单[49]成功', 'admin', '2022-08-06 13:43:21');
+INSERT INTO `system_oplog` VALUES (11, 'admin/menu/edit', '127.0.0.1', '系统菜单管理', '更新系统菜单[49]记录', 'admin', '2022-08-06 13:43:51');
+INSERT INTO `system_oplog` VALUES (12, 'admin/api.runtime/clear', '127.0.0.1', '系统运维管理', '清理网站日志缓存', 'admin', '2022-08-06 14:04:56');
+INSERT INTO `system_oplog` VALUES (13, 'admin/config/storage', '127.0.0.1', '系统配置管理', '修改系统存储参数', 'admin', '2022-08-06 15:53:41');
+INSERT INTO `system_oplog` VALUES (14, 'admin/menu/add', '127.0.0.1', '系统菜单管理', '增加系统菜单[50]成功', 'admin', '2022-08-06 15:55:09');
 
 -- ----------------------------
 -- Table structure for system_queue
@@ -4889,7 +4982,7 @@ CREATE TABLE `system_user`  (
 -- ----------------------------
 -- Records of system_user
 -- ----------------------------
-INSERT INTO `system_user` VALUES (10000, '', 'admin', '21232f297a57a5a743894a0e4a801fc3', '系统管理员', '', ',,', '', '', '', '127.0.0.1', '2022-08-04 20:17:13', 3, '', 1, 1, 0, '2022-03-08 10:00:00');
+INSERT INTO `system_user` VALUES (10000, '', 'admin', '21232f297a57a5a743894a0e4a801fc3', '系统管理员', '', ',,', '', '', '', '127.0.0.1', '2022-08-06 13:26:22', 4, '', 1, 1, 0, '2022-03-08 10:00:00');
 INSERT INTO `system_user` VALUES (10001, '', '17823617122', 'a66abb5684c45962d887564f08346e8d', '测试', '', ',,', '', '', '', '127.0.0.1', '2022-08-04 20:16:45', 1, '', 1, 0, 0, '2022-08-04 20:15:23');
 
 -- ----------------------------
