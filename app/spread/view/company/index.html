@@ -1,12 +1,12 @@
 {extend name="../../admin/view/main"}
 
 {block name="button"}
-<button class='layui-btn layui-btn-sm layui-btn-primary' data-modal='{:url("add")}'>添加应用</button>
+<button class='layui-btn layui-btn-sm layui-btn-primary' data-modal='{:url("add")}'>添加企业</button>
 {/block}
 
 {block name='content'}
 <div class="think-box-shadow">
-    {include file='android/index_search'}
+    {include file='company/index_search'}
     <table class="layui-table margin-top-10" lay-skin="line">
         {notempty name='list'}
         <thead>
@@ -41,6 +41,8 @@
             <td class='text-left nowrap'>
                 <a class="layui-btn layui-btn-sm" data-dbclick data-modal="{:url('edit')}?id={$vo.id}"
                    data-title="编辑产品">编 辑</a>
+                <a class="layui-btn layui-btn-sm" data-dbclick data-modal="{:url('price')}?id={$vo.id}"
+                   data-title="重置密码">下载单价</a>
                <a class="layui-btn layui-btn-sm" data-dbclick data-modal="{:url('password')}?id={$vo.id}"
                   data-title="重置密码">重置密码</a>
                 <a class="layui-btn layui-btn-sm" data-dbclick data-modal="{:url('intelligence')}?id={$vo.id}"

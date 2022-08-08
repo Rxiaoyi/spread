@@ -1,0 +1,21 @@
+<form action="{:sysuri()}" data-table-id="FormTable" class="layui-form layui-card" data-auto="true" method="post">
+   <div class="layui-card-body padding-left-40">
+      <label class="layui-form-item relative block">
+         <span class="help-label"><b>IOS下载单价</b>Company Name</span>
+         <input class="layui-input" name="ios_price" placeholder="请输入IOS下载单价" required value='{$vo.ios_price|default=""}'>
+      </label>
+      <label class="layui-form-item relative block">
+         <span class="help-label"><b>安卓下载单价</b>Company Contacts</span>
+         <input class="layui-input" name="android_price" placeholder="请输入安卓下载单价" required value='{$vo.android_price|default=""}'>
+      </label>
+   </div>
+
+   <div class="hr-line-dashed"></div>
+   {notempty name='vo.id'}<input name='id' type='hidden' value='{$vo.id}'>{/notempty}
+
+   <div class="layui-form-item text-center">
+      <button class="layui-btn" type='submit'>保存数据</button>
+      <button class="layui-btn layui-btn-danger" data-close type='button' data-confirm="确定要取消编辑吗？">取消编辑</button>
+   </div>
+
+</form>

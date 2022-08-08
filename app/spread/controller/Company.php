@@ -80,6 +80,14 @@ class Company extends Controller {
       }
    }
 
+    /**
+     * 下载单价
+     * @auth true
+     */
+    public function price() {
+        SpreadCompany::mForm('price');
+    }
+
    /**
     * 上传资质
     * @auth true

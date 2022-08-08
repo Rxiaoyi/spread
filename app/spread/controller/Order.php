@@ -4,6 +4,7 @@
 namespace app\spread\controller;
 
 use app\spread\model\SpreadAndroid;
+use app\spread\model\SpreadCompany;
 use app\spread\model\SpreadOrder;
 use think\admin\Controller;
 use think\admin\extend\DataExtend;
@@ -30,10 +31,23 @@ class Order extends Controller
     {
 
         $this->title = '订单管理';
-        $query = SpreadAndroid::mQuery();
-        $query->like('name|packageName')->equal('status')->dateBetween('create_at');
+        $query = SpreadOrder::mQuery();
+        $query->like('sn')->equal('status|android')->dateBetween('create_at');
         $query->where(['deleted' => 0])->order('id desc')->page();
     }
+
+    /**
+     * 数据列表处理
+     * @param array $data
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    protected function _page_filter(array &$data)
+    {
+        $this->android = SpreadAndroid::items();
+    }
+
 
     /**
      * 列表数据处理
@@ -45,8 +59,13 @@ class Order extends Controller
     protected function _index_page_filter(array &$data)
     {
         foreach ($data as &$item) {
-//            $business = SpreadCategory::getInfo($item['categoryId']);
-//            $item['categoryName'] = $business['name'];
+            $android = SpreadAndroid::getInfo($item['android_id']);
+            $item['androidName'] = $android['name'];
+            $item['androidIcon'] = $android['icon'];
+            $item['androidPackageName'] = $android['packageName'];
+            $company = SpreadCompany::getInfo($item['company_id']);
+            $item['companyName'] = $company['name'];
+            $item['companyMobile'] = $android['mobile'];
         }
     }
 
@@ -56,7 +75,7 @@ class Order extends Controller
      */
     public function add()
     {
-        SpreadAndroid::mForm('form');
+        SpreadOrder::mForm('form');
     }
 
     /**
@@ -65,7 +84,7 @@ class Order extends Controller
      */
     public function edit()
     {
-        SpreadAndroid::mForm('form');
+        SpreadOrder::mForm('form');
     }
 
     /**
@@ -88,7 +107,7 @@ class Order extends Controller
      */
     public function state()
     {
-        SpreadAndroid::mSave($this->_vali([
+        SpreadOrder::mSave($this->_vali([
             'status.in:0,1' => '状态值范围异常！',
             'status.require' => '状态值不能为空！',
         ]));
@@ -100,6 +119,6 @@ class Order extends Controller
      */
     public function remove()
     {
-        SpreadAndroid::mDelete();
+        SpreadOrder::mDelete();
     }
 }

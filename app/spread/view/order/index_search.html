@@ -2,22 +2,38 @@
     <legend>条件搜索</legend>
     <form action="{:sysuri()}" autocomplete="off" class="layui-form layui-form-pane form-search" method="get" onsubmit="return false">
         <div class="layui-form-item layui-inline">
-            <label class="layui-form-label">产品名称</label>
+            <label class="layui-form-label">产品信息</label>
             <label class="layui-input-inline">
-                <input class="layui-input" name="name" placeholder="请输入产品名称" value="{$get.name|default=''}">
+                <select class="layui-select" lay-search name="android">
+                    <option value="">-- 全部应用 --</option>
+                    {foreach $android as $mark}{if input('marks','') eq $mark}
+                    <option selected value="{$mark.id}">{$mark.name}</option>
+                    {else}
+                    <option value="{$mark.id}">{$mark.name}</option>
+                    {/if}{/foreach}
+                </select>
             </label>
         </div>
 
         <div class="layui-form-item layui-inline">
-            <label class="layui-form-label">产品包名</label>
-            <label class="layui-input-inline">
-                <input class="layui-input" name="packageName" placeholder="请输入产品包名" value="{$get.packageName|default=''}">
-            </label>
+            <label class="layui-form-label">状态</label>
+            <div class="layui-input-inline">
+                <select class="layui-select" name="status">
+                    <option value="">-- 全部 --</option>
+                    {foreach ['待投放', '投放中', '已完成', '已暂停', '已结束'] as $k=>$v}
+                    {if $k.'' eq input('status')}
+                    <option selected value="{$k}">{$v}</option>
+                    {else}
+                    <option value="{$k}">{$v}</option>
+                    {/if}{/foreach}
+                </select>
+            </div>
         </div>
+
         <div class="layui-form-item layui-inline">
-            <label class="layui-form-label">创建时间</label>
+            <label class="layui-form-label">投放订单时间</label>
             <label class="layui-input-inline">
-                <input class="layui-input" data-date-range name="create_at" placeholder="请选择创建时间" value="{$get.create_at|default=''}">
+                <input class="layui-input" data-date-range name="start_at" placeholder="请选择投放订单时间" value="{$get.start_at|default=''}">
             </label>
         </div>
         <div class="layui-form-item layui-inline">
