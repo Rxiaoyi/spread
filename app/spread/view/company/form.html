@@ -1,0 +1,41 @@
+<form action="{:sysuri()}" data-table-id="FormTable" class="layui-form layui-card" data-auto="true" method="post">
+   <div class="layui-card-body padding-left-40">
+      <label class="layui-form-item relative block">
+         <span class="help-label"><b>公司名称</b>Company Name</span>
+         <input class="layui-input" name="name" placeholder="请输入公司名称" required value='{$vo.name|default=""}'>
+      </label>
+      <label class="layui-form-item relative block">
+         <span class="help-label"><b>联系人</b>Company Contacts</span>
+         <input class="layui-input" name="contacts" placeholder="请输入联系人" required value='{$vo.contacts|default=""}'>
+      </label>
+      <label class="layui-form-item relative block">
+         <span class="help-label"><b>手机号码</b>Company Contacts</span>
+         <input class="layui-input" name="mobile" placeholder="请输入手机号码" required value='{$vo.mobile|default=""}'>
+      </label>
+      <label class="layui-form-item relative block">
+         <span class="help-label"><b>登录密码</b>Company Password</span>
+         <input class="layui-input" name="password" placeholder="请输入登录密码" required value='{$vo.password|default=""}'>
+      </label>
+      <label class="layui-form-item relative block">
+         <span class="help-label"><b>社会统一信用代码</b>Company Code</span>
+         <input class="layui-input" name="code" placeholder="请输入社会统一信用代码" required value='{$vo.code|default=""}'>
+      </label>
+      <div class="layui-form-item relative block">
+         <span class="help-label"><b>营业执照</b>Company Code</span>
+         <label class="relative block">
+            <input class="layui-input think-bg-gray" readonly name="license" placeholder="请上传公司营业执照" value='{$vo.license|default=""}'>
+            <a class="input-right-icon layui-icon layui-icon-upload" data-field="license" data-file="one" data-type="png,jpg,jpeg,gif"></a>
+         </label>
+         <span class="help-block"><b>可选，</b>请上传公司营业执照，需要是https可访问的图片资源链接</span>
+      </div>
+   </div>
+
+   <div class="hr-line-dashed"></div>
+   {notempty name='vo.id'}<input name='id' type='hidden' value='{$vo.id}'>{/notempty}
+
+   <div class="layui-form-item text-center">
+      <button class="layui-btn" type='submit'>保存数据</button>
+      <button class="layui-btn layui-btn-danger" data-close type='button' data-confirm="确定要取消编辑吗？">取消编辑</button>
+   </div>
+
+</form>

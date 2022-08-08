@@ -1,0 +1,60 @@
+{extend name="../../admin/view/main"}
+
+{block name="button"}
+<button class='layui-btn layui-btn-sm layui-btn-primary' data-modal='{:url("add")}'>添加应用</button>
+{/block}
+
+{block name='content'}
+<div class="think-box-shadow">
+    {include file='android/index_search'}
+    <table class="layui-table margin-top-10" lay-skin="line">
+        {notempty name='list'}
+        <thead>
+        <tr>
+            <th class="text-left nowrap">企业名称</th>
+            <th class="text-left nowrap">联系人</th>
+            <th class="text-left nowrap">手机号码</th>
+            <th class="text-left nowrap">当前余额</th>
+            <th class="text-left nowrap">累计充值金额</th>
+            <th class="text-left nowrap">状态</th>
+            <th class="text-left nowrap">创建时间</th>
+            <th class="text-left nowrap"></th>
+        </tr>
+        </thead>
+        {/notempty}
+        <tbody>
+        {foreach $list as $key=>$vo}
+        <tr>
+            <td class="text-left nowrap">{$vo.name|default=''}</td>
+            <td class="text-left nowrap">{$vo.contacts|default=''}</td>
+            <td class="text-left nowrap">{$vo.mobile|default=''}</td>
+            <td class="text-left nowrap">{$vo.total|default='0'}</td>
+            <td class="text-left nowrap">{$vo.balance|default='0'}</td>
+            <td class="text-left nowrap">
+                {if $vo.status eq 0}
+                <span class="color-red">正常</span>
+                {elseif $vo.status eq 1}
+                <span class="color-green">停用</span>
+                {/if}
+            </td>
+            <td class="text-left nowrap">{$vo.create_at}</td>
+            <td class='text-left nowrap'>
+                <a class="layui-btn layui-btn-sm" data-dbclick data-modal="{:url('edit')}?id={$vo.id}"
+                   data-title="编辑产品">编 辑</a>
+               <a class="layui-btn layui-btn-sm" data-dbclick data-modal="{:url('password')}?id={$vo.id}"
+                  data-title="重置密码">重置密码</a>
+                <a class="layui-btn layui-btn-sm" data-dbclick data-modal="{:url('intelligence')}?id={$vo.id}"
+                   data-title="上传资质">上传资质</a>
+                <a class="layui-btn layui-btn-sm" data-dbclick data-modal="{:url('files')}?id={$vo.id}"
+                   data-title="重排重入库">重排重入库</a>
+<!--                <a class="layui-btn layui-btn-sm layui-btn-danger" data-action="{:url('remove')}"-->
+<!--                   data-confirm="确定要删除该产品吗？" data-value="id#{$vo.id}">删 除</a>-->
+
+            </td>
+        </tr>
+        {/foreach}
+        </tbody>
+    </table>
+    {empty name='list'}<span class="notdata">没有记录哦</span>{else}{$pagehtml|raw|default=''}{/empty}
+</div>
+{/block}
