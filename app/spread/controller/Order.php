@@ -97,7 +97,7 @@ class Order extends Controller
     protected function _form_filter(array &$data)
     {
         if ($this->request->isGet()) {
-            $this->category = SpreadCategory::getList();
+            $this->android = SpreadAndroid::items();
         }
     }
 

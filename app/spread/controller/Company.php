@@ -23,7 +23,6 @@ class Company extends Controller {
     * @throws \think\db\exception\ModelNotFoundException
     */
    public function index() {
-
       $this->title = '企业管理';
       $query = SpreadCompany::mQuery();
       $query->like('name|packageName')->equal('status')->dateBetween('create_at');

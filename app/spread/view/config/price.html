@@ -1,0 +1,29 @@
+{extend name="../../admin/view/main"}
+
+{block name="content"}
+<div class="think-box-shadow">
+   <form action="{:sysuri()}" method="post" data-auto="true" class="layui-form layui-card" style="width:850px">
+      <div class="layui-card-header text-center margin-20">
+         <b>{$title|default='下载单价规则'}</b>
+      </div>
+      <div class="layui-card-body padding-left-40 padding-bottom-0">
+         <label class="layui-form-item block relative">
+            <span class='help-label'><b>IOS下载单价</b></span>
+            <input class="layui-input" name="ios_price" placeholder="请输入IOS下载单价" required
+                   value="{$data.ios_price|default=''}">
+         </label>
+
+         <label class="layui-form-item block relative">
+            <span class="help-label"><b>安卓下载单价</b></span>
+            <input class="layui-input" name="android_price" placeholder="请输入安卓下载单价" required
+                   value="{$data.android_price|default=''}">
+         </label>
+
+         <div class="hr-line-dashed margin-top-30"></div>
+         <div class="layui-form-item text-center">
+            <button class="layui-btn" data-submit>保存数据</button>
+         </div>
+      </div>
+   </form>
+</div>
+{/block}

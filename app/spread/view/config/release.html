@@ -1,0 +1,22 @@
+{extend name="../../admin/view/main"}
+
+{block name="content"}
+<div class="think-box-shadow">
+   <form action="{:sysuri()}" method="post" data-auto="true" class="layui-form layui-card" style="width:850px">
+      <div class="layui-card-header text-center margin-20">
+         <b>{$title|default='投放规则'}</b>
+      </div>
+      <label class="layui-form-item block relative">
+         <span class="help-label"><b>快速规则</b></span>
+         <input class="layui-input" name="download" placeholder="请输入投放规则" required
+                value="{$data.download|default=''}">
+         <span class="help-block">每分钟下载量</span>
+      </label>
+
+      <div class="hr-line-dashed margin-top-30"></div>
+      <div class="layui-form-item text-center">
+         <button class="layui-btn" data-submit>保存数据</button>
+      </div>
+   </form>
+</div>
+{/block}

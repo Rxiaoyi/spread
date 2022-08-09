@@ -1,0 +1,89 @@
+<form action="{:sysuri()}" data-table-id="FormTable" class="layui-form layui-card" data-auto="true" method="post">
+   <div class="layui-card-body padding-left-40">
+
+      <div class="layui-form-item label-required-prev">
+         <span class="help-label"><b>选择推广应用</b>Android Parent</span>
+         <select class='layui-select' name='host_id' lay-search>
+            {foreach $android as $item}
+            <option value='{$item.id}'>{$item.name}</option>
+            {/foreach}
+         </select>
+      </div>
+
+      <div class="goods-item-box">
+         <div class="flex flex-wrap">
+            <fieldset class="layui-bg-gray">
+               <legend><span class="layui-badge think-bg-violet">选择推广类型</span></legend>
+               <div>
+                  {foreach ['优化下载'] as $k => $v}
+                  {if (isset($vo.type) and $vo.type eq $k) or (empty($vo.type) and $k eq 0)}
+                  <input checked name="type_id" title="{$v}" type="radio" value="{$k}">
+                  {else}
+                  <input name="type_id" title="{$v}" type="radio" value="{$k}">
+                  {/if}{/foreach}
+               </div>
+            </fieldset>
+         </div>
+      </div>
+
+      <label class="layui-form-item relative block">
+         <span class="help-label"><b>产品链接</b>Company Link</span>
+         <input class="layui-input" name="name" placeholder="请输入产品链接" required value='{$vo.name|default=""}'>
+      </label>
+
+      <div class="layui-form-item layui-form-text">
+         <label class="layui-form-label">添加关键词</label>
+         <span class="color-desc margin-left-5">关键词和实际投放量以逗号隔开，关键词间以换行分割</span>
+         <div class="layui-input-block">
+            <textarea placeholder="请输入内容" id="keywords" class="layui-textarea"></textarea>
+         </div>
+      </div>
+      <div class="layui-form-item">
+         <div class="layui-input-block">
+            <button id="addKeywords" class="layui-btn">添加</button>
+            <button type="reset" class="layui-btn layui-btn-primary">删除全部</button>
+         </div>
+      </div>
+
+      <div class="goods-item-box">
+         <div class="flex flex-wrap">
+            <fieldset class="layui-bg-gray">
+               <legend><span class="layui-badge think-bg-violet">是否匀速</span></legend>
+               <div>
+                  {foreach ['否','是'] as $k => $v}
+                  {if (isset($vo.type) and $vo.type eq $k) or (empty($vo.type) and $k eq 0)}
+                  <input checked name="speed" title="{$v}" type="radio" value="{$k}">
+                  {else}
+                  <input name="speed" title="{$v}" type="radio" value="{$k}">
+                  {/if}{/foreach}
+               </div>
+            </fieldset>
+         </div>
+      </div>
+   </div>
+   <div class="layui-form-item layui-inline">
+      <label class="layui-form-label">投放时间</label>
+      <label class="layui-input-inline">
+         <input class="layui-input" data-datetime-input name="start_at" placeholder="请选择投放订单时间"
+                value="{$get.start_at|default=''}">
+         至
+         <input class="layui-input" data-datetime-input name="start_at" placeholder="请选择投放订单时间"
+                value="{$get.start_at|default=''}">
+      </label>
+   </div>
+
+   <div class="hr-line-dashed"></div>
+   {notempty name='vo.id'}<input name='id' type='hidden' value='{$vo.id}'>{/notempty}
+   {notempty name='vo.company_id'}<input name='company_id' type='hidden' value='{$vo.company_id}'>{/notempty}
+
+   <div class="layui-form-item text-center">
+      <button class="layui-btn" type='submit'>保存数据</button>
+      <button class="layui-btn layui-btn-danger" data-close type='button' data-confirm="确定要取消编辑吗？">取消编辑</button>
+   </div>
+</form>
+<script>
+   $('#addKeywords').click(function () {
+      let keywords = $('#keywords').value;
+      console.log(keywords);
+   })
+</script>

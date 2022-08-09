@@ -29,7 +29,7 @@ class SpreadAndroid extends Model
     }
 
     /**
-     * 获取所有标签
+     * 获取所有应用
      * @return array
      */
     public static function items(): array
