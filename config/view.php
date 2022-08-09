@@ -39,4 +39,10 @@ return [
     'strip_space'    => true,
     // 标签默认过滤输出方法
     'default_filter' => 'htmlentities=###,ENT_QUOTES',
+    'tpl_replace_string' => [
+        '__APP__' => rtrim(url('@')->build(), '\\/'),
+        '__ROOT__' => rtrim(dirname(request()->basefile()), '\\/'),
+        '__FULL__' => rtrim(dirname(request()->basefile(true)), '\\/'),
+        '__STATIC__' => rtrim(dirname(request()->basefile()), '\\/') . '/static',
+    ],
 ];

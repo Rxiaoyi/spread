@@ -1,0 +1,2924 @@
+/*全局设置*/
+body{
+	background:#F5F5F5;
+}
+.layui-table tr,.layui-table th{
+	text-align: center
+}
+.layui-table tr.lay-page:hover{
+	background:#fff;
+}
+.layui-table tr.lay-page td{
+	padding:20px 0px;
+}
+.layui-layout-admin .layui-logo{
+	box-shadow: 0 1px 2px 0 rgba(0,0,0,0);
+}
+.layui-side-menu{
+	box-shadow: 1px 0 2px 0 rgba(0,0,0,0);
+}
+/*base页面切换账号*/
+.account_box{
+	max-height:165px;
+	width:218px;
+	padding:5px 0px;
+	position: absolute;
+	z-index: 999999;
+	background:#fff;
+	overflow: auto;
+	color:#666;
+	right:0;
+	left:-337px;
+	box-shadow: 0 0 15px #999;
+}
+.account_box li{
+	height:50px;
+	line-height: 50px;
+	margin-bottom:5px;
+	background:#fff;
+	padding:0 8px;
+	cursor: pointer;
+}
+.account_box li:hover{
+	color:#1E9FFF
+}
+.account_box li.active{
+	color:#1E9FFF
+}
+.account_box li span{
+	float:right;
+	font-size:14px;
+}
+.userinfo{
+	width:210px;
+	position: absolute;
+	z-index: 999999;
+	background:#fff;
+	overflow: auto;
+	color:#666;
+	right:0;
+	left:-118px;
+	box-shadow: 0 0 15px #999;
+}
+.userinfo .userbaseinfo {
+	width:210px;
+	height:69px;
+	background:rgba(61,70,77,1);
+}
+.userinfo .userbaseinfo .userimg{
+	float:left;
+	height:40px;
+	width:40px;
+	margin-top:10px;
+	margin-left:16px;
+	margin-right:10px;
+}
+.userinfo .userbaseinfo .userimg img{
+	height:40px;
+	width:40px;
+	cursor: pointer;
+}
+.userinfo .userbaseinfo .username{
+	float:left;
+	margin-top:13px;
+}
+.userinfo .userbaseinfo .username div{
+	height:22px;
+	line-height:22px;
+	font-size:16px;
+	color:rgba(255,255,255,1);
+	margin-bottom:3px;
+}
+.userinfo .userbaseinfo .username a{
+	display: block;
+	height:16px;
+	line-height:16px;
+	padding:0;
+	color:rgba(255,255,255,1);
+	text-align: left;
+}
+.userinfo .userbaseinfo .username span{
+	display: block;
+	height:16px;
+	line-height:16px;
+	color:rgba(255,255,255,1);
+}
+.userinfo .money{
+	border-bottom:1px solid #E8E8E8;
+	height:76px;
+}
+.userinfo .money .yue{
+	float:left;
+	margin:16px 0 0 16px;
+}
+.userinfo .money .yue div{
+	height:22px;
+	line-height:22px;
+	font-size:16px;
+	color:rgba(61,70,77,1);
+	margin-bottom:3px;
+}
+.userinfo .money .yue span{
+	display: block;
+	height:16px;
+	line-height:16px;
+	color:#3287FF;
+	font-weight:500;
+	font-size: 16px;
+}
+.userinfo .money .chongzhi{
+	float:right;
+	width:48px;
+	height:22px;
+	line-height: 22px;
+	background:rgba(50,135,255,1);
+	border-radius:2px;
+	padding:0;
+	text-align: center;
+	margin-top:26px;
+	margin-right:16px;
+}
+.userinfo .umessage{
+	height:50px;
+	line-height: 50px;
+	padding-left:16px;
+	cursor: pointer;
+	color:rgba(61,70,77,1)!important;
+}
+.userinfo .umessage:hover{
+	background:rgba(232,241,255,1);
+}
+.userinfo .umessage span{
+	float:right;
+	display: block;
+	height:20px;
+	width:20px;
+	background:#3287FF;
+	margin-top:15px;
+	line-height: 20px;
+	text-align: center;
+	margin-right:16px;
+	color:rgba(255,255,255,1);
+	border-radius: 10px;
+}
+.userinfo .tuike{
+	height:50px;
+	line-height: 50px;
+	padding-left:16px;
+	color:rgba(61,70,77,1)!important;
+}
+.userinfo .tuike:hover{
+	background:rgba(232,241,255,1);
+}
+.userinfo .login_out{
+	height:50px;
+	line-height: 50px;
+	padding-left:16px;
+	color:rgba(61,70,77,1)!important;
+}
+.userinfo .login_out:hover{
+	background:rgba(232,241,255,1);
+}
+/*默认颜色修改*/
+.layui-layout-admin .layui-header {
+	background-color: #1687dc;
+}
+.layui-layout-admin .layui-header a, .layui-layout-admin .layui-header a cite {
+	color: #FFF;
+}
+.layui-nav-tree .layui-nav-child dd.layui-this, .layui-nav-tree .layui-nav-child dd.layui-this a, .layui-nav-tree .layui-this, .layui-nav-tree .layui-this>a, .layui-nav-tree .layui-this>a:hover {
+	background-color: #1687dc !important;
+}
+.layui-layout-admin .layui-logo {
+	background-color: #1687dc !important;
+}
+.layui-layout-admin .layui-header a:hover {
+	color: #FFF;
+}
+.layui-layout-admin .layui-header .layui-nav .layui-this:after, .layui-layout-admin .layui-header .layui-nav-bar {
+	height: 2px;
+	background-color: rgba(255,255,255,.5);
+}
+.layadmin-pagetabs .layui-tab-title li.layui-this:after {
+	background-color: #1687dc;
+}
+.layadmin-pagetabs .layui-tab-title li:after {
+	background-color: #1687dc;
+	transition: all .3s;
+	-webkit-transition: all .3s;
+}
+.layui-nav-tree .layui-nav-bar{
+	background-color: #1687dc
+}
+/*logo样式*/
+.layui-logo img{
+	width:120px;
+}
+.layadmin-side-shrink .layui-layout-admin .layui-logo{
+	background-image:url(../images/logo_xs.png);
+	background-size:30px;
+}
+/*推广计划*/
+#spread_plan .layui-top-title{
+	position: relative;
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#spread_plan .layui-right-text{
+	position:absolute;
+	right:0;
+	top:0;
+}
+#spread_plan .layui-btn-primary{
+	border:1px solid #1E9FFF;
+	color:#1E9FFF;
+	margin-right:0;
+}
+#spread_plan .layui-top-title2{
+	margin-top:30px;
+}
+#spread_plan .layui-card-text{
+	padding:30px 0;
+	text-align: center;
+	font-size:24px;
+	color:#333;
+}
+#spread_plan .layui-card-text2{
+	height:110px;
+	text-align: center;
+	line-height: 110px;
+	font-size:16px;
+	color:#333;
+}
+#spread_plan .layui-card-text2 span{
+	color:#1E9FFF;
+	font-size:16px;
+}
+#spread_plan .layui-card-text3{
+	padding-top:25px;
+	height:95px;
+	line-height: 40px;
+	font-size:15px;
+	color:#333;
+	text-align: center;
+}
+#spread_plan .layui-card-text3 span{
+	color:#1E9FFF;
+	font-size:15px;
+}
+#spread_plan .lay-table-box{
+	width:100%;
+	overflow: auto;
+}
+#spread_plan .layui-td{
+	padding:0px 0px 0px 15px;
+	width:250px;
+}
+#spread_plan .layui-table-logo{
+	height:45px;
+	width:45px;
+	float:left;
+	margin-left:10px;
+}
+#spread_plan .layui-table-right{
+	float:left;
+	margin-left:10px;
+	font-size:14px;
+	margin-top:3px;
+}
+#spread_plan .layui-table-p{
+	width:180px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	text-align: left;
+	margin-bottom:3px;
+}
+.hidden{
+	display: none;
+}
+#spread_plan .layui-table p{
+	text-align: left;
+	width:180px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+#spread_plan .lay-table-btn{
+	margin-top:10px;
+}
+/*订单查询*/
+#order_query .layui-top-title{
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+	position: relative;
+}
+#order_query .layui-top-title p{
+	width:200px;
+	position:absolute;
+	text-align: right;
+	right:210px;
+	top:0;
+	font-size:14px;
+}
+#order_query .layui-right-text{
+	position:absolute;
+	right:0;
+	top:0;
+}
+#order_query .layui-btn-primary{
+	border:1px solid #1E9FFF;
+	color:#1E9FFF;
+	margin-right:0;
+}
+#order_query .layui-form-label{
+	padding:9px 15px 9px 0px;
+	width:100px;
+}
+#order_query .layui-tab .layui-this{
+	color:#1E9FFF;
+}
+#order_query .layui-tab .layui-this:after {
+	border-bottom:2px solid #1E9FFF;
+}
+#order_query .lay-table-box{
+	width:100%;
+}
+#order_query .layui-table tr:hover{
+	background:#fff;
+}
+#order_query .layui-table thead tr:hover{
+	background:#f2f2f2;
+}
+#order_query .layui-td{
+	padding:15px 0px 15px 10px;
+	width:260px;
+}
+#order_query .layui-table-logo{
+	display: block;
+	height:50px;
+	width:50px;
+	float:left;
+	margin-left:10px;
+}
+#order_query .layui-table-right{
+	float:left;
+	margin-left:10px;
+	font-size:12px;
+}
+#order_query .layui-table-p{
+	text-align: left;
+	font-size:15px;
+	width: 180px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#order_query .layui-table p{
+	text-align: left;
+	width: 180px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#order_query .layui-table .lay-time{
+	float:left;
+	margin-top:5px;
+}
+#order_query .layui-icon-play{
+	font-size: 25px; color:green;
+}
+#order_query .layui-icon-pause{
+	font-size: 25px; color:#FF5722;
+}
+#order_query .layui-icon-ok-circle{
+	font-size: 25px; color:#1E9FFF;
+}
+#order_query .hidden，#order_spread .hidden{
+	display: none;
+}
+#order_query .ivu-dropdown-rel,#order_spread .ivu-dropdown-rel{
+	padding-right:5px;
+	line-height: 38px;
+	height:38px;
+}
+#order_query .layui-btn-container1{
+	margin-top:10px;
+}
+#order_query .looktype{
+	color:#1E9FFF;
+	cursor: pointer;
+	display:inline-block;
+	width:60px
+}
+.select_txt{
+	display: block;
+	float: left;
+	max-width:280px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+.layui-icon-down{
+	float: right;
+	font-size:12px;
+}
+.ivu-dropdown{
+	position: relative;
+}
+.ivu-select-dropdown{
+	position: absolute;
+	left:0;
+	top:102%;
+	width:290px;
+	background:#fff;
+	max-height: 366px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	border-radius: 4px;
+	box-shadow: 0 1px 6px rgba(0,0,0,.2);
+	z-index:9;
+	padding:10px;
+}
+.ivu-input{
+	display: block;
+	width:285px;
+	border: 1px solid #d6d6d6;
+	line-height:32px;
+	border-radius: 4px;
+}
+.flex {
+	display: -webkit-box;
+	display: -moz-box;
+	display: -ms-flexbox;
+	display: -webkit-flex;
+	display: flex; }
+
+.align-items {
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	-ms-flex-align: center;
+	align-items: center; }
+
+.flex1 {
+	-webkit-box-flex: 1;
+	-webkit-flex: 1;
+	-ms-flex: 1;
+	flex: 1;
+}
+.ivu-dropdown-item{
+	margin:5px 0;
+}
+.ivu-dropdown-item .icon{
+	width:46px;
+	height:46px;
+	border: 1px solid #eee;
+	border-radius: 10px;
+	margin-right:10px;
+}
+.ivu-dropdown-item .appname{
+	width: 200px;
+	white-space: nowrap;
+	-o-text-overflow: ellipsis;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+#order_query .morewidth,#order_spread .morewidth{
+	width:310px;
+}
+.autocomplete-suggestions{
+	background:#fff;
+	padding:10px;
+	border-radius: 4px;
+	box-shadow: 0 1px 6px rgba(0,0,0,.2);
+	z-index: 9;
+	max-height: 366px;
+	overflow-x: hidden;
+	overflow-y: scroll;
+}
+#order_query .liucuntask{
+	position:relative;
+}
+#order_query .liucuntask img{
+	display:inline-block;
+	width:15px;
+	margin-left:3px;
+	cursor: pointer;
+}
+#order_query .liucunlist{
+	position: absolute;
+	z-index: 1000;
+	background:#888;
+	color:#fff;
+}
+#order_query .liucunlist ul{
+	width:195px;
+}
+#order_query .liucunlist li{
+	font-size:12px;
+	width:65px;
+	float:left;
+}
+/*效果报告*/
+#effect_report .layui-top-title{
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+	position: relative;
+}
+#effect_report .layui-top-title p{
+	width:200px;
+	position:absolute;
+	text-align: right;
+	right:210px;
+	top:0;
+	font-size:14px;
+}
+#effect_report .layui-right-text{
+	position:absolute;
+	right:0;
+	top:0;
+}
+#effect_report .layui-btn-primary{
+	border:1px solid #1E9FFF;
+	color:#1E9FFF;
+	margin-right:0;
+}
+#effect_report .layui-form-label{
+	padding:9px 15px 9px 0px;
+	width:100px;
+}
+#effect_report .layui-tab .lay-tip{
+	margin-top:20px;
+	padding-left:10px;
+}
+#effect_report .layui-tab .layui-this{
+	color:#1E9FFF;
+}
+#effect_report .layui-tab .layui-this:after {
+	border-bottom:2px solid #1E9FFF;
+}
+#effect_report .lay-table-box{
+	width:100%;
+	overflow: auto;
+}
+#effect_report .layui-table tr:hover{
+	background:#fff;
+}
+#effect_report .layui-table thead tr:hover{
+	background:#f2f2f2;
+}
+#effect_report .layui-td{
+	padding:15px 0px 15px 10px;
+	width:260px;
+}
+#effect_report .layui-table-logo{
+	display: block;
+	height:50px;
+	width:50px;
+	float:left;
+	margin-left:10px;
+}
+#effect_report .layui-table-right{
+	float:left;
+	margin-left:10px;
+	font-size:12px;
+}
+#effect_report .layui-table-p{
+	text-align: left;
+	font-size:15px;
+	width: 180px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#effect_report .layui-table p{
+	text-align: left;
+	width: 180px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#effect_report .layui-table .lay-time{
+	float:left;
+	margin-top:5px;
+}
+#effect_report .layui-table td .lay-up{
+	color:#FF5722;
+	margin-left:5px;
+}
+#effect_report .layui-table td .lay-down{
+	color:#5FB878;
+	margin-left:5px;
+}
+#effect_report .layui-input-inline1{
+	width:auto;
+	margin-left: 26px;
+	margin-right: 127px;
+}
+#effect_report .layui-table td b{
+	color:#f00;
+	font-weight: normal;
+}
+#effect_report .layui-table td i{
+	color:#5FB878;
+	font-style: normal;
+}
+/*结算单据*/
+#settlement_documents .layui-top-title{
+	position: relative;
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#settlement_documents .lay-table-box{
+	width:100%;
+	overflow: auto;
+}
+#settlement_documents .lay-table-btn{
+	margin-top:10px;
+}
+#settlement_documents .lay-shade{
+	height:100%;
+	width:100%;
+	position: fixed;
+	top:0;
+	left:0;
+	background:#000;
+	opacity: 0.3;
+}
+#settlement_documents .lay-box{
+	position: fixed;
+	top:50%;
+	left:50%;
+	z-index: 10;
+	background:#fff;
+	transform: translate(-50%,-50%);
+	padding:18px 15px;
+	width:50%;
+	height:430px;
+	overflow: auto;
+}
+#settlement_documents .layui-icon-close{
+	position: absolute;
+	right:15px;
+	top:13px;
+	font-size:24px;
+	cursor: pointer;
+}
+#settlement_documents .lay-table-box{
+	width:100%;
+	overflow: auto;
+}
+#settlement_documents .layui-table-one tr td{
+	text-align: left;
+}
+#settlement_documents .layui-table-one tr td.lay-right{
+	text-align: right;
+}
+#settlement_documents .layui-table-one tr td.lay-color-green{
+	color:#5FB878;
+}
+#settlement_documents .layui-table-two tr td{
+	text-align: center;
+}
+#settlement_documents .layui-td{
+	padding:8px 0px 8px 15px;
+	width:240px;
+}
+#settlement_documents .layui-td .layui-table-logo{
+	height:40px;
+	width:40px;
+	float:left;
+	margin-left:10px;
+}
+#settlement_documents .layui-td .layui-table-right{
+	float:left;
+	margin-left:10px;
+	font-size:14px;
+}
+#settlement_documents .layui-td .layui-table-p{
+	width:160px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+	text-align: left;
+}
+#settlement_documents .layui-td  p{
+	text-align: left;
+	width:160px;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+#settlement_documents .layui-table-two tr:hover{
+	background:#fff;
+}
+#settlement_documents .layui-table-two thead tr:hover{
+	background:#f2f2f2;
+}
+#settlement_documents .lay-bottom-btn{
+	display: block;
+	width:120px;
+	height:40px;
+	text-align: center;
+	line-height: 40px;
+	background:#1E9FFF;
+	color:#fff;
+	margin:0 auto;
+}
+#settlement_documents .seal{
+	clear:both;
+	overflow: hidden;
+	margin:30px 0;
+}
+#settlement_documents .seal .sealcontent{
+	width:50%;
+	float:left;
+}
+#settlement_documents .seal .sealcontent ul li{
+	line-height: 40px;
+	font-size:16px;
+	color:#333;
+}
+/*应用管理*/
+#application_management .layui-top-title{
+	position: relative;
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#application_management .layui-right-text{
+	position:absolute;
+	right:0;
+	top:0;
+}
+#application_management .layui-btnp{
+	border:1px solid #1E9FFF;
+	color:#1E9FFF;
+	margin-right:0;
+}
+#application_management .lay-table-box{
+	width:100%;
+	overflow: auto;
+}
+#application_management .layui-table tr,#application_management .layui-table th{
+	text-align: center
+}
+#application_management .layui-td{
+	padding:12px 0px 12px 10px;
+	width:310px;
+}
+#application_management .layui-table-logo{
+	display: block;
+	height:45px;
+	width:45px;
+	float:left;
+	margin-left:10px;
+}
+#application_management .layui-table-right{
+	float:left;
+	margin-left:10px;
+	font-size:14px;
+	margin-top:3px;
+}
+#application_management .layui-table-p{
+	text-align: left;
+	margin-bottom:3px;
+	width: 240px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#application_management .layui-table p{
+	text-align: left;
+	width: 240px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#application_management .layui-td .lay-spc{
+	float:left;
+	margin-left:10px;
+	margin-top:10px;
+	color:#d63b3b;
+	font-size:13px;
+}
+#application_management .layui-td .lay-spc a{
+	color:#1E9FFF;
+	margin-left:10px;
+	font-size:13px;
+}
+#application_management .lay-pei,#application_management .lay-modify{
+	color:#1E9FFF;
+	cursor: pointer;
+}
+#application_management .lay-color-blue{
+	color:#1E9FFF;
+}
+#application_management .lay-shade,#recharge_record .lay-shade{
+	height:100%;
+	width:100%;
+	position: fixed;
+	top:0;
+	left:0;
+	background:#000;
+	opacity: 0.3;
+}
+#application_management .lay-box{
+	position: fixed;
+	top:50%;
+	left:50%;
+	z-index: 10;
+	background:#fff;
+	transform: translate(-50%,-50%);
+	padding:18px 15px 15px;
+	width:50%;
+}
+#application_management .layui-form{
+	margin:20px 0;
+}
+#application_management .layui-form .layui-input-block p{
+	color:#5FB878;
+	margin-top:10px;
+}
+#application_management .layui-icon-close,#recharge_record .layui-icon-close{
+	position: absolute;
+	right:15px;
+	top:13px;
+	font-size:24px;
+	cursor: pointer;
+}
+#application_management .lay-container{
+	text-align: right;
+}
+#application_management .lay-container a{
+	display: inline-block;
+	height:35px;
+	width:90px;
+	text-align: center;
+	line-height: 35px;
+	background:#1E9FFF;
+	color:#fff;
+	border-radius: 5px;
+	border:1px solid #1E9FFF;
+}
+#application_management .lay-container a.lay-copy{
+	border:1px solid #D2D2D2;
+	background:#fff;
+	color:#666;
+}
+#application_management .repeat_box{
+	position: fixed;
+	top:50%;
+	left:50%;
+	z-index: 10;
+	background:#fff;
+	transform: translate(-50%,-50%);
+	padding:18px 15px 30px;
+	width:350px;
+}
+#application_management .repeat_box .lay-top{
+	text-align: center;
+	font-size:16px;
+	margin-bottom:20px;
+}
+#application_management .repeat_box .tips{
+	color:#FF5722;
+	margin-bottom:20px;
+}
+#application_management .repeat_box p{
+	text-align: center;
+}
+#recharge_record .lay-add-application{
+	position: fixed;
+	top:50%;
+	left:50%;
+	z-index: 10;
+	background:#fff;
+	transform: translate(-50%,-50%);
+	padding:18px 15px 15px;
+	width:50%;
+}
+#recharge_record .lay-add-application{
+	text-align: center;
+}
+#recharge_record .lay-add-application img{
+	width:400px;
+	margin:0 auto;
+	height: 400px;
+}
+#application_management .lay-add-application{
+	position: fixed;
+	top:0;
+	left:0;
+	bottom:0;
+	right:0;
+	margin:auto;
+	z-index: 10;
+	background:#fff;
+	padding:18px 15px 15px;
+	width:850px;
+	height:400px;
+}
+#application_management .lay-add-application .layui-form-item{
+	position: relative;
+	margin-top:20px;
+	margin-bottom:0;
+}
+#application_management .lay-add-application button.lay-search{
+	position: absolute;
+	right:1px;
+	top:1px;
+	border:none;
+	height:36px;
+	line-height: 36px;
+	width:50px;
+}
+#application_management .lay-add-application .layui-icon-search{
+	font-size:26px;
+}
+#application_management .layui-form ul{
+	border:1px solid #e6e6e6;
+	border-top:none;
+	height:305px;
+	overflow: auto;
+}
+#application_management .layui-form ul.lay-list-show li:hover{
+	background: #f5f5f5;
+	cursor: pointer;
+}
+#application_management .layui-form ul.lay-list-show li{
+	position: relative;
+	height:50px;
+	line-height: 50px;
+}
+#application_management .layui-form ul.lay-list-show li img{
+	height:35px;
+	width:35px;
+	border-radius: 5px;
+	position: absolute;
+	left:10px;
+	top:7.5px;
+}
+#application_management .layui-form ul.lay-list-show li p{
+	display: inline-block;
+	width:60%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	padding-left:50px;
+	color:#01AAED;
+}
+#application_management .layui-form ul.lay-list-show li p span{
+	color:#FF5722;
+}
+#application_management .layui-form ul.lay-list-show li .lay-right{
+	position: absolute;
+	top:0;
+	right:15%;
+	width:17%;
+	height:50px;
+	line-height: 50px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	color:#ccc;
+}
+button.lay-no-add,button.lay-already-added{
+	position: absolute;
+	top:13px;
+	width:55px;
+	right:5%;
+	height:24px;
+	line-height: 24px;
+	border: 1px solid #1E9FFF;
+	color: #1E9FFF;
+	cursor: pointer;
+}
+button.lay-already-added{
+	border: 1px solid #bbb;
+	color: #666;
+	background: #999;
+}
+#application_management .layui-form ul.lay-list-appadd li{
+	width:45%;
+	float:left;
+	margin:10px 2.3%;
+	border:1px solid #ccc;
+}
+#application_management .layui-form ul.lay-list-appadd li img{
+	height:45px;
+	width:45px;
+	display: block;
+	float:left;
+	margin:10px;
+}
+#application_management .layui-form ul.lay-list-appadd li .lay-apptext{
+	width:40%;
+	float:left;
+}
+#application_management .layui-form ul.lay-list-appadd li .lay-apptext p{
+	margin-top:12px;
+	width:100%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+#application_management .layui-form ul.lay-list-appadd li .lay-apptext span{
+	display: block;
+	width:100%;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	color:#999;
+}
+/*#application_management .layui-form ul.lay-list-appadd li button.lay-already-added{*/
+	/*float:right;*/
+	/*margin:20px 10px;*/
+	/*width:55px;*/
+	/*border:1px solid #bbb;*/
+	/*color:#666;*/
+	/*background:#999;*/
+/*}*/
+/*#application_management .layui-form ul.lay-list-appadd li button.lay-no-add{*/
+	/*float:right;*/
+	/*margin:20px 10px;*/
+	/*width:55px;*/
+	/*border:1px solid #1E9FFF;*/
+	/*color:#1E9FFF;*/
+	/*cursor: pointer;*/
+/*}*/
+/*充值记录*/
+#recharge_record .layui-top-title{
+	position: relative;
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#recharge_record .layui-right-text{
+	position:absolute;
+	right:0;
+	top:0;
+}
+#recharge_record .layui-btn-primary{
+	border:1px solid #1E9FFF;
+	color:#1E9FFF;
+	margin-right:0;
+}
+#recharge_record .lay-table-box{
+	width:100%;
+	overflow: auto;
+}
+/*资源包管理*/
+#resource_pack_management .layui-top-title{
+	position: relative;
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#resource_pack_management .layui-right-text{
+	position:absolute;
+	right:0;
+	top:0;
+}
+#resource_pack_management .layui-btn-primary{
+	border:1px solid #1E9FFF;
+	color:#1E9FFF;
+	margin-right:0;
+}
+#resource_pack_management .lay-table-box{
+	width:100%;
+	overflow: auto;
+}
+/*关键词预估*/
+#keyword_predict .layui-top-title{
+	position: relative;
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#keyword_predict .layui-right-text{
+	position:absolute;
+	right:0;
+	top:0;
+}
+#keyword_predict .layui-btn-primary{
+	border:1px solid #1E9FFF;
+	color:#1E9FFF;
+	margin-right:0;
+}
+#keyword_predict .lay-table-box{
+	width:100%;
+	overflow: auto;
+}
+#keyword_predict .layui-form{
+	width:800px;
+	margin:0 auto;
+}
+#keyword_predict .layui-form button{
+	display: block;
+	width:400px;
+	margin:0 auto;
+	background:#56c1f1;
+}
+#keyword_predict th div{
+	display: inline-block;
+	position: relative;
+}
+#keyword_predict th i.layui-icon-up{
+	font-size:12px;
+	font-weight: bolder;
+	display: inline-block;
+	width:12px;
+	height:12px;
+	position: absolute;
+	top:-5px;
+	cursor: pointer;
+}
+#keyword_predict th i.layui-icon-down{
+	font-size:12px;
+	font-weight: bolder;
+	display: inline-block;
+	width:12px;
+	height:12px;
+	position: absolute;
+	top:7px;
+	cursor: pointer;
+}
+#keyword_predict th i.selectedColor{
+	color:#f00
+}
+#keyword_predict tr td .up{
+	color:red;
+}
+#keyword_predict tr td .down{
+	color:#12d2aa;
+}
+#keyword_predict tr.nonenum{
+	height:200px;
+	background:#fff;
+}
+#keyword_predict tr.nonenum a{
+	color:#1E9FFF;
+	cursor: pointer;
+}
+/*确认退订信息*/
+#confirm_unsubscribe_information .layui-top-title{
+	position: relative;
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#confirm_unsubscribe_information .layui-right-text{
+	position:absolute;
+	right:0;
+	top:0;
+}
+#confirm_unsubscribe_information .layui-btn-primary{
+	border:1px solid #1E9FFF;
+	color:#1E9FFF;
+	margin-right:0;
+}
+#confirm_unsubscribe_information .lay-tips{
+	color:#FF5722;
+	margin-bottom:5px;
+}
+#confirm_unsubscribe_information .lay-table-box{
+	width:100%;
+	overflow: auto;
+}
+#confirm_unsubscribe_information .layui-table{
+	margin:0;
+}
+#confirm_unsubscribe_information .lay-tishi{
+	background:#fff;
+	border:1px solid #e6e6e6;
+	border-bottom:none;
+	height:40px;
+	line-height: 40px;
+	padding-left:10px;
+}
+#confirm_unsubscribe_information .layui-table tr{
+	background:#fff;
+}
+#confirm_unsubscribe_information .submission{
+	background:#fff;
+	height:60px;
+	border:1px solid #E6E6E6;
+	border-top:none;
+	position: relative;
+}
+#confirm_unsubscribe_information .submission div{
+	height:60px;
+	line-height: 60px;
+	position: absolute;
+	right:150px;
+	top:0;
+}
+#confirm_unsubscribe_information .submission div span{
+	color:#1E9FFF;
+}
+#confirm_unsubscribe_information .submission .layui-btn-normal{
+	position: absolute;
+	right:50px;
+	top:11px;
+}
+/*下单推广*/
+#order_spread .layui-top-title{
+	position: relative;
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#order_spread .layui-right-text{
+	position:absolute;
+	right:0;
+	top:0;
+}
+#order_spread .layui-form-label{
+	width:110px;
+}
+#order_spread .lay-add-position{
+	position:relative;
+}
+#order_spread .lay-hidden{
+	padding:0;
+	margin:0;
+	width:64px;
+	position:absolute;
+	left:0;
+	background:transparent;
+	color:transparent;
+}
+#order_spread .layui-input-block {
+	margin-left:150px;
+}
+#order_spread .layui-form-radio i{
+	color:#C2C2C2;
+}
+#order_spread .layui-form-radioed>i{
+	color:#1E9FFF;
+}
+#order_spread .lay-line-go{
+	position: relative;
+}
+#order_spread .lay-current{
+	position: absolute;
+	left:220px;
+	top:10px;
+	color:#888;
+}
+#order_spread .lay-go-purchase,#order_spread .lay-go-purchase-ios12{
+	margin-left:10px;
+	color:#1E9FFF;
+}
+#order_spread .lay-go-purchase-hidden{
+	display: inline-block;
+	width:42px;
+	overflow: hidden;
+	height:16px;
+	position:absolute;
+	right:0;
+	top:0;
+	color: transparent;
+}
+#order_spread .layui-tab-title .layui-this{
+	color:#1E9FFF;
+}
+#order_spread .layui-tab .layui-this:after {
+	border-bottom:2px solid #1E9FFF;
+}
+#order_spread .layui-tab-item p:nth-child(1){
+	margin:10px 0;
+}
+#order_spread .layui-tab-item p span{
+	display: inline-block;
+	border:1px solid #c2c2c2;
+	padding:0 3px;
+	margin-left:5px;
+}
+#order_spread .lay-tab-one .layui-textarea{
+	margin:5px 0px 15px;
+}
+#order_spread .layui-tab-content .lay-tab-two{
+	margin-bottom:50px;
+}
+#order_spread .layui-table-tool{
+	position:absolute;
+	bottom:7px;
+	border:none;
+	padding:10px 0 0;
+}
+#order_spread .layui-table-tool-self{
+	display: none;
+}
+#order_spread .layui-form-checked[lay-skin=primary] i {
+    border-color: #1E9FFF;
+    background-color: #1E9FFF;
+    color: #fff;
+}
+#order_spread .lay-add-table{
+	margin-bottom:0;
+}
+#order_spread .layui-table .layui-btn{
+	margin:3px;
+}
+#order_spread .lay-add-tr{
+	height:50px;
+	background:#fff;
+	border:1px solid #e6e6e6;
+	border-top:none;
+	line-height: 50px;
+	text-align: center;
+}
+#order_spread .lay-add-tr i{
+	font-size:30px;
+	color:#999;
+	cursor: pointer;
+}
+#order_spread .layui-table tr td .lay-today{
+	padding-left:8px;
+	width:50px;
+	margin:0 5px;
+	text-align: center;
+}
+#order_spread .layui-table tr td .layui-icon-help{
+	color:#1E9FFF;
+}
+#order_spread .lay-jiesuan{
+	line-height: 36px;
+	position: relative;
+}
+#order_spread .lay-jiesuan div{
+	position: absolute;
+	right:0;
+	top:0;
+}
+#order_spread .lay-jiesuan div p{
+	text-align: right;
+}
+#order_spread .lay-jiesuan div p i{
+	font-style: normal;
+}
+
+
+
+#order_spread .layui-table input{
+	text-align: center;
+}
+#order_spread .lay-add-keyword .lay-add-table input{
+	height:30px;
+	padding:0 5px;
+	text-align: center;
+	color:#666;
+}
+#order_spread .layui-table tr:hover input.lay-input-hide{
+	background:#f2f2f2;
+}
+#order_spread .layui-table input.lay-input-hide{
+	border-color:transparent!important;
+}
+#order_spread .lay-refresh{
+	margin-left:5px;
+	cursor: pointer;
+}
+#order_spread .layui-input-inline{
+	margin-left: 10px;
+}
+#order_spread .yun_tips{
+	background: #fff;
+	line-height: 30px;
+	border: 1px solid rgb(230, 230, 230);
+	border-top: none;
+	padding-left: 15px;
+}
+#order_spread .lay-add-keyword .lay-add-table input[name="kwdspeed"]{
+	display:inline-block;
+	font-size:20px;
+	cursor: pointer;
+}
+#order_spread .lay-date-tips{
+	color:#1E9FFF;
+	cursor: pointer;
+}
+#order_spread .datelabel{
+	position: relative;
+}
+#order_spread .datelabel ol{
+	position:absolute;
+	top:40px;
+	left:40px;
+	width:400px;
+	text-align: left;
+	background:#666;
+	color:#fff;
+	z-index: 999;
+	padding:8px 10px;
+}
+#order_spread .layui-form{
+	padding-bottom:100px;
+}
+#order_spread .lay-footer{
+	position:fixed;
+	bottom:0px;
+	height:80px;
+	width:100%;
+	background:#f5f5f5;
+	padding-top:20px;
+	border-top:1px solid #d2d2d2;
+}
+#order_spread .lay-footer .layui-btn-disabled{
+	float:left;
+}
+#order_spread .lay-footer span{
+	margin-left:20px;
+	color:#FFB800;
+}
+#order_spread .lay-footer.uablesubmit div{
+	margin-top:11px;
+	float:left;
+}
+#order_spread .lay-footer.uablesubmit div a{
+	color:#1E9FFF;
+}
+#order_spread .lay-footer.ablesubmit,
+#order_spread .lay-footer.uablesubmit .noname,
+#order_spread .lay-footer.uablesubmit .noresource,
+#order_spread .lay-footer.uablesubmit .nomoney{
+	display:none;
+}
+#order_spread .colortips{
+	color:#f00;
+}
+#order_spread .wenan{
+	width:300px;
+}
+#order_spread .wenanitem1{
+	position: relative;
+}
+#order_spread .examplebox{
+	width:410px;
+	position: absolute;
+	left:500px;
+	top:0;
+}
+#order_spread .example_l{
+	float:left;
+	margin-top:34px;
+	margin-right:10px;
+}
+#order_spread .wenanitem2{
+	margin-bottom:50px;
+}
+/*钱包管理*/
+#purse_management .layui-top-title{
+	position: relative;
+	color:#333;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#purse_management .layui-right-text{
+	position:absolute;
+	right:0;
+	top:0;
+}
+#purse_management .layui-btn-primary{
+	border:1px solid #1E9FFF;
+	color:#1E9FFF;
+	margin-right:0;
+}
+#purse_management .layui-top-title2{
+	margin-top:30px;
+}
+#purse_management .layui-card-text{
+	padding:25px 20px;
+}
+#purse_management .lay-top{
+	position: relative;
+	margin-bottom:20px;
+}
+#purse_management .lay-top .lay-yen{
+	font-size:34px;
+	color:#1E9FFF;
+	font-weight: 800;
+}
+#purse_management .lay-top .lay-right{
+	position:absolute;
+	right:0;
+	top:0;
+	padding:0 35px;
+}
+#purse_management .lay-bottom{
+	position: relative;
+}
+#purse_management .lay-bottom .lay-right{
+	position:absolute;
+	right:0;
+	top:0;
+}
+#purse_management .lay-bottom .lay-right a{
+	margin-left:10px;
+	color:#1E9FFF;
+}
+#purse_management .layui-form-label{
+	padding:9px 0px;
+	text-align: center;
+}
+#purse_management .lay-table-box{
+	width:100%;
+	overflow: auto;
+}
+/*账户充值*/
+#recharge .layui-top-title{
+	position: relative;
+	color:#333;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#recharge .layui-right-text{
+	position:absolute;
+	right:0;
+	top:0;
+}
+#recharge .layui-btn-primary{
+	border:1px solid #1E9FFF;
+	color:#1E9FFF;
+	margin-right:0;
+}
+#recharge .layui-tab-content{
+	padding-left:60px;
+}
+#recharge .layui-tab span{
+	float:left;
+	height:42px;
+	line-height: 42px;
+	margin-left:50px;
+}
+#recharge .layui-tab .lay-tab-box{
+	display: inline-block;
+	border:none;
+}
+#recharge .layui-tab .lay-tab-box li{
+	background:#fff;
+	border:1px solid #d2d2d2;
+	margin-left:20px;
+}
+#recharge .layui-tab .lay-tab-box li.layui-this{
+	background:#1E9FFF;
+	border:1px solid #1E9FFF;
+	color:#fff;
+}
+#recharge .layui-tab .lay-tab-box li.layui-this:after{
+	border-color:#1E9FFF
+}
+#recharge .layui-tab .lay-form-one p{
+	margin:30px 0 25px;
+}
+#recharge .layui-tab .lay-form-one table{
+	height:150px;
+	width:400px;
+	background:#fff;
+}
+#recharge .layui-tab .lay-form-one table tr td{
+	border:1px solid #D2D2D2;
+	text-align: center;
+}
+#recharge .layui-tab .lay-form-two{
+	margin-top:35px;
+}
+#recharge .layui-tab .layui-form button{
+	margin-top:25px;
+	padding:0 35px;
+}
+#recharge .layui-tab .lay-form-two h4{
+	margin:20px 0 5px;
+}
+#recharge .layui-tab .lay-form-two p{
+	line-height:30px;
+}
+
+/*发票管理*/
+#invoice_management .layui-top-title{
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:10px;
+	margin-top:10px;
+	position: relative;
+}
+#invoice_management .layui-right-text{
+	position:absolute;
+	right:0;
+	top:0;
+}
+#invoice_management .layui-btn-primary{
+	border:1px solid #1E9FFF;
+	color:#1E9FFF;
+	margin-right:0;
+}
+#invoice_management .lay-table-box{
+	width:100%;
+	overflow: auto;
+}
+#invoice_management .lay-tips{
+	color:#FF5722;
+	margin-bottom:10px;
+	padding-left:40px;
+}
+#invoice_management .lay-sel{
+	padding-left:40px;
+}
+#invoice_management .lay-company-information{
+	margin:10px 0 20px 40px;
+}
+#invoice_management .lay-add-default-information{
+	padding-bottom:30px;
+	background:#fff;
+	overflow: hidden;
+	width:300px;
+}
+#invoice_management .lay-add-default-information .lay-top{
+	position: relative;
+	height:30px;
+	margin-bottom:30px;
+}
+#invoice_management .lay-add-default-information .lay-top .lay-set-default{
+	position: absolute;
+	left:-45px;
+	top:-20px;
+	height:60px;
+	width:110px;
+	line-height: 90px;
+	background:#1E9FFF;
+	color:#fff;
+	text-align: center;
+	transform:rotate(-45deg);
+	-ms-transform:rotate(-45deg);
+	-moz-transform:rotate(-45deg);
+	-webkit-transform:rotate(-45deg);
+	-o-transform:rotate(-45deg);
+}
+#invoice_management .lay-add-default-information .lay-top .lay-top-right{
+	position: absolute;
+	right:15px;
+	top:7px;
+}
+#invoice_management .lay-add-default-information .lay-top .lay-top-right span{
+	margin-left:12px;
+	color:#1E9FFF;
+	cursor: pointer;
+}
+#invoice_management .lay-add-default-information .lay-bottom div{
+	line-height: 30px;
+	overflow: hidden;
+	clear: both;
+}
+#invoice_management .lay-add-default-information .lay-bottom .lay-bottom-left{
+	float:left;
+	width:40%;
+	text-align: right;
+}
+#invoice_management .lay-add-default-information .lay-bottom .lay-bottom-right{
+	float:left;
+	width:40%;
+}
+#invoice_management .lay-add-sign{
+	height:200px;
+	width:200px;
+	text-align: center;
+	line-height: 200px;
+	background:#fff;
+}
+#invoice_management .lay-add-sign .layui-icon-add-1{
+	font-size:20px;
+	font-weight: bold;
+}
+#invoice_management .lay-add-sign span{
+	font-size:16px;
+	cursor: pointer;
+}
+#invoice_management .lay-shade{
+	height:100%;
+	width:100%;
+	position: fixed;
+	top:0;
+	left:0;
+	background:#000;
+	opacity: 0.3;
+	z-index: 1;
+}
+#invoice_management .lay-box{
+	position: fixed;
+	z-index: 300;
+	top:50%;
+	left:50%;
+	z-index: 10;
+	background:#fff;
+	transform: translate(-50%,-50%);
+	padding:18px 15px;
+	width:50%;
+	height:420px;
+	overflow: auto;
+}
+#invoice_management .lay-box h3{
+	margin-bottom:25px;
+}
+#invoice_management .lay-box .layui-form-label{
+	padding-left:0;
+	width:120px;
+}
+#invoice_management .lay-box .lay-form-label-duo{
+	padding-top:0;
+}
+#invoice_management .lay-box .layui-input-block {
+	margin-left:135px;
+}
+#invoice_management .lay-box .lay-btn-content{
+	position: relative;
+	height:35px;
+}
+#invoice_management .lay-box .lay-btn-content .lay-cancel{
+	position: absolute;
+	right:80px;
+	top:0;
+}
+#invoice_management .lay-box .lay-btn-content .lay-confirm{
+	position: absolute;
+	right:0px;
+	top:0;
+}
+#invoice_management .layui-form-radio i{
+	color:#C2C2C2;
+}
+#invoice_management .layui-form-radioed>i{
+	color:#1E9FFF;
+}
+#invoice_management .lay-color-red{
+	color:#FF5722;
+}
+#invoice_management .lay-submit{
+	margin-left:40px;
+	margin-bottom:25px;
+}
+/*资源包购买*/
+#resource_pack_purchase .lay-purchase{
+	background:#fff;
+	padding:30px 25px;
+}
+#resource_pack_purchase .layui-top-title{
+	color:#000;
+	font-size:14px;
+	font-weight: normal;
+	margin-bottom:40px;
+}
+#resource_pack_purchase .lay-radio-one label{
+	display: inline-block;
+	height:20px;
+	width:100px;
+	border:1px solid #f5f5f5;
+}
+#resource_pack_purchase .lay-count div .throu {
+	text-decoration: line-through;
+	text-decoration-color: #1E9FFF;
+	color:#1E9FFF;
+}
+#resource_pack_purchase .yuan_price{
+	margin-left:10px;
+}
+/*资源包购买*/
+#resource_pack_purchase .layui-top-title{
+	position: relative;
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#resource_pack_purchase .layui-right-text{
+	position:absolute;
+	right:0;
+	top:0;
+}
+#resource_pack_purchase .layui-btn-primary{
+	border:1px solid #1E9FFF;
+	color:#1E9FFF;
+	margin-right:0;
+}
+#resource_pack_purchase .layui-form-label{
+	width:110px;
+}
+#resource_pack_purchase .layui-form-radio i{
+	color:#C2C2C2;
+}
+#resource_pack_purchase .layui-form-radioed>i{
+	color:#1E9FFF;
+}
+#resource_pack_purchase .lay-line-go{
+	position: relative;
+}
+#resource_pack_purchase .lay-current{
+	position: absolute;
+	left:385px;
+	top:10px;
+	color:#888;
+}
+#resource_pack_purchase .lay-go-purchase{
+	margin-left:10px;
+	color:#1E9FFF;
+}
+#resource_pack_purchase .lay-go-purchase-hidden{
+	display: inline-block;
+	width:42px;
+	overflow: hidden;
+	height:16px;
+	position:absolute;
+	right:0;
+	top:0;
+	color: transparent;
+}
+#resource_pack_purchase .lay-num-content{
+	margin-top:40px;
+}
+#resource_pack_purchase .lay-num-content input{
+	text-align: center;
+}
+#resource_pack_purchase .lay-color-blue{
+	font-size:16px;
+	color:#1E9FFF;
+}
+#resource_pack_purchase .lay-color-blue span{
+	margin-left:3px;
+}
+#resource_pack_purchase .lay-bbb{
+	color:#999;
+}
+#resource_pack_purchase .lay-count{
+	padding:10px 70px;
+	border-top: 1px solid #D2D2D2;
+	border-bottom: 1px solid #D2D2D2;
+}
+#resource_pack_purchase .lay-count div{
+	line-height: 30px;
+}
+#resource_pack_purchase .lay-count div span{
+	color:#1E9FFF;
+}
+#resource_pack_purchase .lay-count div span.hong_color{
+	color:#ff1e57;
+}
+#resource_pack_purchase .lay-count div span:first-child{
+	margin-left:20px;
+}
+#resource_pack_purchase .lay-total{
+	padding:15px 70px;
+}
+#resource_pack_purchase .lay-total span{
+	color:#1E9FFF;
+	font-size:20px;
+}
+#resource_pack_purchase .lay-total span:nth-child(1){
+	margin-left:20px;
+}
+#resource_pack_purchase .lay-total span:nth-child(2){
+	margin-right:20px;
+}
+/*账号管理*/
+#my_account .layui-top-title, #subacct .layui-top-title{
+	position: relative;
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#my_account .account_information,#my_account .delivery_information{
+	padding:20px 40px;
+	background:#fff;
+}
+#my_account .delivery_information{
+	margin-top: 20px;
+	line-height: 38px;
+}
+#my_account .account_information .account_information-top{
+	color:#000;
+	margin-bottom:30px;
+	width:280px;
+	position: relative;
+}
+#my_account .account_information .account_information-top a{
+	position: absolute;
+	right:0;
+	top:0;
+	color:#1E9FFF;
+}
+#my_account .account_information .account_information-content div{
+	height:38px;
+	line-height: 38px;
+	margin-bottom:10px;
+}
+#my_account .account_information .account_information-content div span:nth-child(2){
+	margin:0 30px;
+}
+#my_account .account_information .account_information-content div .lay-modify-name,
+#my_account .account_information .account_information-content div .lay-modify-telphone
+{
+	position:absolute;
+	left:360px;
+}
+#my_account .authentication_information{
+	margin-top:20px;
+	padding:20px 40px;
+	background:#fff;
+}
+#my_account .authentication_information .authentication_information-top{
+	color:#000;
+	margin-bottom:30px;
+	width:280px;
+	position: relative;
+	height:38px;
+	line-height: 38px;
+}
+#my_account .authentication_information .authentication_information-top span:nth-child(2){
+	color:#1E9FFF;
+	margin-left:20px;
+}
+#my_account .authentication_information .authentication_information-top div{
+	position: absolute;
+	right:0;
+	top:0;
+}
+#my_account .authentication_information .authentication_information-top div span{
+	color:#1E9FFF;
+	margin-right:10px;
+}
+#my_account .authentication_information .authentication_information-content div{
+	margin-bottom:20px;
+}
+#my_account .authentication_information .authentication_information-content div span:nth-child(1){
+	display: inline-block;
+	width:130px;
+	text-align: right;
+	margin-right:40px;
+}
+.account_information-content div span:nth-child(1){
+	display: inline-block;
+	width:130px;
+	text-align: right;
+	margin-right:40px;
+}
+.account_information-content div.last img{
+	height:150px;
+	width:200px;
+	margin-left: 26px;
+}
+.account_information .account_information-content .last{
+	height:150px!important;
+	line-height: 150px;
+}
+#my_account .authentication_information .authentication_information-content div.last{
+	height:150px;
+	line-height: 150px;
+}
+#my_account .authentication_information .authentication_information-content div.last img{
+	height:150px;
+	width:200px;
+}
+#my_account .lay-shade, #subacct .lay-shade{
+	height:100%;
+	width:100%;
+	position: fixed;
+	top:0;
+	left:0;
+	background:#000;
+	opacity: 0.3;
+}
+#my_account .lay-window-common, #subacct .lay-window-common{
+	position: fixed;
+	top:50%;
+	left:50%;
+	z-index: 10;
+	background:#fff;
+	transform: translate(-50%,-50%);
+	padding:18px 15px;
+}
+#my_account .lay-window-common .layui-form-mid, #subacct .lay-window-common .layui-form-mid{
+	padding:0!important;
+}
+#my_account .lay-window-common .layui-form-mid button, #subacct .lay-window-common .layui-form-mid button{
+	width:120px;
+	padding:0!important;
+}
+#my_account .lay-window-common p, #subacct .lay-window-common p{
+	height:30px;
+	line-height: 30px;
+	text-align: center;
+	font-size:16px;
+	margin-bottom:20px;
+}
+#my_account .lay-window-common .lay-btnc, #subacct .lay-window-common .lay-btnc{
+	padding-top:20px;
+	text-align: center;
+}
+/*实名认证*/
+#real_name_authentication .layui-top-title{
+	position: relative;
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#real_name_authentication .lay-active-color{
+	background:#1E9FFF;
+	color:#fff;
+}
+#real_name_authentication .layui-form-mid-sp{
+	padding:0!important;
+}
+#real_name_authentication .layui-form-label{
+	width:130px;
+	padding-right:40px;
+}
+#real_name_authentication .layui-form-radio i{
+	color:#C2C2C2;
+}
+#real_name_authentication .layui-form-radioed>i{
+	color:#1E9FFF;
+}
+#real_name_authentication .layui-form-item .layui-input-inline{
+	width:230px;
+}
+#real_name_authentication .layui-business_license{
+	height:140px;
+
+}
+#real_name_authentication .layui-business_license .layui-form-label{
+	height:120px;
+	line-height: 120px;
+}
+#real_name_authentication .layui-form-imgcontainer{
+	/*width:600px;*/
+	height:120px;
+}
+/*#real_name_authentication .layui-business_license img{*/
+	/*margin-top:10px;*/
+	/*height:120px;*/
+	/*width:120px;*/
+	/*float:left;*/
+	/*margin-right:10px;*/
+/*}*/
+#real_name_authentication .layui-form-imgcontainer>div{
+	float: left;
+	height:120px;
+	width:120px;
+	text-align: center;
+	line-height: 120px;
+	background:#fff;
+	position: relative;
+	margin-right: 10px;
+}
+#real_name_authentication .layui-form-imgcontainer .imgBox img{
+	width:120px;
+	height:120px;
+}
+#real_name_authentication .layui-form-imgcontainer div span{
+	cursor: pointer;
+}
+#real_name_authentication .layui-form-imgcontainer .close{
+	position: absolute;
+	top:0;
+	right:0;
+	font-size: 30px;
+	line-height: normal;
+}
+#real_name_authentication .lay-tips{
+	color:#FF5722;
+	padding-left:190px;
+	margin-bottom:5px;
+}
+#real_name_authentication .lay-submit{
+	margin:30px 70px;
+	padding:0 35px;
+}
+#real_name_authentication .layui-form-item .layui-inline .lay-duijie{
+	width:150px;
+}
+#real_name_authentication .lay-duijie-tips{
+	color:#FF5722;
+}
+/*修改密码*/
+#modify_password .layui-top-title{
+	position: relative;
+	color:#333;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#modify_password .layui-input-inline{
+	width:230px
+}
+#modify_password button{
+	margin-top:30px;
+}
+#modify_password button:nth-child(1){
+	margin-left:80px;
+}
+/*消息中心*/
+#message_center .layui-card-header{
+	color:#000;
+	padding:10px 15px;
+}
+#message_center .lay-message-box li{
+	padding:18px 0;
+	color:#000;
+	border-bottom:1px solid #f5f5f5;
+}
+#message_center .lay-message-box li span{
+	color:#444;
+	font-size:12px;
+}
+#message_center .lay-message-box li p {
+	margin-bottom:8px;
+	position: relative;
+}
+#message_center .lay-message-box li p .layui-badge-dot{
+	position: absolute;
+}
+
+#message_center .lay-message-box li p .lay-time{
+	color:#777;
+	margin-left:14px;
+}
+#message_center .lay-page{
+	padding-bottom:40px;
+	margin-top:30px;
+}
+
+/*cpc投放计划*/
+#launch_plan .layui-top-title{
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:50px;
+	margin-top:10px;
+	position: relative;
+}
+#launch_plan .layui-top-title p{
+	width:200px;
+	position:absolute;
+	text-align: right;
+	right:210px;
+	top:0;
+	font-size:14px;
+}
+#launch_plan .layui-right-text{
+	position:absolute;
+	right:0;
+	top:0;
+}
+#launch_plan .layui-btn-primary{
+	border:1px solid #1E9FFF;
+	color:#1E9FFF;
+	margin-right:0;
+}
+#launch_plan .layui-form-label{
+	padding:9px 15px 9px 0px;
+}
+#launch_plan .lay-table-box{
+	width:100%;
+	overflow: auto;
+}
+#launch_plan .layui-table .layui-btn-container .layui-btn-normal{
+	margin-top:10px;
+}
+#launch_plan .layui-table .lay-minwidth{
+	min-width:35px;
+}
+#launch_plan .layui-table p{
+	color:#FF5722;
+	font-size:12px;
+	margin-top:8px;
+}
+#launch_plan td img{
+	width:55px;
+	cursor: pointer;
+}
+	/*cpc新建计划和编辑计划*/
+#new_plan .layui-top-title{
+	position: relative;
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#new_plan .layui-right-text{
+	position:absolute;
+	right:0;
+	top:0;
+}
+#new_plan .layui-right-text .layui-btn-normal{
+	margin-right:0;
+}
+#new_plan .layui-top-title2{
+	margin-top:30px;
+}
+#new_plan .layui-form{
+	padding:0 15px;
+}
+#new_plan .lay-width{
+	width:350px;
+}
+#new_plan .layui-form-label{
+	width:95px;
+	padding: 9px 25px;
+}
+#new_plan .layui-form-radio i{
+	color:#C2C2C2;
+}
+#new_plan .layui-form-radioed>i{
+	color:#1E9FFF;
+}
+#new_plan .layui-form-checked[lay-skin=primary] i{
+	border-color:#1E9FFF;
+	background:#1E9FFF;
+}
+#new_plan .layui-input-inline{
+	width:260px;
+}
+#new_plan .lay-typesetting{
+	position: relative;
+}
+#new_plan .effect_img{
+	position:absolute;
+	right:30px;
+	top:10px;
+}
+#new_plan .effect_img .ggxgimg{
+	width:228px;
+	height:325px;
+}
+#new_plan .effect_img p{
+	text-align: center;
+	margin-top:5px;
+}
+#new_plan .imgBox{
+	position: relative;
+	/*width:100px;*/
+	/*height:181px;*/
+	max-width:200px;
+	float:left;
+	margin-left:5px;
+	margin-bottom:20px;
+	margin-right:10px;
+}
+#new_plan .imgBox img{
+	width:100%;
+}
+#new_plan .imgBox .close{
+	position:absolute;
+	right:-8px;
+	top:-12px;
+	font-size:25px;
+	cursor: pointer;
+}
+#new_plan .layui-form-mid span{
+	color:#1E9FFF;
+	margin:0 5px;
+}
+#new_plan .layui-form-mid i{
+	color:#FF5722;
+	font-style: normal;
+	margin:0 5px;
+}
+#new_plan .lay-bottom{
+	padding:20px 0px 50px;
+	margin-top:30px;
+	border-top:1px solid #ccc;
+}
+#new_plan .lay-bottom .layui-btn-normal{
+	position:absolute;
+	right:30px;
+}
+#new_plan .lay-bottom .layui-btn-primary{
+	position:absolute;
+	right:140px;
+}
+#new_plan .swiper-container {
+	width: 228px;
+	height: 337px;
+	background:rgba(0,0,0,0.4);
+}
+#new_plan .ggxgimg{
+	padding-top:1px;
+	width: 228px;
+	height: 337px;
+}
+#new_plan .ggxgimg .model{
+	margin:9px auto 0;
+}
+#new_plan .model{
+	background:url(/images/model.png) no-repeat;
+	height:299px;
+	width:142px;
+	box-sizing: border-box;
+	margin:10px auto 0;
+	padding-top:27px;
+	position: relative;
+}
+#new_plan .model img{
+	display: block;
+	width:138px;
+	margin:0 auto;
+}
+#new_plan .model img.fangda{
+	width:38px;
+	position: absolute;
+	bottom:0px;
+	right:-44px;
+	z-index: 100;
+}
+#new_plan .aui_alert_zn{ position:relative;background: #FFF}
+#new_plan .aui_alert_zn li{list-style-type:none;font: 12px/1.5 宋体,Arial,sans-serif; }
+#new_plan .aui_alert_zn a{text-decoration:none; color:#0077b3;}
+#new_plan .aui_alert{font: 12px/1.5 宋体,Arial,sans-serif; position:absolute; margin:0px auto;}
+#new_plan .aui_outer { text-align: left;}
+#new_plan .aui_alert a { color: #0077b3; text-decoration: none; }
+#new_plan .aui_alert table { border-collapse: collapse; border-spacing: 0 }
+#new_plan .aui_header{ background:#FFF;}
+#new_plan table.aui_border, table.aui_dialog { border: 0; margin: 0; border-collapse: collapse; width: auto }
+#new_plan .aui_footer, .aui_header, .aui_main { padding: 0 }
+#new_plan .aui_header { font: 12px/1.11 Tahoma, Arial, Helvetica;border-bottom: 1px solid #eee }
+#new_plan .aui_title { overflow: hidden; text-overflow: ellipsis; }
+#new_plan .aui_close { display: block; position: absolute; text-decoration: none; outline: 0 }
+#new_plan .aui_close:hover { text-decoration: none }
+#new_plan .aui_main { text-align: left; min-width: 9em; min-width: 0\9 }
+#new_plan .aui_content { display: inline-block; text-align: left; border: none 0; vertical-align: middle }
+#new_plan .aui_content .timer { text-align: center; color: red }
+#new_plan .aui_icon { vertical-align: top }
+#new_plan .aui_icon div { width: 48px; position: relative; height: 48px; margin: 20px -15px 10px 10px; background-position: center center; background-repeat: no-repeat }
+#new_plan .aui_buttons { padding: 0px 20px; text-align: center;  background-color: #FFF }
+#new_plan .aui_buttons a, .aui_buttons button { margin: 0 10px 10px 0;  }
+#new_plan .aui_inner { background: #FFF }
+#new_plan .aui_titleBar { width: 100%; height: 45px; line-height:45px; margin-top:5px; bottom: 30px; z-index: 1 }
+#new_plan .aui_title { font-size: 16px; height: 45px; line-height: 45px; padding: 0 15px 0 15px; color: #000; font-weight: 400 }
+#new_plan .aui_close { background-image: url(../images/simple_s.png); background-repeat: no-repeat }
+#new_plan .aui_close { top: 15px; right: 8px; width: 14px; height: 14px; text-indent: -9999em; background-position: left -53px; overflow: hidden }
+#new_plan .aui_close:hover { background-position: right -67px }
+#new_plan .aui-btn { display: inline-block; padding: 5px 12px; font-size: 14px; line-height: 18px; color: #333; text-align: center; vertical-align: middle; cursor: pointer; background: #f5f5f5; border: 1px solid #ccc; -webkit-border-radius: 2px; -moz-border-radius: 2px; border-radius: 2px; overflow: visible }
+#new_plan .aui-btn-disabled, .aui-btn:active, .aui-btn:focus, .aui-btn:hover, .aui-btn[disabled] { color: #333; background: #e6e6e6 }
+#new_plan .aui-btn:active { background: #ccc \9}
+#new_plan .aui-btn:focus, .aui-btn:hover { color: #333; text-decoration: none; background-position: 0 -15px }
+#new_plan .aui-btn:focus { outline: thin dotted #333; outline: 5px auto -webkit-focus-ring-color; outline-offset: -2px }
+#new_plan .aui-btn.active { background-image: none; outline: 0 }
+#new_plan .aui-btn-primary { float:right;color: #fff; background: #3d9ccc; border: 1px #3c98c7 solid;}
+#new_plan .aui-btn-primary.active, .aui-btn-primary.disabled, .aui-btn-primary:focus, .aui-btn-primary:hover, .aui-btn-primary[disabled] { color: #fff; background: #3689b3 }
+#new_plan .aui-btn-primary.active{ background: #3d9ccc }
+#new_plan .aui-btn-light { float:right;color: #3d9ccc; background: #fff; border: 1px #d2edfa solid ;}
+#new_plan .aui-btn-light.active, .aui-btn-light.disabled, .aui-btn-light:active, .aui-btn-light:focus, .aui-btn-light:hover, .aui-btn-light[disabled] { color: #00528c; background: #f5f9ff }
+#new_plan .view-all .clearfix:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+#new_plan .view-all .clearfix { *zoom: 1;}
+#new_plan .view-all .clearfix{padding-left: 10px}
+#new_plan .data-error { display: none; top: 10px; right: 10px; padding: 3px 15px; color: #b94a48; border-color: #eed3d7; background-color: #f2dede; border-radius: 3px; position: absolute; font-size:12px;}
+#new_plan .data-result { background-color: #FFF; line-height: 32px; padding: 10px 34px; font-size:12px;}
+#new_plan .data-result em { color: #678; margin-right: 10px; display: inline-block; vertical-align: middle; font-style:italic; }
+#new_plan .data-result span { display: inline-block; vertical-align: middle; background-color: #5297cc; border-radius: 15px; padding: 0 14px 2px; color: #fff; margin: 0px 5px 2px 0; line-height: 26px; white-space: nowrap; }
+#new_plan .data-result span i { display: inline-block; margin-left: 5px; color: #a9cbe6; font-size: 18px; cursor: pointer; vertical-align: bottom; *vertical-align: middle;margin-left: 5px; margin-right: -5px; font-style:normal;   }
+#new_plan .data-result span i:hover { color: #fff; }
+#new_plan .data-tabs { background-color: #FFF;}
+#new_plan .data-tabs ul {*zoom:1;padding: 0 34px;margin: 0}
+#new_plan .data-tabs ul:after { visibility: hidden; display: block; font-size: 0; content: " "; clear: both; height: 0; }
+#new_plan .data-tabs ul li { float: left; position: relative; border-width: 1px 1px 0 1px; border-color: #d9d9d9; border-style: solid; line-height: 29px; margin-right: -1px; border-radius: 2px; }
+#new_plan .data-tabs ul li a { display: block; padding: 0 15px; color: #333; }
+#new_plan .data-tabs ul li a em { display: inline-block; vertical-align: middle; width: 12px; height: 6px; overflow: hidden; margin-left: 15px; margin-right: -5px; background: url(../images/dropdown.png); }
+#new_plan .data-tabs ul li a:hover, .data-tabs ul li a:active, .data-tabs ul li a:focus { color: #333; text-decoration: none; }
+#new_plan .data-tabs ul li.active { padding-bottom: 1px; margin-bottom: -1px; background-color: #fcfcfc; }
+#new_plan .data-title {margin-left: 25px;font-size: 12px;font-weight: bold}
+#new_plan .data-container { margin-left: 34px; margin-right: 34px; min-height: 240px; display:none;padding-left: 0}
+#new_plan .data-container a.d-item { line-height: 30px; padding: 0 10px; display: inline-block; vertical-align: middle; white-space: nowrap; }
+#new_plan .data-container a.d-item:hover, .data-container a.d-item:active, .data-container a.d-item:focus{ text-decoration: none; }
+#new_plan .data-container a.d-item:hover{ background-color: #d5e9f2; }
+#new_plan .data-container a.d-item:focus { outline: none; }
+#new_plan .data-container a.d-item-active, .data-container a.d-item-active:hover { color: #fff; background-color: #3d9ccc; }
+#new_plan .data-container .view-all { overflow: hidden; }
+#new_plan .data-container-city{display:block; background-color: #fcfcfc;border: 1px solid #e5e5e5;margin:0 34px 18px;padding:14px 0 ;border-radius:2px}
+#new_plan .data-container-city .clearfix{padding-left: 10px}
+#new_plan .data-container.data-container-city ul li { float: left; margin-bottom: 1px;overflow-x: hidden;text-overflow: ellipsis; width: 100px;}
+#new_plan .data-container.data-container-city a.d-item label {background-color: #5297cc; color: #fff; display: none;font-family: Arial;line-height: 16px; margin-left: 4px;padding: 0 4px;}
+#new_plan .li-disabled {cursor:not-allowed;color:#ccc;}
+#new_plan .li-disabled a {color:#ccc;}
+#new_plan .data-search {float:right;margin-right: 34px;}
+#new_plan .data-search input {line-height: 26px;height: 26px;}
+#new_plan .data-search .run{border:1px solid #d9d9d9;width:200px;}
+#new_plan .data-search .searchList {display: none;background: #F8F8FF;position: absolute;z-index: 100;border:1px solid #d9d9d9;}
+#new_plan .data-search .searchList em {float: right;font-style: normal;}
+#new_plan .area_menu {display: block;padding: 2px 3px}
+#new_plan .data-search a:hover{color:#3f9ffc;}
+/*投放数据和投放数据详情*/
+#launch_data .layui-top-title,#launch_data_detail .layui-top-title{
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:50px;
+	margin-top:10px;
+	position: relative;
+}
+#launch_data .layui-top-title p,#launch_data_detail .layui-top-title p{
+	font-size: 14px;
+	padding-left:22px;
+	color:#666;
+}
+#launch_data .layui-top-title .layui-btn-normal,#launch_data_detail .layui-top-title .layui-btn-normal{
+	position:absolute;
+	right:0;
+	top:0;
+}
+#launch_data .layui-form-label,#launch_data_detail .layui-form-label{
+	padding:9px 15px 9px 0px;
+}
+#launch_data .layui-tab .layui-this,#launch_data_detail .layui-tab .layui-this{
+	color:#1E9FFF;
+}
+#launch_data .layui-tab .layui-this:after,#launch_data_detail .layui-tab .layui-this:after {
+	border-bottom:2px solid #1E9FFF;
+}
+#launch_data .lay-table-box,#launch_data_detail .lay-table-box{
+	width:100%;
+	overflow: auto;
+}
+#launch_data td a[lay-href]{
+	color:#1E9FFF;
+}
+#launch_data .pagespecial{
+	background:#fff;
+	padding:20px 0;
+	border: 1px solid #e6e6e6;
+	border-top:none;
+	margin-top:-10px;
+}
+
+
+/*创建推广计划*/
+.lay-red{
+	color:#FF5722;
+}
+#order_spread .lay-add-tr{
+	border-bottom: none;
+}
+#order_spread .total, #order_spread .total-ios12{
+	background:#fff;
+	line-height:30px;
+	border:1px solid rgb(230, 230, 230);
+	border-top:none;
+	padding-left:15px;
+}
+#order_spread .layui-card1{
+	height:131px;
+}
+#order_spread .layui-card1 .layui-card-body{
+	margin-top: 22px;
+}
+#order_spread .layui-card-header{
+	border:none;
+}
+#order_spread .layui-col-space30>.layui-col-md6{
+	position: relative;
+}
+#order_spread .layui-col-space30>.layui-col-md6 .layui-form-radio{
+	position: absolute;
+	left:15px;
+	right:15px;
+	top:15px;
+	bottom:15px;
+	margin:0;
+	padding:0;
+	z-index:9;
+	opacity:0;
+}
+#order_spread [name="pay_type"]:checked~.layui-card{
+	border:1px solid #1E9FFF;
+	position: relative;
+	overflow: hidden;
+}
+#order_spread .checkeddiv{
+	display: none;
+}
+#order_spread [name="pay_type"]:checked~.layui-card .checkeddiv{
+	display:block;
+	box-sizing: border-box;
+	position:absolute;
+	width:100px;
+	height:100px;
+	right:-50px;
+	top:-50px;
+	border-radius:50%;
+	background:#1E9FFF;
+	padding-top:64px;
+	padding-left:25px;
+}
+#order_spread .tips{
+	line-height:28px;
+}
+#order_spread .tipstitle{
+	color:#000;
+}
+#order_spread .imgBoxAnd{
+	position: relative;
+	max-width:200px;
+	float:left;
+	margin-left:5px;
+	margin-bottom:20px;
+	margin-right:10px;
+}
+#order_spread .imgBoxAnd img{
+	width:100%;
+}
+#order_spread .imgBoxAnd .close{
+	position:absolute;
+	right:-8px;
+	top:-12px;
+	font-size:25px;
+	cursor: pointer;
+}
+#order_spread .lookexampleAnd{
+	margin-left:10px;
+}
+#order_spread input[name='imgposition']{
+	text-align: center;
+	width:120px;
+}
+#order_spread .lay-shade{
+	height:100%;
+	width:100%;
+	position: fixed;
+	top:0;
+	left:0;
+	background:#000;
+	opacity: 0.3;
+}
+#order_spread .exampleboxAnd{
+	position: fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	margin:auto;
+	z-index: 10;
+	background:#fff;
+	padding:18px 15px 15px;
+	width:700px;
+	height:520px;
+	overflow: auto;
+}
+#order_spread .exampleboxAnd .lay-top{
+	position: relative;
+	margin-bottom:15px;
+}
+#order_spread .exampleboxAnd .lay-top div{
+	position: absolute;
+	top:-8px;
+	right:0;
+}
+#order_spread .exampleboxAnd .imgcontainer{
+	display: flex;
+	justify-content: center;
+}
+#order_spread .exampleboxAnd .imgcontainer .exaimg{
+	width:210px;
+	margin:0 20px;
+}
+#order_spread .exampleboxAnd .imgcontainer .exaimg.smallimg{
+	width:245px;
+}
+#order_spread .layui-icon-help{
+	width:20px;
+}
+#order_spread .exampleboxAnd .imgcontainer .exaimg img{
+	width:100%;
+}
+#order_spread .exampleboxAnd .imgcontainer .exaimg p{
+	text-align: center;
+	margin-top:20px;
+	font-size:18px;
+}
+#order_spread .lay-colorclass1,#order_spread .lay-colorclass2{
+	color:#1E9FFF;
+}
+/*应用审核*/
+#application_add .orientation{
+	width:100%;
+}
+#application_add .orientation input[type="text"]{
+	width:70px;
+}
+#application_add .layui-form-item4{
+	margin-bottom:0;
+}
+#application_add .layui-form-item1{
+	padding-bottom:15px;
+	border-bottom: 1px solid #e6e6e6;
+}
+#application_add .layui-form-item1 .layui-input-block label,#application_add .layui-form-item1 .layui-input-block input{
+	margin-bottom:15px;
+}
+#application_add .layui-form-item2 .layui-form-label{
+	width: 100px;
+}
+#application_add .layui-form-item3 .lay-red{
+	padding-top: 9px;
+	float:right;
+	width: 150px;
+	margin-right: 280px;
+}
+#application_add .layui-form-item4 .layui-input-block{
+	padding-top: 10px;
+}
+#application_add .layui-form-item4 .layui-input-block>label{
+	display: inline-block;
+	width:85px;
+	text-align: left;
+}
+/*投放订单*/
+#launch_order .layui-btn-sky{
+	background:mediumpurple;
+}
+#launch_order .layui-btn-purple{
+	background:deeppink;
+}
+#launch_order .lay-box1{
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	z-index: 10;
+	background: #fff;
+	transform: translate(-50%,-50%);
+	padding: 15px 15px 30px;
+	width: 800px;
+}
+#launch_order .layui-form-item3 .lay-red{
+	padding-top: 9px;
+	float:right;
+	width: 150px;
+	margin-right:350px;
+}
+#launch_order .ios12{
+	position: absolute;
+	left:0;
+	top:0;
+	width:30px;
+}
+
+/*thumb*/
+::-webkit-scrollbar-thumb {
+	height: 10px;
+	background-color: rgba(0,0,0,.5);
+	-webkit-border-radius: 10px;
+	outline-offset: -2px;
+	border: 1px solid #666;
+}
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+/*特殊资质提交*/
+#special_submit .layui-top-title{
+	position: relative;
+	color:#1E9FFF;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#special_submit .layui-form-label{
+	width:170px;
+}
+#special_submit .layui-form-item .layui-input-inline{
+	width:380px;
+}
+#special_submit .layui-btn-xs{
+	padding:0 30px;
+}
+#special_submit .layui-btn-disabled{
+	color:#333;
+}
+
+/*申请开票*/
+#applyinvoice .layui-top-title{
+	position: relative;
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#applyinvoice .lay-table-box{
+	width:100%;
+	overflow: auto;
+}
+#applyinvoice .layui-table{
+	margin:0;
+}
+#applyinvoice .layui-table tr{
+	background:#fff;
+}
+#applyinvoice .submission{
+	background:#fff;
+	height:40px;
+	border:1px solid #E6E6E6;
+	border-top:none;
+	position: relative;
+	padding-left:30px;
+}
+#applyinvoice .submission div{
+	height:40px;
+	line-height: 40px;
+}
+#applyinvoice .submission div span{
+	color:#1E9FFF;
+}
+#applyinvoice .lay-submit-btn{
+	margin-top:25px;
+	margin-bottom:5px;
+}
+#applyinvoice .lay-tips{
+	color:#FF5722;
+	margin-bottom:5px;
+}
+#applyinvoice .emptytr{
+	height:100px;
+}
+#applyinvoice .invoicebase span{
+	margin-right:50px;
+}
+#applyinvoice .acolor{
+	color:#1E9FFF;
+}
+#applyinvoice .lay-tishi{
+	margin-top:20px;
+}
+/*开票记录*/
+#invoicerecord .layui-top-title{
+	position: relative;
+	color:#333;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#invoicerecord .lay-table-box{
+	width:100%;
+	overflow: auto;
+}
+#invoicerecord .rejected{
+	color:#FF5722;
+}
+/*开票信息*/
+#invoiceinfocommit .layui-top-title{
+	position: relative;
+	color:#000;
+	height:38px;
+	line-height: 38px;
+	font-size:16px;
+	margin-bottom:15px;
+	margin-top:10px;
+}
+#invoiceinfocommit .layui-form-label{
+	width:160px;
+}
+#invoiceinfocommit .layui-form-radio i{
+	color:#C2C2C2;
+}
+#invoiceinfocommit .layui-form-radioed>i{
+	color:#1E9FFF;
+}
+#invoiceinfocommit .layui-disabled{
+	color:#666!important;
+}
+#invoiceinfocommit .layui-input-inline{
+	width:350px;
+}
+#invoiceinfocommit .imginfo{
+	max-width:850px;
+}
+#invoiceinfocommit .tipsp{
+	color:#FF5722;
+	margin-top:5px;
+	padding-left:190px;
+	width:100%;
+	box-sizing: border-box;
+	float:left;
+}
+#invoiceinfocommit .imgBox{
+	position: relative;
+	float:left;
+	max-width:850px;
+	margin-left:5px;
+	margin-bottom:10px;
+	margin-right:10px;
+}
+#invoiceinfocommit .imgBox img{
+	width:100%;
+}
+#invoiceinfocommit .imgBox .close{
+	position:absolute;
+	right:-8px;
+	top:-12px;
+	font-size:25px;
+	cursor: pointer;
+}
+.layui-form-checkbox[lay-skin=primary]:hover i{
+	border-color:#1E9FFF!important;
+}
+.layui-form-checked[lay-skin=primary] i{
+	border-color: #1E9FFF!important;
+	background-color: #1E9FFF!important;
+}
+.ticket{
+	display: flex;
+	line-height: 38px;
+}
+.ticket_money{
+	color: #1E9FFF;
+}
+.mr-chose{
+	font-size: 12px;
+	display: inline-block;
+	width: 40px;
+	height: 20px;
+	line-height: 20px;
+	background: #1E9FFF;
+	color: #fff;
+	text-align: center;
+}
+.modify_pic{
+	color: #1E9FFF;
+	cursor: pointer;
+}
+.invoice_tips{
+	margin-left: 10px;
+	color: red;
+}
+.ml40{
+	margin-left: 40px;
+}
+.redtxt{
+	color: red;
+}
+.tl{
+	text-align: left;
+}
+.pl0{
+	padding-left:0;
+}
