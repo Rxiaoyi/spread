@@ -1,0 +1,58 @@
+{extend name="../../admin/view/main"}
+
+{block name='content'}
+<div class="think-box-shadow">
+   {include file='recharge/index_search'}
+   <table class="layui-table margin-top-10" lay-skin="line">
+      {notempty name='list'}
+      <thead>
+      <tr>
+         <th class='list-table-check-td think-checkbox'>
+            <label><input data-auto-none data-check-target='.list-check-box' type='checkbox'></label>
+         </th>
+         <th class='list-table-sort-td'>
+            <button class="layui-btn layui-btn-xs" data-reload type="button">刷 新</button>
+         </th>
+         <th class="text-left nowrap">充值编号</th>
+         <th class="text-left nowrap">企业名称</th>
+         <th class="text-left nowrap">手机号</th>
+         <th class="text-left nowrap">充值金额</th>
+         <th class="text-left nowrap">账户余额</th>
+         <th class="text-left nowrap">充值时间</th>
+         <th class="text-left nowrap">充值来源</th>
+         <th class="text-left nowrap"></th>
+      </tr>
+      </thead>
+      {/notempty}
+      <tbody>
+      {foreach $list as $key=>$vo}
+      <tr>
+         <td class='list-table-check-td think-checkbox'>
+            <label><input class="list-check-box" type='checkbox' value='{$vo.id}'></label>
+         </td>
+         <td class="text-left nowrap">{$vo.code|default=''}</td>
+         <td class="text-left nowrap">{$vo.companyName|default=''}</td>
+         <td class="text-left nowrap">{$vo.companyMobile|default=''}</td>
+         <td class="text-left nowrap">{$vo.amount|default=''}</td>
+         <td class="text-left nowrap">{$vo.companyBalance|default=''}</td>
+         <td class="text-left nowrap">{$vo.create_at}</td>
+         <td class="text-left nowrap">
+            {if $vo.type eq 0}
+            <span class="color-red">支付宝</span>
+            {elseif $vo.status eq 1}
+            <span class="color-green">对公打款</span>
+            {/if}
+         </td>
+         <td class='text-left nowrap'>
+            <a class="layui-btn layui-btn-sm" data-dbclick data-modal="{:url('edit')}?id={$vo.id}"
+               data-title="编辑产品">编 辑</a>
+            <a class="layui-btn layui-btn-sm layui-btn-danger" data-action="{:url('remove')}"
+               data-confirm="确定要删除该产品吗？" data-value="id#{$vo.id}">删 除</a>
+         </td>
+      </tr>
+      {/foreach}
+      </tbody>
+   </table>
+   {empty name='list'}<span class="notdata">没有记录哦</span>{else}{$pagehtml|raw|default=''}{/empty}
+</div>
+{/block}
