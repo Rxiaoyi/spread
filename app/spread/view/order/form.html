@@ -65,15 +65,15 @@
         <div class="layui-form-item">
             <label class="layui-form-label">投放量</label>
             <div class="layui-input-inline">
-                <input type="text" disabled class="layui-input">
+                <input type="text"  class="layui-input">
             </div>
             <label class="layui-form-label">单价</label>
             <div class="layui-input-inline">
-                <input type="text" disabled class="layui-input">
+                <input type="text"  class="layui-input">
             </div>
             <label class="layui-form-label">消耗</label>
             <div class="layui-input-inline">
-                <input type="text" disabled class="layui-input">
+                <input type="text"  class="layui-input">
             </div>
         </div>
 
@@ -1560,291 +1560,291 @@
 
 <!--        })-->
 <!--        //关键词输入框失去焦点事件-->
-<!--        $("body").delegate("#keyword_table .lay-keyword-ipt", "blur", function () {-->
+        $("body").delegate("#keyword_table .lay-keyword-ipt", "blur", function () {
 
-<!--            var that = this;-->
-<!--            var iptkey = $(this).val().trim();-->
-<!--            $(this).val(iptkey);-->
-<!--            if (!iptkey) {-->
-<!--                return false-->
-<!--            }-->
-<!--            if (!appstore_id) {-->
-<!--                layer.msg("请先选择应用", {time: 1500})-->
-<!--                return false;-->
-<!--            }-->
-<!--            var sign = 0-->
+            var that = this;
+            var iptkey = $(this).val().trim();
+            $(this).val(iptkey);
+            if (!iptkey) {
+                return false
+            }
+            if (!appstore_id) {
+                layer.msg("请先选择应用", {time: 1500})
+                return false;
+            }
+            var sign = 0
 
-<!--            var alrdy_length = $(".lay-keyword-ipt").length-->
-<!--            for (var z = 0; z < alrdy_length; z++) {-->
-<!--                var ipt_val = $(".lay-keyword-ipt").eq(z).val()-->
-<!--                if (iptkey == ipt_val) {-->
-<!--                    sign++-->
-<!--                }-->
-<!--            }-->
+            var alrdy_length = $(".lay-keyword-ipt").length
+            for (var z = 0; z < alrdy_length; z++) {
+                var ipt_val = $(".lay-keyword-ipt").eq(z).val()
+                if (iptkey == ipt_val) {
+                    sign++
+                }
+            }
 
-<!--            if (sign > 1) {-->
-<!--                layer.msg("此关键词已有添加")-->
-<!--                return false;-->
-<!--            }-->
-<!--            word_added_table.push(iptkey)-->
-<!--            $(that).attr('ready', 1)-->
-<!--            $(that).attr("disabled", "disabled")-->
-<!--            $(that).css("border", "none")-->
-<!--            //请求ios11的排名-->
-<!--            $.ajax({-->
-<!--                url: "/cust/aso/wordrank",-->
-<!--                data: {-->
-<!--                    word: iptkey,-->
-<!--                    appstore_id: appstore_id-->
-<!--                },-->
-<!--                success: function (res) {-->
-<!--                    console.log(res, 'res')-->
-<!--                    var data = JSON.parse(res)-->
-<!--                    if (data.code != 0) {-->
-<!--                        // console.log('获取失败')-->
-<!--                    }-->
-<!--                    $(that).parent().siblings(".heat").text(data.data.rank.hot)-->
-<!--                    $(that).parent().siblings(".rank").text(data.data.rank.rank)-->
-<!--                }-->
-<!--            })-->
-<!--            //请求ios12的排名-->
-<!--            $.ajax({-->
-<!--                url: "/cust/aso/ios12rank",-->
-<!--                type: "post",-->
-<!--                data: {-->
-<!--                    words: iptkey,-->
-<!--                    appstore_id: appstore_id-->
-<!--                },-->
-<!--                success: function (res) {-->
-<!--                    var data = JSON.parse(res)-->
-<!--                    //console.log(data)-->
-<!--                    if (data.code == 0) {-->
-<!--                        var list = data.data.words-->
-<!--                        var list_key = Object.keys(list)-->
-<!--                        if (list_key == 0) {-->
-<!--                            //console.log("返回为空")-->
-<!--                            return false;-->
-<!--                        }-->
-<!--                        $(that).parent().siblings(".rank-ios12").find(".lay-rank-ipt-ios12").val(list[iptkey].r)-->
-<!--                        $(that).parent().siblings(".heat").text(list[iptkey].hot)-->
-<!--                        $(that).parent().siblings(".rank").text(list[iptkey].r11)-->
-<!--                    }-->
-<!--                }-->
-<!--            })-->
+            if (sign > 1) {
+                layer.msg("此关键词已有添加")
+                return false;
+            }
+            word_added_table.push(iptkey)
+            $(that).attr('ready', 1)
+            $(that).attr("disabled", "disabled")
+            $(that).css("border", "none")
+            //请求ios11的排名
+            $.ajax({
+                url: "/cust/aso/wordrank",
+                data: {
+                    word: iptkey,
+                    appstore_id: appstore_id
+                },
+                success: function (res) {
+                    console.log(res, 'res')
+                    var data = JSON.parse(res)
+                    if (data.code != 0) {
+                        // console.log('获取失败')
+                    }
+                    $(that).parent().siblings(".heat").text(data.data.rank.hot)
+                    $(that).parent().siblings(".rank").text(data.data.rank.rank)
+                }
+            })
+            //请求ios12的排名
+            $.ajax({
+                url: "/cust/aso/ios12rank",
+                type: "post",
+                data: {
+                    words: iptkey,
+                    appstore_id: appstore_id
+                },
+                success: function (res) {
+                    var data = JSON.parse(res)
+                    //console.log(data)
+                    if (data.code == 0) {
+                        var list = data.data.words
+                        var list_key = Object.keys(list)
+                        if (list_key == 0) {
+                            //console.log("返回为空")
+                            return false;
+                        }
+                        $(that).parent().siblings(".rank-ios12").find(".lay-rank-ipt-ios12").val(list[iptkey].r)
+                        $(that).parent().siblings(".heat").text(list[iptkey].hot)
+                        $(that).parent().siblings(".rank").text(list[iptkey].r11)
+                    }
+                }
+            })
 
-<!--        })-->
+        })
 
-<!--        //关键词表格添加行 加号点击-->
-<!--        $(".lay-keyword-tr").click(function () {-->
-<!--            if (!appstore_id) {-->
-<!--                layer.msg("请先选择应用", {time: 1500})-->
-<!--                return false;-->
-<!--            }-->
-<!--            //提交下单按钮不可点击-->
-<!--            $(".ablesubmit").hide();-->
-<!--            $(".uablesubmit").show();-->
-<!--            $(".nowrite").show();-->
-<!--            $(".noname,.noresource,.nomoney").hide();-->
+        //关键词表格添加行 加号点击
+        $(".lay-keyword-tr").click(function () {
+            if (!appstore_id) {
+                layer.msg("请先选择应用", {time: 1500})
+                return false;
+            }
+            //提交下单按钮不可点击
+            $(".ablesubmit").hide();
+            $(".uablesubmit").show();
+            $(".nowrite").show();
+            $(".noname,.noresource,.nomoney").hide();
 
-<!--            var aready_length = $(".lay-keyword-ipt").length-->
-<!--            if (aready_length > 299) {-->
-<!--                layer.msg("总提交的关键词不能超过300")-->
-<!--                return false;-->
-<!--            }-->
-<!--            var keyword_table = document.getElementById("keyword_table")-->
-<!--            var newtr = document.createElement("tr");-->
-<!--            var check_box;-->
-<!--            if (kwdspeedall == 1) {-->
-<!--                check_box = '<input type="checkbox" name="kwdspeed" value="1" lay-skin="primary" checked>'-->
-<!--            } else {-->
-<!--                check_box = '<input type="checkbox" name="kwdspeed" value="1" lay-skin="primary">'-->
-<!--            }-->
-<!--            var laypretime;-->
-<!--            if (timeScreen == 0) {-->
-<!--                laypretime = '<td class="lay-starttime" style="display:none"><input type="text" class="layui-input lay-input-show lay-starttime-ipt" /></td>'-->
-<!--                    + '<td class="lay-endtime" style="display:none"><input type="text" class="layui-input lay-input-show lay-endtime-ipt" /></td>'-->
-<!--            } else {-->
-<!--                laypretime = '<td class="lay-starttime"><input type="text" class="layui-input lay-input-show lay-starttime-ipt" /></td>'-->
-<!--                    + '<td class="lay-endtime"><input type="text" class="layui-input lay-input-show lay-endtime-ipt" /></td>'-->
-<!--            }-->
+            var aready_length = $(".lay-keyword-ipt").length
+            if (aready_length > 299) {
+                layer.msg("总提交的关键词不能超过300")
+                return false;
+            }
+            var keyword_table = document.getElementById("keyword_table")
+            var newtr = document.createElement("tr");
+            var check_box;
+            if (kwdspeedall == 1) {
+                check_box = '<input type="checkbox" name="kwdspeed" value="1" lay-skin="primary" checked>'
+            } else {
+                check_box = '<input type="checkbox" name="kwdspeed" value="1" lay-skin="primary">'
+            }
+            var laypretime;
+            if (timeScreen == 0) {
+                laypretime = '<td class="lay-starttime" style="display:none"><input type="text" class="layui-input lay-input-show lay-starttime-ipt" /></td>'
+                    + '<td class="lay-endtime" style="display:none"><input type="text" class="layui-input lay-input-show lay-endtime-ipt" /></td>'
+            } else {
+                laypretime = '<td class="lay-starttime"><input type="text" class="layui-input lay-input-show lay-starttime-ipt" /></td>'
+                    + '<td class="lay-endtime"><input type="text" class="layui-input lay-input-show lay-endtime-ipt" /></td>'
+            }
 
-<!--            if (iosnum == "1") {-->
-<!--                newtr.innerHTML = '<td><input type="text" need="0" ready="0" value="" class="layui-input lay-input-show lay-keyword-ipt"/></td>'-->
-<!--                    + '<td class="heat">-</td>'-->
-<!--                    + '<td class="rank" style="display:none">-</td>'-->
-<!--                    + '<td class="rank-ios12" style="display:none"><input type="text" class="layui-input lay-rank-ipt-ios12" value="-" /></td>'-->
-<!--                    + '<td class="lay-shiji-num"><input type="number" value="" class="layui-input lay-input-show lay-launch-ipt" min="0"/></td>'-->
-<!--                    + laypretime-->
-<!--                    + '<td>'-->
-<!--                    + check_box-->
-<!--                    + '</td>'-->
-<!--                    + '<td>'-->
-<!--                    + '<div class="layui-btn-container">'-->
-<!--                    + '<button class="layui-btn layui-btn-normal lay-delete-keyword" type="button">删除</button></div>'-->
-<!--                    + '</td>'-->
-<!--            } else if (iosnum == "2") {-->
-<!--                var ios12td;-->
-<!--                if (edit_ios12) {-->
-<!--                    ios12td = '<td class="rank-ios12"><input type="text" class="layui-input lay-rank-ipt-ios12" value="-" /></td>'-->
-<!--                } else {-->
-<!--                    ios12td = '<td class="rank-ios12"><input type="text" class="layui-input lay-rank-ipt-ios12" value="-" disabled style="border:none"/></td>'-->
-<!--                }-->
-<!--                newtr.innerHTML = '<td><input type="text" need="0" ready="0" value="" class="layui-input lay-input-show lay-keyword-ipt"/></td>'-->
-<!--                    + '<td class="heat">-</td>'-->
-<!--                    + '<td class="rank" style="display:none">-</td>'-->
-<!--                    + ios12td-->
-<!--                    + '<td class="lay-shiji-num"><input type="number" value="" class="layui-input lay-input-show lay-launch-ipt" min="0"/></td>'-->
-<!--                    + laypretime-->
-<!--                    + '<td>'-->
-<!--                    + check_box-->
-<!--                    + '</td>'-->
-<!--                    + '<td>'-->
-<!--                    + '<div class="layui-btn-container">'-->
-<!--                    + '<button class="layui-btn layui-btn-normal lay-delete-keyword" type="button">删除</button></div>'-->
-<!--                    + '</td>'-->
-<!--            } else {-->
-<!--                var ios12td;-->
-<!--                if (edit_ios12) {-->
-<!--                    ios12td = '<td class="rank-ios12"><input type="text" class="layui-input lay-rank-ipt-ios12" value="-" /></td>'-->
-<!--                } else {-->
-<!--                    ios12td = '<td class="rank-ios12"><input type="text" class="layui-input lay-rank-ipt-ios12" value="-" disabled style="border:none"/></td>'-->
-<!--                }-->
-<!--                newtr.innerHTML = '<td><input type="text" need="0" ready="0" value="" class="layui-input lay-input-show lay-keyword-ipt"/></td>'-->
-<!--                    + '<td class="heat">-</td>'-->
-<!--                    + '<td class="rank" style="display:none">-</td>'-->
-<!--                    + ios12td-->
-<!--                    + '<td class="lay-shiji-num"><input type="number" value="" class="layui-input lay-input-show lay-launch-ipt" min="0"/></td>'-->
-<!--                    + laypretime-->
-<!--                    + '<td>'-->
-<!--                    + check_box-->
-<!--                    + '</td>'-->
-<!--                    + '<td>'-->
-<!--                    + '<div class="layui-btn-container">'-->
-<!--                    + '<button class="layui-btn layui-btn-normal lay-delete-keyword" type="button">删除</button></div>'-->
-<!--                    + '</td>'-->
-<!--            }-->
-<!--            keyword_table.appendChild(newtr);-->
-<!--        })-->
+            if (iosnum == "1") {
+                newtr.innerHTML = '<td><input type="text" need="0" ready="0" value="" class="layui-input lay-input-show lay-keyword-ipt"/></td>'
+                    + '<td class="heat">-</td>'
+                    + '<td class="rank" style="display:none">-</td>'
+                    + '<td class="rank-ios12" style="display:none"><input type="text" class="layui-input lay-rank-ipt-ios12" value="-" /></td>'
+                    + '<td class="lay-shiji-num"><input type="number" value="" class="layui-input lay-input-show lay-launch-ipt" min="0"/></td>'
+                    + laypretime
+                    + '<td>'
+                    + check_box
+                    + '</td>'
+                    + '<td>'
+                    + '<div class="layui-btn-container">'
+                    + '<button class="layui-btn layui-btn-normal lay-delete-keyword" type="button">删除</button></div>'
+                    + '</td>'
+            } else if (iosnum == "2") {
+                var ios12td;
+                if (edit_ios12) {
+                    ios12td = '<td class="rank-ios12"><input type="text" class="layui-input lay-rank-ipt-ios12" value="-" /></td>'
+                } else {
+                    ios12td = '<td class="rank-ios12"><input type="text" class="layui-input lay-rank-ipt-ios12" value="-" disabled style="border:none"/></td>'
+                }
+                newtr.innerHTML = '<td><input type="text" need="0" ready="0" value="" class="layui-input lay-input-show lay-keyword-ipt"/></td>'
+                    + '<td class="heat">-</td>'
+                    + '<td class="rank" style="display:none">-</td>'
+                    + ios12td
+                    + '<td class="lay-shiji-num"><input type="number" value="" class="layui-input lay-input-show lay-launch-ipt" min="0"/></td>'
+                    + laypretime
+                    + '<td>'
+                    + check_box
+                    + '</td>'
+                    + '<td>'
+                    + '<div class="layui-btn-container">'
+                    + '<button class="layui-btn layui-btn-normal lay-delete-keyword" type="button">删除</button></div>'
+                    + '</td>'
+            } else {
+                var ios12td;
+                if (edit_ios12) {
+                    ios12td = '<td class="rank-ios12"><input type="text" class="layui-input lay-rank-ipt-ios12" value="-" /></td>'
+                } else {
+                    ios12td = '<td class="rank-ios12"><input type="text" class="layui-input lay-rank-ipt-ios12" value="-" disabled style="border:none"/></td>'
+                }
+                newtr.innerHTML = '<td><input type="text" need="0" ready="0" value="" class="layui-input lay-input-show lay-keyword-ipt"/></td>'
+                    + '<td class="heat">-</td>'
+                    + '<td class="rank" style="display:none">-</td>'
+                    + ios12td
+                    + '<td class="lay-shiji-num"><input type="number" value="" class="layui-input lay-input-show lay-launch-ipt" min="0"/></td>'
+                    + laypretime
+                    + '<td>'
+                    + check_box
+                    + '</td>'
+                    + '<td>'
+                    + '<div class="layui-btn-container">'
+                    + '<button class="layui-btn layui-btn-normal lay-delete-keyword" type="button">删除</button></div>'
+                    + '</td>'
+            }
+            keyword_table.appendChild(newtr);
+        })
 
-<!--        //关键词表格填写删除-->
-<!--        $("body").delegate(".lay-delete-keyword", "click", function () {-->
-<!--            var word = $(this).parents('tr').find('.lay-keyword-ipt').val()-->
-<!--            word_added_table.splice($.inArray(word, word_added_table), 1);-->
-<!--            $(this).parent().parent().parent().remove()-->
-<!--            var length = $("#keyword_table tr .lay-shiji-num .lay-input-show").length-->
-<!--            var launch_num_arr = [];-->
-<!--            for (var i = 0; i < length; i++) {-->
-<!--                if ($("#keyword_table tr .lay-shiji-num .lay-input-show").eq(i).val() != 0) {-->
-<!--                    launch_num_arr.push($("#keyword_table tr .lay-shiji-num .lay-input-show").eq(i).val())-->
-<!--                }-->
-<!--            }-->
-<!--            var sum;-->
-<!--            if (launch_num_arr != 0) {-->
-<!--                sum = eval(launch_num_arr.join("+"))-->
-<!--            } else {-->
-<!--                sum = ""-->
-<!--                $("#time_table tr").remove();-->
-<!--                time_table_arr = [];-->
-<!--            }-->
+        //关键词表格填写删除
+        $("body").delegate(".lay-delete-keyword", "click", function () {
+            var word = $(this).parents('tr').find('.lay-keyword-ipt').val()
+            word_added_table.splice($.inArray(word, word_added_table), 1);
+            $(this).parent().parent().parent().remove()
+            var length = $("#keyword_table tr .lay-shiji-num .lay-input-show").length
+            var launch_num_arr = [];
+            for (var i = 0; i < length; i++) {
+                if ($("#keyword_table tr .lay-shiji-num .lay-input-show").eq(i).val() != 0) {
+                    launch_num_arr.push($("#keyword_table tr .lay-shiji-num .lay-input-show").eq(i).val())
+                }
+            }
+            var sum;
+            if (launch_num_arr != 0) {
+                sum = eval(launch_num_arr.join("+"))
+            } else {
+                sum = ""
+                $("#time_table tr").remove();
+                time_table_arr = [];
+            }
 
-<!--            $(".allnum span").text(sum)-->
-<!--            dqtfzl_one = sum;-->
-<!--            dqlczl_one = sum * ($('.content-one .lay-input-hide').length);-->
-<!--            $('.content-one .lay-go-purchase span').text(dqlczl_one);-->
-<!--            dqAll_one = (dqtfzl_one * Number($('#tfdj').text()) + dqlczl_one * Number($('#lcdj').text())).toFixed(2);-->
-<!--            $('.ssyh').text('¥' + dqAll_one);-->
-<!--            var time_tou_length = $("#time_table .tounum").length-->
-<!--            for (var j = 0; j < time_tou_length; j++) {-->
-<!--                $("#time_table .tounum").eq(j).text(sum)-->
-<!--            }-->
-<!--            //判断余额/资源包是否充足-->
-<!--            if ($("#is_yue").val() == 1) {-->
-<!--                var useryue = Number($("#useryue").data("useryue"));-->
-<!--                if (useryue < Number(dqAll_one)) {-->
-<!--                    //提交下单按钮不可点击-->
-<!--                    $(".ablesubmit").hide();-->
-<!--                    $(".uablesubmit").show();-->
-<!--                    $(".nomoney").show();-->
-<!--                    $(".noname,.noresource,.nowrite").hide();-->
-<!--                } else if (payType == '3') {-->
-<!--                    var allnum = $('.allnum span').text();-->
-<!--                    let maxless = $('.newshengyu span').text();-->
-<!--                    if (Number(allnum) > Number(maxless)) {-->
-<!--                        $(".ablesubmit").hide();-->
-<!--                        $(".uablesubmit").show();-->
-<!--                        $(".noresource").show();-->
-<!--                        $(".nowrite").hide();-->
-<!--                        // $(".noname,.nomoney,.nowrite").show();-->
-<!--                    } else {-->
-<!--                        $(".ablesubmit").show();-->
-<!--                        $(".uablesubmit").hide();-->
-<!--                        $(".noresource").hide();-->
-<!--                        $(".noname,.nomoney,.nowrite").hide();-->
-<!--                    }-->
-<!--                } else {-->
-<!--                    //对接类型是否选择判断-->
-<!--                    var apiType = $('input[name="apiType"]:checked').val();-->
-<!--                    if (!!apiType) {-->
-<!--                        $(".ablesubmit").show();-->
-<!--                        $(".uablesubmit").hide();-->
-<!--                    }-->
-<!--                }-->
-<!--            } else {-->
-<!--                var ziyuanbao_yu = Number($(".shengyu span").text());-->
-<!--                var toufang_zong = Number($(".dq_all span").text());-->
-<!--                var liucun_yu = Number($(".liucun_yu").text());-->
-<!--                var liucun_zong = Number($(".word_liucun span").text());-->
-<!--                if (ziyuanbao_yu < toufang_zong || liucun_yu < liucun_zong) {-->
-<!--                    //提交下单按钮不可点击-->
-<!--                    $(".ablesubmit").hide();-->
-<!--                    $(".uablesubmit").show();-->
-<!--                    $(".noresource").show();-->
-<!--                    $(".noname,.nomoney,.nowrite").hide();-->
-<!--                } else {-->
-<!--                    //对接类型是否选择判断-->
-<!--                    var apiType = $('input[name="apiType"]:checked').val();-->
-<!--                    if (!!apiType) {-->
-<!--                        $(".ablesubmit").show();-->
-<!--                        $(".uablesubmit").hide();-->
-<!--                    }-->
-<!--                }-->
-<!--            }-->
-<!--            if (payType == '3') {-->
-<!--                var allnum = $('.allnum span').text();-->
-<!--                let maxless = $('.newshengyu span').text();-->
-<!--                if (Number(allnum) > Number(maxless)) {-->
-<!--                    $(".ablesubmit").hide();-->
-<!--                    $(".uablesubmit").show();-->
-<!--                    $(".noresource").show();-->
-<!--                    $(".noname,.nomoney,.nowrite").show();-->
-<!--                } else {-->
-<!--                    $(".ablesubmit").show();-->
-<!--                    $(".uablesubmit").hide();-->
-<!--                    $(".noresource").hide();-->
-<!--                    $(".noname,.nomoney,.nowrite").hide();-->
-<!--                }-->
-<!--            }-->
-<!--            //判断信息是否填写完-->
-<!--            if (sum == 0) {-->
-<!--                //提交下单按钮不可点击-->
-<!--                $(".ablesubmit").hide();-->
-<!--                $(".uablesubmit").show();-->
-<!--                $(".nowrite").show();-->
-<!--                $(".noname,.noresource,.nomoney").hide();-->
-<!--            } else {-->
-<!--                //对接类型是否选择判断-->
-<!--                var apiType = $('input[name="apiType"]:checked').val();-->
-<!--                if (!!apiType) {-->
-<!--                    $(".ablesubmit").show();-->
-<!--                    $(".uablesubmit").hide();-->
-<!--                } else {-->
-<!--                    $(".ablesubmit").hide();-->
-<!--                    $(".uablesubmit").show();-->
-<!--                    $(".nowrite").show();-->
-<!--                    $(".noname,.noresource,.nomoney").hide();-->
-<!--                }-->
-<!--            }-->
-<!--        })-->
+            $(".allnum span").text(sum)
+            dqtfzl_one = sum;
+            dqlczl_one = sum * ($('.content-one .lay-input-hide').length);
+            $('.content-one .lay-go-purchase span').text(dqlczl_one);
+            dqAll_one = (dqtfzl_one * Number($('#tfdj').text()) + dqlczl_one * Number($('#lcdj').text())).toFixed(2);
+            $('.ssyh').text('¥' + dqAll_one);
+            var time_tou_length = $("#time_table .tounum").length
+            for (var j = 0; j < time_tou_length; j++) {
+                $("#time_table .tounum").eq(j).text(sum)
+            }
+            //判断余额/资源包是否充足
+            if ($("#is_yue").val() == 1) {
+                var useryue = Number($("#useryue").data("useryue"));
+                if (useryue < Number(dqAll_one)) {
+                    //提交下单按钮不可点击
+                    $(".ablesubmit").hide();
+                    $(".uablesubmit").show();
+                    $(".nomoney").show();
+                    $(".noname,.noresource,.nowrite").hide();
+                } else if (payType == '3') {
+                    var allnum = $('.allnum span').text();
+                    let maxless = $('.newshengyu span').text();
+                    if (Number(allnum) > Number(maxless)) {
+                        $(".ablesubmit").hide();
+                        $(".uablesubmit").show();
+                        $(".noresource").show();
+                        $(".nowrite").hide();
+                        // $(".noname,.nomoney,.nowrite").show();
+                    } else {
+                        $(".ablesubmit").show();
+                        $(".uablesubmit").hide();
+                        $(".noresource").hide();
+                        $(".noname,.nomoney,.nowrite").hide();
+                    }
+                } else {
+                    //对接类型是否选择判断
+                    var apiType = $('input[name="apiType"]:checked').val();
+                    if (!!apiType) {
+                        $(".ablesubmit").show();
+                        $(".uablesubmit").hide();
+                    }
+                }
+            } else {
+                var ziyuanbao_yu = Number($(".shengyu span").text());
+                var toufang_zong = Number($(".dq_all span").text());
+                var liucun_yu = Number($(".liucun_yu").text());
+                var liucun_zong = Number($(".word_liucun span").text());
+                if (ziyuanbao_yu < toufang_zong || liucun_yu < liucun_zong) {
+                    //提交下单按钮不可点击
+                    $(".ablesubmit").hide();
+                    $(".uablesubmit").show();
+                    $(".noresource").show();
+                    $(".noname,.nomoney,.nowrite").hide();
+                } else {
+                    //对接类型是否选择判断
+                    var apiType = $('input[name="apiType"]:checked').val();
+                    if (!!apiType) {
+                        $(".ablesubmit").show();
+                        $(".uablesubmit").hide();
+                    }
+                }
+            }
+            if (payType == '3') {
+                var allnum = $('.allnum span').text();
+                let maxless = $('.newshengyu span').text();
+                if (Number(allnum) > Number(maxless)) {
+                    $(".ablesubmit").hide();
+                    $(".uablesubmit").show();
+                    $(".noresource").show();
+                    $(".noname,.nomoney,.nowrite").show();
+                } else {
+                    $(".ablesubmit").show();
+                    $(".uablesubmit").hide();
+                    $(".noresource").hide();
+                    $(".noname,.nomoney,.nowrite").hide();
+                }
+            }
+            //判断信息是否填写完
+            if (sum == 0) {
+                //提交下单按钮不可点击
+                $(".ablesubmit").hide();
+                $(".uablesubmit").show();
+                $(".nowrite").show();
+                $(".noname,.noresource,.nomoney").hide();
+            } else {
+                //对接类型是否选择判断
+                var apiType = $('input[name="apiType"]:checked').val();
+                if (!!apiType) {
+                    $(".ablesubmit").show();
+                    $(".uablesubmit").hide();
+                } else {
+                    $(".ablesubmit").hide();
+                    $(".uablesubmit").show();
+                    $(".nowrite").show();
+                    $(".noname,.noresource,.nomoney").hide();
+                }
+            }
+        })
 
 <!--        //未搜到排名时 点击刷新-->
 <!--        $(".lay-refresh").click(function () {-->

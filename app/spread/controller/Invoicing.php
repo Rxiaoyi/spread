@@ -17,7 +17,7 @@ use think\admin\helper\QueryHelper;
 class Invoicing extends Controller {
 
    /**
-    * 充值记录
+    * 开票记录
     * @auth true
     * @menu true
     * @throws \think\db\exception\DataNotFoundException
@@ -25,7 +25,7 @@ class Invoicing extends Controller {
     * @throws \think\db\exception\ModelNotFoundException
     */
    public function index() {
-      $this->title = '充值记录';
+      $this->title = '开票记录';
       $query = SpreadInvoicing::mQuery();
       $query->equal('status')->dateBetween('create_at');
       $query->where(['deleted' => 0])->order('id desc')->page();
@@ -48,7 +48,7 @@ class Invoicing extends Controller {
          $item['address'] = $ticket['address'];
          $company = SpreadCompany::getInfo($item['company_id']);
          $item['companyName'] = $company['name'];
-         $item['companyMobile'] = $android['mobile'];
+         $item['companyMobile'] = $company['mobile'];
       }
    }
 
