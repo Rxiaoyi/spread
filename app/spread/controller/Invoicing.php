@@ -2,7 +2,9 @@
 
 namespace app\spread\controller;
 
+use app\spread\model\SpreadCompany;
 use app\spread\model\SpreadInvoicing;
+use app\spread\model\SpreadTicket;
 use think\admin\Controller;
 use think\admin\extend\DataExtend;
 use think\admin\helper\QueryHelper;
@@ -37,7 +39,17 @@ class Invoicing extends Controller {
     * @throws \think\db\exception\ModelNotFoundException
     */
    protected function _index_page_filter(array &$data) {
-
+      foreach ($data as &$item) {
+         $ticket = SpreadTicket::getInfo($item['ticket_id']);
+         $item['invoice'] = $ticket['invoice'];
+         $item['type'] = $ticket['type'];
+         $item['collector'] = $ticket['collector'];
+         $item['mobile'] = $ticket['mobile'];
+         $item['address'] = $ticket['address'];
+         $company = SpreadCompany::getInfo($item['company_id']);
+         $item['companyName'] = $company['name'];
+         $item['companyMobile'] = $android['mobile'];
+      }
    }
 
    /**
