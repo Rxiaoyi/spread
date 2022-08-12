@@ -1,5 +1,8 @@
 {extend name="../../admin/view/main"}
 
+{block name="button"}
+<button class='layui-btn layui-btn-sm layui-btn-primary' data-open='{:url("add")}'>添加企业</button>
+{/block}
 {block name='content'}
 <div class="think-box-shadow">
    {include file='recharge/index_search'}

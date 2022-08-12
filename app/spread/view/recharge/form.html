@@ -1,44 +1,379 @@
+{extend name="../../admin/view/main"}
+{block name='style'}
+<style>
+   /*账户充值*/
+   #recharge .layui-top-title {
+      position: relative;
+      color: #333;
+      height: 38px;
+      line-height: 38px;
+      font-size: 16px;
+      margin-bottom: 15px;
+      margin-top: 10px;
+   }
+
+   #recharge .layui-right-text {
+      position: absolute;
+      right: 0;
+      top: 0;
+   }
+
+   #recharge .layui-btn-primary {
+      border: 1px solid #1E9FFF;
+      color: #1E9FFF;
+      margin-right: 0;
+   }
+
+   #recharge .layui-tab-content {
+      padding-left: 60px;
+   }
+
+   #recharge .layui-tab span {
+      float: left;
+      height: 42px;
+      line-height: 42px;
+      margin-left: 50px;
+   }
+
+   #recharge .layui-tab .lay-tab-box {
+      display: inline-block;
+      border: none;
+   }
+
+   #recharge .layui-tab .lay-tab-box li {
+      background: #fff;
+      border: 1px solid #d2d2d2;
+      margin-left: 20px;
+   }
+
+   #recharge .layui-tab .lay-tab-box li.layui-this {
+      background: #1E9FFF;
+      border: 1px solid #1E9FFF;
+      color: #fff;
+   }
+
+   #recharge .layui-tab .lay-tab-box li.layui-this:after {
+      border-color: #1E9FFF
+   }
+
+   #recharge .layui-tab .lay-form-one p {
+      margin: 30px 0 25px;
+   }
+
+   #recharge .layui-tab .lay-form-one table {
+      height: 150px;
+      width: 400px;
+      background: #fff;
+   }
+
+   #recharge .layui-tab .lay-form-one table tr td {
+      border: 1px solid #D2D2D2;
+      text-align: center;
+   }
+
+   #recharge .layui-tab .lay-form-two {
+      margin-top: 35px;
+   }
+
+   #recharge .layui-tab .layui-form button {
+      margin-top: 25px;
+      padding: 0 35px;
+   }
+
+   #recharge .layui-tab .lay-form-two h4 {
+      margin: 20px 0 5px;
+   }
+
+   #recharge .layui-tab .lay-form-two p {
+      line-height: 30px;
+   }
+
+   #recharge .lay-shade, #recharge_record .lay-shade {
+      height: 100%;
+      width: 100%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background: #000;
+      opacity: 0.3;
+   }
+
+   #recharge .lay-box {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      z-index: 10;
+      background: #fff;
+      transform: translate(-50%, -50%);
+      padding: 18px 20px 15px;
+      width: 600px;
+   }
+
+   #recharge .lay-container {
+      margin-top: 30px;
+      text-align: right;
+   }
+
+   #recharge .lay-container a {
+      display: inline-block;
+      height: 35px;
+      width: 90px;
+      text-align: center;
+      line-height: 35px;
+      background: #1E9FFF;
+      color: #fff;
+      border-radius: 5px;
+      border: 1px solid #1E9FFF;
+   }
+
+   #recharge .lay-container a.lay-cancel {
+      border: 1px solid #D2D2D2;
+      background: #fff;
+      color: #666;
+      cursor: pointer;
+   }
+
+   #recharge .lay-container a.lay-copy {
+      background: #1E9FFF;
+      color: #fff;
+      border: 1px solid #1E9FFF;
+   }
+</style>
+{/block}
+{block name="content"}
+
 <form action="{:sysuri()}" data-table-id="FormTable" class="layui-form layui-card" data-auto="true" method="post">
-    <div class="layui-card-body padding-left-40">
+   <div class="layui-fluid" id="recharge">
+      <div class="layui-top-title">
+         <span>账户充值</span>
+         <div class="layui-btn-container layui-right-text">
+         </div>
+      </div>
+      <div class="layui-tab">
+         <span>选择充值方式</span>
+         <ul class="layui-tab-title lay-tab-box">
+            <li class="layui-this">线下汇款</li>
+            <li>支付宝</li>
+         </ul>
+         <div class="layui-tab-content">
+            <div class="layui-tab-item layui-show">
+               <form class="layui-form lay-form-one">
+                  <p>第一步：在线提交付款信息</p>
+                  <div class="layui-form-item">
+                     <label class="layui-form-label">充值金额</label>
+                     <div class="layui-input-inline">
+                        <input type="text" name="amount" required lay-verify="required|number" placeholder="请输入充值的金额"
+                               autocomplete="off" class="layui-input">
+                     </div>
+                     <div class="layui-form-mid layui-word-aux">元</div>
+                  </div>
+                  <div class="layui-form-item">
+                     <label class="layui-form-label">确认金额</label>
+                     <div class="layui-input-inline">
+                        <input type="text" name="amount2" required lay-verify="required|number" placeholder="请输入确认的金额"
+                               autocomplete="off" class="layui-input">
+                     </div>
+                     <div class="layui-form-mid layui-word-aux">元</div>
+                  </div>
+                  <div class="layui-form-item">
+                     <label class="layui-form-label">付款人</label>
+                     <div class="layui-input-inline">
+                        <select name="payer_name" required lay-verify="required" placeholder="请输入付款人/公司名称">
+                           <option value="" selected disabled style="display: none;">请选择付款人/公司名称</option>
+                           <option value="重庆鑫超娱乐有限公司">重庆鑫超娱乐有限公司</option>
+                        </select>
+                     </div>
+                  </div>
+                  <p>第二步：请将付款款项转入以下官方账户</p>
+                  <table  class="layui-table margin-top-10" lay-skin="line">
+                     <tr class="text-left nowrap">
+                        <td class="text-left nowrap">公司名称</td>
+                        <td class="text-left nowrap">四川云思相纵网络科技有限公司</td>
+                     </tr>
+                     <tr class="text-left nowrap">
+                        <td class="text-left nowrap">银行账户</td>
+                        <td class="text-left nowrap">4402205009100320628</td>
+                     </tr>
+                     <tr class="text-left nowrap">
+                        <td class="text-left nowrap">开户银行</td>
+                        <td class="text-left nowrap">工行成都芷泉支行</td>
+                     </tr>
+                  </table>
+                  <button class="layui-btn layui-btn-danger" data-close type='button'>取消</button>
+                  <button class="layui-btn layui-btn-normal" lay-submit lay-filter="underline">提交</button>
+               </form>
+            </div>
+            <div class="layui-tab-item">
+               <form class="layui-form lay-form-two">
+                  <div class="layui-form-item">
+                     <label class="layui-form-label">充值金额</label>
+                     <div class="layui-input-inline">
+                        <input type="text" name="amount" required lay-verify="required|number" placeholder="请输入充值的金额"
+                               autocomplete="off" class="layui-input">
+                     </div>
+                     <div class="layui-form-mid layui-word-aux">元</div>
+                  </div>
+                  <div class="layui-form-item">
+                     <label class="layui-form-label">确认金额</label>
+                     <div class="layui-input-inline">
+                        <input type="text" name="amount2" required lay-verify="required|number" placeholder="请输入确认的金额"
+                               autocomplete="off" class="layui-input">
+                     </div>
+                     <div class="layui-form-mid layui-word-aux">元</div>
+                  </div>
+                  <div class="layui-form-item">
+                     <label class="layui-form-label">付款人</label>
+                     <div class="layui-input-inline">
+                        <input type="text" name="payer_name" required lay-verify="required" placeholder="请输入付款人/公司名称"
+                               autocomplete="off" class="layui-input">
+                     </div>
+                  </div>
+                  <button class="layui-btn layui-btn-danger" data-close type='button'>取消</button>
+                  <button class="layui-btn layui-btn-normal" lay-submit lay-filter="zhifubao">提交</button>
+               </form>
+            </div>
+         </div>
+      </div>
+      <!--遮罩-->
+      <!--    <div class="lay-shade" style="display:none"></div>-->
+      <!--去支付宝弹窗-->
+      <!--    <div class="lay-box" style="display:none">-->
+      <!--        <div class="lay-top">-->
+      <!--            <span>提交成功</span>-->
+      <!--        </div>-->
+      <!--        <div class="lay-container">-->
+      <!--            <a href="#" class="lay-copy" id="btn" target="_blank">去充值</a>-->
+      <!--            <a class="lay-cancel">取消</a>-->
+      <!--        </div>-->
+      <!--    </div>-->
 
+   </div>
 
-        <label class="layui-form-item relative block">
-            <span class="help-label"><b>产品名称</b>Android Name</span>
-            <input class="layui-input" name="name" placeholder="请输入产品名称" required value='{$vo.name|default=""}'>
-            <span class="help-block"><b>必填，</b>请填写产品名称，建议字符不要太长，一般 4-6 个汉字</span>
-        </label>
+   <div class="hr-line-dashed"></div>
+   {notempty name='vo.id'}<input name='id' type='hidden' value='{$vo.id}'>{/notempty}
 
-        <div class="layui-form-item label-required-prev">
-            <span class="help-label"><b>产品类别</b>Android Parent</span>
-            <select class='layui-select' name='categoryId' lay-search>
-                {foreach $category as $cate}
-                <option value='{$cate.id}'>{$cate.name}</option>
-                {/foreach}
-            </select>
-        </div>
-
-        <div class="layui-form-item relative block">
-            <span class="help-label"><b>产品LOGO</b>Android Icon</span>
-            <label class="relative block">
-                <input class="layui-input think-bg-gray" readonly name="icon" placeholder="请上传应用名称图标" value='{$vo.icon|default=""}'>
-                <a class="input-right-icon layui-icon layui-icon-upload" data-field="icon" data-file data-type="png,jpg,jpeg,gif"></a>
-            </label>
-            <span class="help-block"><b>可选，</b>请上传产品LOGO，需要是http可访问的图片资源链接</span>
-        </div>
-
-        <label class="layui-form-item relative block">
-            <span class="color-green font-w7">产品包名</span>
-            <span class="color-desc margin-left-5">Android Package</span>
-            <textarea class="layui-textarea" name="packageName" placeholder="请输入产品包名">{$vo.packageName|default=''}</textarea>
-        </label>
-    </div>
-
-    <div class="hr-line-dashed"></div>
-    {notempty name='vo.id'}<input name='id' type='hidden' value='{$vo.id}'>{/notempty}
-
-    <div class="layui-form-item text-center">
-        <button class="layui-btn" type='submit'>保存数据</button>
-        <button class="layui-btn layui-btn-danger" data-close type='button' data-confirm="确定要取消编辑吗？">取消编辑</button>
-    </div>
+   <!--   <div class="layui-form-item text-center">-->
+   <!--      <button class="layui-btn" type='submit'>保存数据</button>-->
+   <!--      <button class="layui-btn layui-btn-danger" data-close type='button' data-confirm="确定要取消编辑吗？">取消编辑</button>-->
+   <!--   </div>-->
 
 </form>
+{/block}
+{block name='script'}
+<!--<script>-->
+<!--   layui.config({-->
+<!--      base: '/' //静态资源所在路径-->
+<!--   }).extend({-->
+<!--      index: 'lib/index' //主入口模块-->
+<!--   }).use(['index','form','element','jquery'],function(){-->
+<!--      var $ = layui.$;-->
+<!--      var form = layui.form;-->
+
+<!--      //未实名认证时点击下单出现的弹窗-->
+<!--      $('.go-order-spread').click(function(){-->
+<!--         var num = $('#is_realname').val();-->
+<!--         if(num != 1){-->
+<!--            layer.confirm('下单推广功能需~实名认证~成功后方可使用哦！', {-->
+<!--               title :"提示",-->
+<!--               btn: ['前往认证','取消']-->
+<!--            }, function(index){-->
+<!--               layer.close(index);-->
+<!--               $(".go-realname").click();-->
+<!--            });-->
+<!--            return false;-->
+<!--         }-->
+<!--      })-->
+
+<!--      form.on('submit(underline)', function(data){-->
+<!--         //console.log(data.field)-->
+<!--         var amount = data.field.amount-->
+<!--         var amount2 = data.field.amount2-->
+<!--         var payer_name = data.field.payer_name-->
+<!--         layer.confirm('您确定要充值吗？', {-->
+<!--            title :"提示",-->
+<!--            btn: ['确定','取消']-->
+<!--         }, function(){-->
+<!--            $.ajax({-->
+<!--               url:"/cust/fund/offlineRecharge",-->
+<!--               type:"post",-->
+<!--               data:{-->
+<!--                  amount:amount,-->
+<!--                  amount2:amount2,-->
+<!--                  payer_name:payer_name-->
+<!--               },-->
+<!--               success:function(data){-->
+<!--                  //console.log(JSON.parse(data))-->
+<!--                  var data = JSON.parse(data)-->
+<!--                  if(data.code==0){-->
+<!--                     layer.msg('提交成功', {time: 1000},function(){-->
+<!--                        $(".layui-btn-active").click()-->
+<!--//                                var iframe_len = $('#LAY_app_body iframe', parent.document).length-->
+<!--//                                for(var i=0; i<iframe_len; i++){-->
+<!--//                                    var src_a = $('#LAY_app_body iframe', parent.document).eq(i).attr("src")-->
+<!--//                                    $('#LAY_app_body iframe', parent.document).eq(i).attr("src",src_a)-->
+<!--//                                }-->
+<!--                     });-->
+<!--                  }else{-->
+<!--                     layer.msg(data.msg,{time: 1500})-->
+<!--                  }-->
+<!--               }-->
+
+<!--            })-->
+
+<!--         });-->
+
+<!--         return false;-->
+<!--      });-->
+<!--      form.on('submit(zhifubao)', function(data){-->
+<!--         //console.log(data.field)-->
+<!--         var amount = data.field.amount-->
+<!--         var amount2 = data.field.amount2-->
+<!--         var payer_name = data.field.payer_name-->
+<!--         $.ajax({-->
+<!--            url:"/cust/fund/alipayRecharge",-->
+<!--            type:"post",-->
+<!--            data:{-->
+<!--               amount:amount,-->
+<!--               amount2:amount2,-->
+<!--               payer_name:payer_name-->
+<!--            },-->
+<!--            success:function(data){-->
+<!--               console.log(JSON.parse(data))-->
+<!--               var data = JSON.parse(data)-->
+<!--               if(data.code==0){-->
+<!--                  $("#recharge").append(data.data.url)-->
+<!--//                        $("#btn").attr("href",data.data.url)-->
+<!--//                        $(".lay-shade").show()-->
+<!--//                        $(".lay-box").show()-->
+
+<!--//                        layer.msg('提交成功', {time: 1000},function(){-->
+<!--//                                $(".lay-go-zhifubao").click()-->
+<!--//                                window.open(data.data.url);-->
+<!--                  //$(".layui-btn-active").click()-->
+<!--//                                var iframe_len = $('#LAY_app_body iframe', parent.document).length-->
+<!--//                                for(var i=0; i<iframe_len; i++){-->
+<!--//                                    var src_a = $('#LAY_app_body iframe', parent.document).eq(i).attr("src")-->
+<!--//                                    $('#LAY_app_body iframe', parent.document).eq(i).attr("src",src_a)-->
+<!--//                                }-->
+<!--//                        });-->
+<!--               }else{-->
+<!--                  layer.msg(data.msg,{time: 1500})-->
+<!--               }-->
+<!--            }-->
+
+<!--         })-->
+
+
+<!--         return false;-->
+<!--      });-->
+<!--      //弹窗取消操作-->
+<!--      $(".lay-cancel").click(function(){-->
+<!--         $(".lay-shade").hide()-->
+<!--         $(".lay-box").hide()-->
+<!--      })-->
+
+
+<!--   });-->
+<!--</script>-->
+{/block}
+
