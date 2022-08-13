@@ -9,9 +9,9 @@
 
         <div class="layui-card-body  margin-left-30 margin-top-10 margin-bottom-30">
             账户余额：<span class="font-s20">{$company.balance}</span>
-            <a class="layui-btn" style="margin-left: 150px" data-dbclick data-title="充值">充 值</a>
-            <a class="layui-btn" style="margin-left: 30px" data-dbclick data-title="充值记录">充值记录</a>
-            <a class="layui-btn" style="margin-left: 30px" data-dbclick data-title="收支记录">收支记录</a>
+            <a class="layui-btn" style="margin-left: 150px" data-dbclick  data-open="{:url('/spread/recharge/add')}" data-title="充值">充 值</a>
+            <a class="layui-btn" style="margin-left: 30px" data-dbclick data-open="{:url('/spread/recharge/index')}" data-title="充值记录">充值记录</a>
+            <a class="layui-btn" style="margin-left: 30px" data-dbclick data-open="{:url('/spread/order/index')}" data-title="收支记录">收支记录</a>
         </div>
 
         <div class="layui-card-header margin-10">
