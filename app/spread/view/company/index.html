@@ -25,15 +25,15 @@
         <tbody>
         {foreach $list as $key=>$vo}
         <tr>
-            <td class="text-left nowrap">{$vo.name|default=''}</td>
+            <td class="text-left nowrap">{$vo.nickname|default=''}</td>
             <td class="text-left nowrap">{$vo.contacts|default=''}</td>
-            <td class="text-left nowrap">{$vo.mobile|default=''}</td>
+            <td class="text-left nowrap">{$vo.username|default=''}</td>
             <td class="text-left nowrap">{$vo.total|default='0'}</td>
             <td class="text-left nowrap">{$vo.balance|default='0'}</td>
             <td class="text-left nowrap">
-                {if $vo.status eq 0}
+                {if $vo.status eq 1}
                 <span class="color-red">正常</span>
-                {elseif $vo.status eq 1}
+                {elseif $vo.status eq 0}
                 <span class="color-green">停用</span>
                 {/if}
             </td>

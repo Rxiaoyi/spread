@@ -61,7 +61,7 @@ class Invoicing extends Controller {
    }
 
    /**
-    * 编辑企业应用
+    * 编辑开票记录
     * @auth true
     */
    public function edit() {
@@ -80,7 +80,7 @@ class Invoicing extends Controller {
    }
 
    /**
-    * 修改企业应用状态
+    * 修改开票记录状态
     * @auth true
     */
    public function state() {
@@ -91,7 +91,7 @@ class Invoicing extends Controller {
    }
 
    /**
-    * 删除企业应用
+    * 删除开票记录
     * @auth true
     */
    public function remove() {

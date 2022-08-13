@@ -9,6 +9,8 @@ use app\spread\model\SpreadOrder;
 use think\admin\Controller;
 use think\admin\extend\DataExtend;
 use think\admin\helper\QueryHelper;
+use think\admin\model\SystemUser;
+use think\admin\service\AdminService;
 
 /**
  * 订单管理
@@ -98,6 +100,37 @@ class Order extends Controller
     {
         if ($this->request->isGet()) {
             $this->android = SpreadAndroid::items();
+        }
+    }
+
+    public function ready()
+    {
+        if ($this->request->isPost()) {
+            [$post] = [$this->request->post()];
+            $company = SystemUser::mk()->find(AdminService::getUserId());
+            $speed = (int)$post['speed'];
+            $total_consumption = 0;
+            $time = $post['time'] || 0;
+            if ($company['android_price']) {
+                $android_price = $company['android_price'];
+            } else {
+                $opt = sysdata('price');
+                $android_price = $opt['android_price'];
+            }
+            if ($speed === 1) {
+                $total_consumption = $post['number'] * $time * $android_price;
+            } else if ($speed === 0) {
+                $opt = sysdata('release');
+                $download = $opt['download'];
+                $total_consumption = $download * $time * $android_price;
+            } else {
+                $this->error('请选择是否匀速', '', 400);
+            }
+            $return = [
+                'total_consumption' => $total_consumption,
+                'price' => $android_price,
+            ];
+            $this->success('', $return, 200);
         }
     }
 

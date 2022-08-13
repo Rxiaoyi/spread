@@ -8,6 +8,9 @@ use app\spread\model\SpreadCategory;
 use think\admin\Controller;
 use think\admin\extend\DataExtend;
 use think\admin\helper\QueryHelper;
+use think\admin\Library;
+use think\admin\model\SystemUser;
+use think\admin\service\AdminService;
 
 /**
  * Android管理
@@ -16,12 +19,6 @@ use think\admin\helper\QueryHelper;
  */
 class Android extends Controller
 {
-    /**
-     * 最大级别
-     * @var integer
-     */
-    protected $maxLevel = 5;
-
     /**
      * Android管理
      * @auth true
@@ -35,8 +32,28 @@ class Android extends Controller
 
         $this->title = '安卓应用管理';
         $query = SpreadAndroid::mQuery();
+        if (Library::$sapp->session->get('user.usertype', '') === 1) {
+            $query->where(['user_id' => AdminService::getUserId()]);
+        }
         $query->like('name|packageName')->equal('status')->dateBetween('create_at');
         $query->where(['deleted' => 0])->order('id desc')->page();
+    }
+
+    /**
+     * Android管理
+     * @auth true
+     * @menu true
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function admin()
+    {
+        $this->title = '安卓应用管理';
+        $query = SpreadAndroid::mQuery();
+        $query->like('name|packageName')->equal('status')->dateBetween('create_at');
+        $query->where(['deleted' => 0])->order('id desc')->page();
+
     }
 
     /**
@@ -52,6 +69,34 @@ class Android extends Controller
             $business = SpreadCategory::getInfo($item['categoryId']);
             $item['categoryName'] = $business['name'];
         }
+    }
+
+    /**
+     * 列表数据处理
+     * @param array $data
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    protected function _admin_page_filter(array &$data)
+    {
+        foreach ($data as &$item) {
+            $business = SpreadCategory::getInfo($item['categoryId']);
+            $item['categoryName'] = $business['name'];
+            $user = SystemUser::mk()->where(['id' => $item['user_id']])->field('nickname,username')->find();
+            $item['companyName'] = $user['nickname'];
+            $item['companyMobile'] = $user['username'];
+        }
+    }
+
+
+    /**
+     * 拒绝添加内容
+     * @auth true
+     */
+    public function refuse()
+    {
+        SpreadAndroid::mForm('refuse');
     }
 
     /**
@@ -102,6 +147,10 @@ class Android extends Controller
     {
         if ($this->request->isGet()) {
             $this->category = SpreadCategory::getList();
+        } else if ($this->request->isPost()) {
+            if (Library::$sapp->session->get('user.usertype', '') === 1) {
+                $data['user_id'] = AdminService::getUserId();
+            }
         }
     }
 
@@ -112,7 +161,7 @@ class Android extends Controller
     public function state()
     {
         SpreadAndroid::mSave($this->_vali([
-            'status.in:0,1' => '状态值范围异常！',
+            'status.in:0,1,2' => '状态值范围异常！',
             'status.require' => '状态值不能为空！',
         ]));
     }

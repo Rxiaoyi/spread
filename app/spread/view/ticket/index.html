@@ -1,0 +1,80 @@
+{extend name="../../admin/view/main"}
+
+{block name='content'}
+<div class="think-box-shadow">
+   {include file='invoicing/index_search'}
+   <table class="layui-table margin-top-10" lay-skin="line">
+      {notempty name='list'}
+      <thead>
+      <tr>
+         <th class='list-table-check-td think-checkbox'>
+            <label><input data-auto-none data-check-target='.list-check-box' type='checkbox'></label>
+         </th>
+         <th class='list-table-sort-td'>
+            <button class="layui-btn layui-btn-xs" data-reload type="button">刷 新</button>
+         </th>
+         <th class="text-left nowrap">序号</th>
+         <th class="text-left nowrap">企业信息</th>
+         <th class="text-left nowrap">开票时间</th>
+         <th class="text-left nowrap">发票抬头</th>
+         <th class="text-left nowrap">开票金额</th>
+         <th class="text-left nowrap">发票类型</th>
+         <th class="text-left nowrap">收件人</th>
+         <th class="text-left nowrap">收件地址</th>
+         <th class="text-left nowrap">开票状态</th>
+         <th class="text-left nowrap">快递单号</th>
+         <th class="text-left nowrap"></th>
+      </tr>
+      </thead>
+      {/notempty}
+      <tbody>
+      {foreach $list as $key=>$vo}
+      <tr>
+         <td class='list-table-check-td think-checkbox'>
+            <label><input class="list-check-box" type='checkbox' value='{$vo.id}'></label>
+         </td>
+         <td class="text-left nowrap">{$vo.id|default=''}</td>
+         <td class='nowrap'>
+            <div class="inline-block sub-span-blue">
+               <div>企业名称<span>{$vo.companyName|default='--'}</span></div>
+               <div>联系方式：<span>{$vo.companyMobile|default='--'}</span></div>
+            </div>
+         </td>
+
+         <td class="text-left nowrap">{$vo.create_at|default=''}</td>
+         <td class="text-left nowrap">{$vo.invoice|default=''}</td>
+         <td class="text-left nowrap">{$vo.amount|default=''}</td>
+         <td class="text-left nowrap">
+            {if $vo.type eq 0}
+            <span class="color-red">增值税普通发票</span>
+            {elseif $vo.status eq 1}
+            <span class="color-green">增值税专用发票</span>
+            {/if}
+         </td>
+         <td class="text-left nowrap">
+            <div class="inline-block sub-span-blue">
+               <div>收件人<span>{$vo.collector|default='--'}</span></div>
+               <div>联系方式：<span>{$vo.mobile|default='--'}</span></div>
+            </div>
+         </td>
+         <td class="text-left nowrap">{$vo.address|default=''}</td>
+         <td class="text-left nowrap">
+            {if $vo.status eq 0}
+            <span class="color-red">未开票</span>
+            {elseif $vo.status eq 1}
+            <span class="color-green">已开票</span>
+            {/if}
+         </td>
+         <td class='text-left nowrap'>
+            <a class="layui-btn layui-btn-sm" data-dbclick data-modal="{:url('edit')}?id={$vo.id}"
+               data-title="编辑产品">开票</a>
+            <a class="layui-btn layui-btn-sm layui-btn-danger" data-action="{:url('remove')}"
+               data-confirm="确定要删除该产品吗？" data-value="id#{$vo.id}">删 除</a>
+         </td>
+      </tr>
+      {/foreach}
+      </tbody>
+   </table>
+   {empty name='list'}<span class="notdata">没有记录哦</span>{else}{$pagehtml|raw|default=''}{/empty}
+</div>
+{/block}

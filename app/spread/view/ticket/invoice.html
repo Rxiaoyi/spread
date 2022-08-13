@@ -1,6 +1,7 @@
+{extend name="../../admin/view/main"}
+{block name='content'}
 <form action="{:sysuri()}" data-table-id="FormTable" class="layui-form layui-card" data-auto="true" method="post">
     <div class="layui-card-body padding-left-40">
-
 
         <label class="layui-form-item relative block">
             <span class="help-label"><b>产品名称</b>Android Name</span>
@@ -8,14 +9,6 @@
             <span class="help-block"><b>必填，</b>请填写产品名称，建议字符不要太长，一般 4-6 个汉字</span>
         </label>
 
-        <div class="layui-form-item label-required-prev">
-            <span class="help-label"><b>产品类别</b>Android Parent</span>
-            <select class='layui-select' name='categoryId' lay-search>
-                {foreach $category as $cate}
-                <option value='{$cate.id}'>{$cate.name}</option>
-                {/foreach}
-            </select>
-        </div>
 
         <div class="layui-form-item relative block">
             <span class="help-label"><b>产品LOGO</b>Android Icon</span>
@@ -43,5 +36,5 @@
         <button class="layui-btn" type='submit'>保存数据</button>
         <button class="layui-btn layui-btn-danger" data-close type='button' data-confirm="确定要取消编辑吗？">取消编辑</button>
     </div>
-
 </form>
+{/block}

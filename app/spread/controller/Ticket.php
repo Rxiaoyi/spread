@@ -16,7 +16,7 @@ use think\admin\helper\QueryHelper;
 class Ticket extends Controller {
 
    /**
-    * 企业管理
+    * 开票信息管理
     * @auth true
     * @menu true
     * @throws \think\db\exception\DataNotFoundException
@@ -28,6 +28,18 @@ class Ticket extends Controller {
       $query = SpreadTicket::mQuery();
       $query->equal('status')->dateBetween('create_at');
       $query->where(['deleted' => 0])->order('id desc')->page();
+   }
+
+    /**
+     * 申请开票
+     * @auth true
+     * @menu true
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+   public function invoice(){
+       SpreadTicket::mForm('invoice');
    }
 
    /**

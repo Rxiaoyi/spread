@@ -1,7 +1,6 @@
 <form action="{:sysuri()}" data-table-id="FormTable" class="layui-form layui-card" data-auto="true" method="post">
     <div class="layui-card-body padding-left-40">
 
-
         <label class="layui-form-item relative block">
             <span class="help-label"><b>产品名称</b>Android Name</span>
             <input class="layui-input" name="name" placeholder="请输入产品名称" required value='{$vo.name|default=""}'>
@@ -20,10 +19,8 @@
         <div class="layui-form-item relative block">
             <span class="help-label"><b>产品LOGO</b>Android Icon</span>
             <label class="relative block">
-                <input class="layui-input think-bg-gray" readonly name="icon" placeholder="请上传应用名称图标"
-                       value='{$vo.icon|default=""}'>
-                <a class="input-right-icon layui-icon layui-icon-upload" data-field="icon" data-file
-                   data-type="png,jpg,jpeg,gif"></a>
+                <input class="layui-input think-bg-gray" readonly name="icon" placeholder="请上传应用名称图标" value='{$vo.icon|default=""}'>
+                <a class="input-right-icon layui-icon layui-icon-upload" data-field="icon" data-file data-type="png,jpg,jpeg,gif"></a>
             </label>
             <span class="help-block"><b>可选，</b>请上传产品LOGO，需要是http可访问的图片资源链接</span>
         </div>
@@ -31,8 +28,7 @@
         <label class="layui-form-item relative block">
             <span class="color-green font-w7">产品包名</span>
             <span class="color-desc margin-left-5">Android Package</span>
-            <textarea class="layui-textarea" name="packageName"
-                      placeholder="请输入产品包名">{$vo.packageName|default=''}</textarea>
+            <textarea class="layui-textarea" name="packageName" placeholder="请输入产品包名">{$vo.packageName|default=''}</textarea>
         </label>
     </div>
 

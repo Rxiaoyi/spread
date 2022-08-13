@@ -16,7 +16,7 @@ use think\admin\helper\QueryHelper;
 class Recharge extends Controller {
 
    /**
-    * 企业管理
+    * 充值记录
     * @auth true
     * @menu true
     * @throws \think\db\exception\DataNotFoundException

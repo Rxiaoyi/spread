@@ -50,7 +50,7 @@ class User extends Controller
         }, function (QueryHelper $query) {
 
             // 加载对应数据列表
-            $query->where(['is_deleted' => 0, 'status' => intval($this->type === 'index')]);
+            $query->where(['is_deleted' => 0, 'status' => 1, 'usertype' => 0]);
 
             // 关联用户身份资料
             $query->with(['userinfo' => function (Relation $relation) {
@@ -96,9 +96,9 @@ class User extends Controller
             SystemUser::mForm('pass');
         } else {
             $data = $this->_vali([
-                'id.require'                  => '用户ID不能为空！',
-                'password.require'            => '登录密码不能为空！',
-                'repassword.require'          => '重复密码不能为空！',
+                'id.require' => '用户ID不能为空！',
+                'password.require' => '登录密码不能为空！',
+                'repassword.require' => '重复密码不能为空！',
                 'repassword.confirm:password' => '两次输入的密码不一致！',
             ]);
             $user = SystemUser::mk()->find($data['id']);
@@ -130,7 +130,7 @@ class User extends Controller
                 if (empty($data['username'])) {
                     $this->error('登录账号不能为空！');
                 }
-                $map = ['username' => $data['username'], 'is_deleted' => 0];
+                $map = ['username' => $data['username'], 'is_deleted' => 0, 'usertype' => 0];
                 if (SystemUser::mk()->where($map)->count() > 0) {
                     $this->error("账号已经存在，请使用其它账号！");
                 }
@@ -156,7 +156,7 @@ class User extends Controller
     {
         $this->_checkInput();
         SystemUser::mSave($this->_vali([
-            'status.in:0,1'  => '状态值范围异常！',
+            'status.in:0,1' => '状态值范围异常！',
             'status.require' => '状态值不能为空！',
         ]));
     }

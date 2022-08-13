@@ -2,7 +2,7 @@
    <div class="layui-card-body padding-left-40">
       <label class="layui-form-item relative block">
          <span class="help-label"><b>公司名称</b>Company Name</span>
-         <input class="layui-input" name="name" placeholder="请输入公司名称" required value='{$vo.name|default=""}'>
+         <input class="layui-input" name="nickname" placeholder="请输入公司名称" required value='{$vo.nickname|default=""}'>
       </label>
       <label class="layui-form-item relative block">
          <span class="help-label"><b>联系人</b>Company Contacts</span>
@@ -10,7 +10,7 @@
       </label>
       <label class="layui-form-item relative block">
          <span class="help-label"><b>手机号码</b>Company Contacts</span>
-         <input class="layui-input" name="mobile" placeholder="请输入手机号码" required value='{$vo.mobile|default=""}'>
+         <input class="layui-input" name="username" placeholder="请输入手机号码" required value='{$vo.username|default=""}'>
       </label>
       <label class="layui-form-item relative block">
          <span class="help-label"><b>登录密码</b>Company Password</span>
@@ -32,6 +32,8 @@
 
    <div class="hr-line-dashed"></div>
    {notempty name='vo.id'}<input name='id' type='hidden' value='{$vo.id}'>{/notempty}
+   {notempty name='vo.is_deleted'}<input name='is_deleted' type='hidden' value='0'>{/notempty}
+   {notempty name='vo.usertype'}<input name='usertype' type='hidden' value='1'>{/notempty}
 
    <div class="layui-form-item text-center">
       <button class="layui-btn" type='submit'>保存数据</button>

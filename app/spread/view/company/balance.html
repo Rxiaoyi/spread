@@ -1,0 +1,35 @@
+{extend name="../../admin/view/main"}
+
+{block name="content"}
+<div class="think-box-shadow">
+    <form action="{:sysuri()}" method="post" data-auto="true" class="layui-form layui-card" style="width:850px">
+        <div class="layui-card-header margin-10">
+            <b>资产信息</b>
+        </div>
+
+        <div class="layui-card-body  margin-left-30 margin-top-10 margin-bottom-30">
+            账户余额：<span class="font-s20">{$company.balance}</span>
+            <a class="layui-btn" style="margin-left: 150px" data-dbclick data-title="充值">充 值</a>
+            <a class="layui-btn" style="margin-left: 30px" data-dbclick data-title="充值记录">充值记录</a>
+            <a class="layui-btn" style="margin-left: 30px" data-dbclick data-title="收支记录">收支记录</a>
+        </div>
+
+        <div class="layui-card-header margin-10">
+            <b>账号信息</b>
+        </div>
+
+        <div class="layui-card-body  margin-left-30 margin-top-10 margin-bottom-30">
+            <div style="display: flex;flex-direction: column;">
+                <span class="font-s16 margin-top-20">企业名称：{$company.nickname}</span>
+                <span class="font-s16 margin-top-20">社会统一信用代码：{$company.code}</span>
+                <span class="font-s16 margin-top-20">联系人：{$company.contacts}</span>
+                <span class="font-s16 margin-top-20">联系电话：{$company.username}</span>
+                <span class="font-s16 margin-top-20">营业执照：
+                    <div class="headimg headimg-no" style="width: 100px;height: 100px;" data-tips-hover data-tips-image
+                         data-lazy-src="{$company.license}"></div>
+                </span>
+            </div>
+        </div>
+    </form>
+</div>
+{/block}
