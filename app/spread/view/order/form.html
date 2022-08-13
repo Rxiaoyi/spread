@@ -1,7 +1,7 @@
 {extend name="../../admin/view/main"}
 
 {block name='content'}
-<form action="{:sysuri()}" method="post" data-auto="true" class="layui-form layui-card" data-table-id="MessageTable">
+<form action="" method="post" data-auto="true" class="layui-form layui-card" data-table-id="MessageTable">
     <div class="layui-card-body">
 
         <label class="layui-form-item relative block">
@@ -29,17 +29,17 @@
 
         <label class="layui-form-item label-required-prev">
             <span class="help-label"><b>产品链接：</b></span>
-            <input class="layui-input" name="url" placeholder="请输入内容" required value=''>
+            <input class="layui-input" name="url" placeholder="请输入内容"  value=''>
         </label>
 
         <label class="layui-form-item label-required-prev">
             <span class="help-label"><b>添加关键词：</b>关键词和实际投放量以逗号隔开，关键词间以换行分割</span>
-            <textarea class="layui-textarea" name="remarks" placeholder="请输入关键词和实际投放量"></textarea>
-            <button class="layui-btn" type="button" style="margin-top: 10px">添加数据</button>
-            <button class="layui-btn layui-btn-primary" type='button' style="margin-top: 10px">清空数据</button>
+            <textarea class="layui-textarea" name="remarks" placeholder="请输入关键词和实际投放量" value=""></textarea>
+            <button class="layui-btn" type="button" style="margin-top: 10px" onclick="add()">添加数据</button>
+            <button class="layui-btn layui-btn-primary" type='button' style="margin-top: 10px" onclick="emptyTextArea()">清空数据</button>
         </label>
 
-        <table class="layui-table margin-top-10">
+        <table class="layui-table margin-top-10" id="keyword_table" name="case">
             <thead>
             <tr>
                 <th class="text-center nowrap pointer" width="50%"><b>关键词</b></th>
@@ -48,26 +48,28 @@
             </tr>
             </thead>
             <tbody>
-            <tr>
-                <th class="text-center nowrap pointer" width="50%"><b>1</b></th>
-                <th class="text-center nowrap pointer" width="30%"><b>1</b></th>
-                <th class="text-center nowrap pointer" width="20%">
-                    <a data-action='' data-value="" data-confirm="确认要删除这条记录吗？"
-                       class="layui-btn layui-btn-sm layui-btn-danger">删 除</a>
-                </th>
-            </tr>
-
+<!--            <tr>-->
+<!--               <td class="text-center nowrap pointer" width="50%">-->
+<!--                  <input class="layui-input" name="words" placeholder="请输入关键词"  value='' required="required" >-->
+<!--               </td>-->
+<!--               <td class="text-center nowrap pointer" width="30%">-->
+<!--                  <input class="layui-input" name="contents" placeholder="请输入投放数量" required="required" value='' onblur="checkContent()">-->
+<!--               </td>-->
+<!--               <td class="text-center nowrap pointer" width="20%">-->
+<!--                  <a class="layui-btn layui-btn-sm layui-btn-danger" onclick="del(this,2)">删 除</a>-->
+<!--               </td>-->
+<!--            </tr>-->
             </tbody>
         </table>
         <div class="layui-form-item">
             <p class="color-desc">投放总量：
-                <span class="help-label" style="margin-left: 10px"><b>XXX</b></span>
+                <span class="help-label" style="margin-left: 10px"><b id="num">0</b></span>
             </p>
             <p class="color-desc">单价（元）：
-                <span class="help-label" style="margin-left: 10px"><b>XXX</b></span>
+                <span class="help-label" style="margin-left: 10px"><b id="price">0</b></span>
             </p>
             <p class="color-desc">消耗（元）：
-                <span class="help-label" style="margin-left: 10px"><b>XXX</b></span>
+                <span class="help-label" style="margin-left: 10px"><b id="conmuse">0</b></span>
             </p>
         </div>
 
@@ -76,8 +78,8 @@
             <span class="help-label"><b>是否匀速：</b></span>
             <div class="flex flex-wrap">
                 <fieldset class="layui-bg-gray">
-                    <input checked name="speed" title="是" type="radio" value="是">
-                    <input name="speed" title="否" type="radio" value="否">
+                    <input checked name="speed" title="是" type="radio" value="1">
+                    <input name="speed" title="否" type="radio" value="0">
                 </fieldset>
             </div>
         </div>
@@ -111,7 +113,8 @@
         {notempty name='vo.id'}<input name='id' type='hidden' value='{$vo.id}'>{/notempty}
 
         <div class="layui-form-item text-center">
-            <button class="layui-btn" type="submit">提交推广</button>
+<!--           <p onclick="getFormData()">提交</p>-->
+            <button class="layui-btn" type="button" onclick="getFormData()">提交推广</button>
             <button class="layui-btn layui-btn-danger" data-confirm="确定要取消推广吗？" type='button' data-history-back>取消推广
             </button>
         </div>
@@ -122,6 +125,248 @@
     require(['ckeditor'], function () {
         window.createEditor('[name=content]', {height: 530});
     });
+    var cell_arr = [];//定义一个空数组，用来装投放数量整列每个单元格的数值
+    /*验证内容*/
+    function checkContent(rows,datas) {
+       var params = document.getElementsByName("contents")[0];
+       console.log(params,'params');
+       var paramsA = params.value;
+       if (checkNumber(paramsA) === true){
+          layer.msg("是数字", {time: 3500})
+          console.log(cell_arr);
+          console.log(rows)//获取除开表头后的第几行
+          console.log(datas)//获取当前行的投放数量
+          var total_consume = 0;
+          if(parseInt(cell_arr[rows]) !== parseInt(datas)){
+             cell_arr[rows-1] = parseInt(datas);
+          }
+          console.log(cell_arr)
+          cell_arr.forEach((item, index) => {
+             total_consume += parseInt(item);
+          })
+          console.log(total_consume)
+          // document.getElementById("num").innerHTML = num;//设置投放总额
+       }
+       else {
+          layer.msg("非数字", {time: 3500})
+       }
+    }
+    /*获取值*/
+   function getFormData() {
+      /*获取推广应用ID*/
+      //获取下拉框
+      var select = document.getElementsByName("host_id")[0];
+      //获取选中项的值
+      var host_id = select.value;
+      console.log("推广应用ID="+host_id);
+
+      /*获取被选中的推广类型ID*/
+      var type_id = 1;
+      console.log("推广类型ID="+type_id);
+
+      /*获取产品链接*/
+      var url_dom = document.getElementsByName("url")[0];
+      var url = url_dom.value;
+      console.log("产品链接="+url);
+
+      /*获取关键词和投放数量*/
+      console.log(add());
+
+      /*获取是否匀速*/
+      var speed_dom=document.getElementsByName("speed");
+      for(var i=0;i<speed_dom.length;i++){
+         if(speed_dom[i].checked===true){
+            var speed=speed_dom[i].value;
+            break;
+         }
+      }
+      console.log("是否匀速="+speed);
+
+   }
+   /*获取投放间隔时间*/
+   function spaceTime() {
+      /*获取投放时间*/
+      var startDate1_dom=document.getElementsByName("startDate1")[0];
+      var startDate1 = startDate1_dom.value;
+      console.log("开始日期="+startDate1);
+
+      var startDate2_dom=document.getElementsByName("startDate2")[0];
+      var startDate2 = startDate2_dom.value;
+      console.log("开始时间="+startDate2);
+      console.log("完整开始日期="+startDate1+" "+startDate2);
+
+      var endDate1_dom=document.getElementsByName("endDate1")[0];
+      var endDate1 = endDate1_dom.value;
+      console.log("结束日期="+endDate1);
+      var endDate2_dom=document.getElementsByName("endDate2")[0];
+      var endDate2 = endDate2_dom.value;
+      console.log("结束日期="+endDate2);
+      console.log("完整结束日期="+endDate1+" "+endDate2);
+      return space(startDate1+" "+startDate2,endDate1+" "+endDate2);
+   }
+
+    $("body").delegate("#keyword_table .nowrap .layui-input", "blur", function () {
+       var length = $("#keyword_table .nowrap [name=contents]").length
+       let launch_num_arr = [];
+       for (let i = 0; i < length; i++) {
+          if ($("#k#keyword_table .nowrap [name=contents]").eq(i).val() != "") {
+             launch_num_arr.push($("#keyword_table .nowrap [name=contents]").eq(i).val())
+          }
+       }
+       var sum = eval(launch_num_arr.join("+"));
+       document.getElementById("num").innerHTML = sum;//设置投放总额
+       //同时向后台发起验证
+       $.ajax({
+          url: "/spread/Order/ready",
+          type: "post",
+          data: {
+             time: spaceTime(),
+             number: sum,
+             speed: 1,
+          },
+          success: function (res) {
+             if(res.code === 200){
+                var datas = res.data;
+                document.getElementById("conmuse").innerHTML = datas.total_consumption;//回显消耗总额
+                document.getElementById("price").innerHTML = datas.price;//回显单价
+             }else{
+                layer.msg(res.info, {time: 3500})
+             }
+          }
+       })
+
+    });
+
+    /*向表格添加数据*/
+    function add(){
+       /*获取关键词信息*/
+       var remarks_dom = document.getElementsByName("remarks")[0];
+       var keywords_info = remarks_dom.value;
+       var code = keywords_info.split(/[(\r\n)\r\n]+/); // 根据换行或者回车进行识别
+       code.forEach((item, index) => { // 删除空项
+          if (!item) {
+             code.splice(index, 1);
+          }
+       })
+       var new_code = Array.from(new Set(code)); // 去重
+       var item_arr = [];
+       new_code.forEach((item, index) => {
+          if(getStr(item,',').length !== 0 ){
+             item_arr[index] = getStr(item,",");
+          }else {
+             item_arr = [];
+          }
+       })
+       var num = 0; //投放总量
+       if(item_arr.length !== 0){ //关键词框内有数据
+          item_arr.forEach((item, infos) => {
+             var table=document.getElementsByName("case")[0];//找到表格
+             var tr=document.createElement('tr');//创建tr(表格的行)
+             table.appendChild(tr);//向表格里添加行
+             //往新建的行添加列和数据
+             tr.innerHTML='<td class="text-center nowrap pointer" width="50%">'
+                +'<input class="layui-input" name="words" placeholder="请输入关键词"  value="'
+                + item[0]+ '" required="required" ></td>'
+                + '<td class="text-center nowrap pointer" width="30%" id="quantity">'
+                + '<input class="layui-input" type="number" name="contents" placeholder="请输入投放数量" required="required"  value="'+ item[1]+ '"></td>'
+                + '<td class="text-center nowrap pointer" width="20%">'
+                + '<a class="layui-btn layui-btn-sm layui-btn-danger" onclick="del(this,' + item[1] + ')">删 除</a></td>';
+             num += parseInt(item[1]);
+             cell_arr[infos] = item[1];//存每个关键词对应的投放数量
+          })
+          document.getElementById("num").innerHTML = num;//设置投放总额
+          //向后台发起验证
+          $.ajax({
+             url: "/spread/Order/ready",
+             type: "post",
+             data: {
+                time: spaceTime(),
+                number: num,
+                speed: 1,
+             },
+             success: function (res) {
+                if(res.code === 200){
+                   var datas = res.data;
+                   document.getElementById("conmuse").innerHTML = datas.total_consumption;//回显消耗总额
+                   document.getElementById("price").innerHTML = datas.price;//回显单价
+                }else{
+                   layer.msg(res.info, {time: 3500})
+                }
+             }
+          })
+
+
+       }else{
+          layer.msg("请填写符合规则的关键词和投放数量", {time: 3500})
+       }
+       return item_arr;
+
+    }
+    /*删除关键词表格中的任意行*/
+    function del(obj,params){
+       $(obj).parents("tr").remove();
+       //投放总量
+       var num_val = document.getElementById("num").innerText;
+       //删除行后重新计算投放总量
+       document.getElementById("num").innerHTML = num_val - params;
+
+       //向后台发起验证
+       $.ajax({
+          url: "/spread/Order/ready",
+          type: "post",
+          data: {
+             time: spaceTime(),
+             number: num_val - params,
+             speed: 1,
+          },
+          success: function (res) {
+             if(res.code === 200){
+                var datas = res.data;
+                document.getElementById("conmuse").innerHTML = datas.total_consumption;//回显消耗总额
+                document.getElementById("price").innerHTML = datas.price;//回显单价
+             }else{
+                layer.msg(res.info, {time: 3500})
+             }
+          }
+       })
+    }
+    /*清空文本域中所有的关键词信息*/
+    function emptyTextArea(){
+       document.getElementsByName("remarks")[0].value = "";
+    }
+    /*获取指定字符","和"，"前后的信息*/
+    function getStr(string,str){
+       var arrs = [];
+       if(string.indexOf(str) === -1){
+          arrs = [];
+       } else {
+          var str_before = string.split(str)[0];
+          var str_after = string.split(str)[1];
+          if (!checkNumber(str_after)){
+             arrs = [];
+          }else {
+             arrs = [str_before,str_after]
+          }
+       }
+       return  arrs;
+    }
+    //验证字符串是否是数字
+    function checkNumber(theObj) {
+       var reg = /^[0-9]+.?[0-9]*$/;
+       return reg.test(theObj);
+    }
+    //计算时间间隔
+    function space (start,end) {
+       let startTime = new Date(start); // 开始时间
+       let endTime = new Date(end); // 结束时间
+       let usedTime = endTime - startTime; // 相差的毫秒数
+       let days = Math.floor(usedTime / (24 * 3600 * 1000)); // 计算出天数
+       let leavel = usedTime % (24 * 3600 * 1000); // 计算天数后剩余的时间
+       let hours = Math.floor(leavel / (3600 * 1000)); // 计算剩余的小时数
+       let leavel2 = leavel % (3600 * 1000); // 计算剩余小时后剩余的毫秒数
+       let minutes = Math.floor(leavel2 / (60 * 1000)); // 计算剩余的分钟数
+       return ((days * 24 * 60)+(hours * 60)+ minutes);
+    }
 </script>
 <script>
     var defaultdate = new Date();
