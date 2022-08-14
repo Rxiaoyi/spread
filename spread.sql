@@ -11,7 +11,7 @@
  Target Server Version : 50726
  File Encoding         : 65001
 
- Date: 10/08/2022 22:53:31
+ Date: 14/08/2022 20:58:15
 */
 
 SET NAMES utf8mb4;
@@ -4487,25 +4487,28 @@ CREATE TABLE `shop_order_send`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `spread_android`;
 CREATE TABLE `spread_android`  (
-  `id` int(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `id` tinyint(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
   `name` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '应用名称',
   `icon` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '应用图标',
   `packageName` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '应用包名',
-  `status` tinyint(1) NULL DEFAULT 1 COMMENT '状态(0待审核 ,1审核完成,2审核拒绝)',
+  `status` tinyint(1) NULL DEFAULT 0 COMMENT '状态(0待审核 ,1审核完成,2审核拒绝)',
   `sort` bigint(20) NULL DEFAULT 0 COMMENT '排序权重',
   `categoryId` int(20) NULL DEFAULT NULL COMMENT '分类Id',
   `deleted` tinyint(1) NULL DEFAULT 0 COMMENT '删除(1删除,0未删)',
   `create_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `slider` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '资质图片',
   `files` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '文件',
+  `user_id` int(20) NULL DEFAULT NULL COMMENT '用户Id',
+  `refuse` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '驳回原因',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '安卓' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 6 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '安卓' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of spread_android
 -- ----------------------------
-INSERT INTO `spread_android` VALUES (1, '家加按摩', 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg', 'uni.UNIB9FC978', 1, 0, 2, 0, '2022-08-06 14:23:03', NULL, NULL);
-INSERT INTO `spread_android` VALUES (2, '家加按摩', 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg', 'uni.UNIB9FC978', 1, 0, 2, 0, '2022-08-06 14:23:56', 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg|http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg|http://127.0.0.1:8000/upload/a4/371d06df7752ff19cd64aa1ac5e6a7.png', 'e3/422573c05e2820c300f9be34e2dca5.docx');
+INSERT INTO `spread_android` VALUES (1, '家加按摩1', 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg', 'uni.UNIB9FC978', 2, 0, 2, 0, '2022-08-06 14:23:03', NULL, NULL, 10002, '大萨达撒大萨达阿萨德阿萨德撒打算撒旦');
+INSERT INTO `spread_android` VALUES (2, '家加按摩', 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg', 'uni.UNIB9FC978', 1, 0, 2, 0, '2022-08-06 14:23:56', 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg|http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg|http://127.0.0.1:8000/upload/a4/371d06df7752ff19cd64aa1ac5e6a7.png', 'e3/422573c05e2820c300f9be34e2dca5.docx', 10002, NULL);
+INSERT INTO `spread_android` VALUES (5, '快乐到家', 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg', '快乐到家', 0, 0, 2, 0, '2022-08-13 18:51:40', NULL, NULL, 10002, NULL);
 
 -- ----------------------------
 -- Table structure for spread_annex
@@ -4599,17 +4602,23 @@ INSERT INTO `spread_company` VALUES (1, '测试公司', '张三', '17823617122',
 DROP TABLE IF EXISTS `spread_invoicing`;
 CREATE TABLE `spread_invoicing`  (
   `id` int(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
-  `amount` tinyint(20) NULL DEFAULT NULL COMMENT '开票金额',
+  `amount` float(20, 2) NULL DEFAULT NULL COMMENT '开票金额',
   `company` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '快递公司',
   `numbers` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '快递单号',
   `hostIds` json NULL COMMENT '开票订单',
   `create_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  `status` tinyint(1) NULL DEFAULT 1 COMMENT '状态(0待开票,1已开票)',
+  `status` tinyint(1) NULL DEFAULT 0 COMMENT '状态(0待开票,1已开票)',
   `ticket_id` tinyint(20) NULL DEFAULT NULL COMMENT '开票信息',
-  `company_id` tinyint(20) NULL DEFAULT NULL COMMENT '所属公司',
+  `user_id` int(20) NULL DEFAULT NULL COMMENT '所属公司',
   `deleted` tinyint(1) UNSIGNED NULL DEFAULT 0 COMMENT '删除状态',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员-开票记录' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员-开票记录' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of spread_invoicing
+-- ----------------------------
+INSERT INTO `spread_invoicing` VALUES (1, 200.00, NULL, NULL, NULL, '2022-08-14 20:34:00', 0, 1, 10002, 0);
+INSERT INTO `spread_invoicing` VALUES (2, 200.00, '顺丰快递', '010102512513512', NULL, '2022-08-14 20:38:24', 1, 1, 10002, 0);
 
 -- ----------------------------
 -- Table structure for spread_ios
@@ -4627,13 +4636,35 @@ CREATE TABLE `spread_ios`  (
 ) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = 'ios' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
+-- Table structure for spread_ment
+-- ----------------------------
+DROP TABLE IF EXISTS `spread_ment`;
+CREATE TABLE `spread_ment`  (
+  `id` int(20) NOT NULL AUTO_INCREMENT COMMENT 'ID',
+  `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '' COMMENT '结算编号',
+  `amount` float(20, 2) NULL DEFAULT NULL COMMENT '结算金额',
+  `month` tinyint(10) NULL DEFAULT NULL COMMENT '结算月份',
+  `status` tinyint(1) NULL DEFAULT 0 COMMENT '状态(0待结算,1已结算)',
+  `user_id` int(20) NULL DEFAULT NULL COMMENT '所属用户',
+  `deleted` tinyint(1) UNSIGNED NULL DEFAULT 0 COMMENT '删除状态',
+  `create_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  PRIMARY KEY (`id`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 3 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员-结算单' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of spread_ment
+-- ----------------------------
+INSERT INTO `spread_ment` VALUES (1, 'G7603994823786848557', 200.00, 6, 1, 10002, 0, '2022-08-14 17:21:16');
+INSERT INTO `spread_ment` VALUES (2, 'G7603994823786848558', 200.00, 6, 0, 10002, 0, '2022-08-14 17:21:16');
+
+-- ----------------------------
 -- Table structure for spread_order
 -- ----------------------------
 DROP TABLE IF EXISTS `spread_order`;
 CREATE TABLE `spread_order`  (
   `id` int(20) NOT NULL COMMENT 'ID',
   `sn` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '订单号',
-  `keywords` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '关键词',
+  `keywords` json NULL COMMENT '关键词',
   `url` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '产品链接',
   `status` tinyint(1) NULL DEFAULT 1 COMMENT '状态(0待投放,1投放中,2已完成,3已暂停,4已结束)',
   `speed` tinyint(1) NULL DEFAULT NULL COMMENT '匀速(0否,1是)',
@@ -4645,14 +4676,10 @@ CREATE TABLE `spread_order`  (
   `consume` tinyint(10) NULL DEFAULT NULL COMMENT '消耗',
   `type_id` int(20) NULL DEFAULT NULL COMMENT '推广类型id',
   `android_id` int(20) NULL DEFAULT NULL COMMENT '应用ID',
-  `planNum` int(10) NULL DEFAULT NULL COMMENT '计划份数',
-  `finishNum` int(10) NULL DEFAULT NULL COMMENT '完成份数',
   `finish_volume` tinyint(20) NULL DEFAULT NULL COMMENT '完成投放量',
   `type` tinyint(1) NULL DEFAULT NULL COMMENT '类型(0 ios,1安卓)',
-  `company_id` tinyint(20) NULL DEFAULT NULL COMMENT '所属公司',
   `user_id` tinyint(20) NULL DEFAULT NULL COMMENT '所属用户',
   `create_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
-  `is_deleted` tinyint(1) NULL DEFAULT 0 COMMENT '删除(1删除,0未删)',
   `deleted` tinyint(1) NULL DEFAULT 0 COMMENT '删除(1删除,0未删)',
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '安卓订单' ROW_FORMAT = Dynamic;
@@ -4663,19 +4690,25 @@ CREATE TABLE `spread_order`  (
 DROP TABLE IF EXISTS `spread_recharge`;
 CREATE TABLE `spread_recharge`  (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `uuid` bigint(20) UNSIGNED NULL DEFAULT 0 COMMENT '用户UID',
   `code` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL DEFAULT '' COMMENT '充值编号',
   `amount` decimal(20, 2) NULL DEFAULT 0.00 COMMENT '充值金额',
+  `balance` decimal(20, 2) NULL DEFAULT 0.00 COMMENT '余额',
   `deleted` tinyint(1) UNSIGNED NULL DEFAULT 0 COMMENT '删除状态',
-  `company_id` bigint(20) NULL DEFAULT 0 COMMENT '公司',
+  `user_id` int(20) NULL DEFAULT 0 COMMENT '用户',
   `create_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   `status` tinyint(1) NULL DEFAULT 1 COMMENT '充值流程状态(0已取消,1待支付,2支付中,3已支付,4待审核,5已完成)',
   `type` tinyint(1) NULL DEFAULT NULL COMMENT '充值类型(0支付宝,1对公打款)',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_data_user_balance_code`(`code`) USING BTREE,
-  INDEX `idx_data_user_balance_deleted`(`deleted`) USING BTREE,
-  INDEX `idx_data_user_balance_uuid`(`uuid`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '用户-账务-充值' ROW_FORMAT = Dynamic;
+  INDEX `idx_data_user_balance_deleted`(`deleted`) USING BTREE
+) ENGINE = InnoDB AUTO_INCREMENT = 11 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '用户-账务-充值' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of spread_recharge
+-- ----------------------------
+INSERT INTO `spread_recharge` VALUES (8, 'G7603994823786848557', 100.00, 0.00, 0, 10002, '2022-08-13 22:04:42', 4, 1);
+INSERT INTO `spread_recharge` VALUES (9, 'G7603995367733522420', 100.00, 0.00, 0, 10002, '2022-08-13 22:05:36', 4, 1);
+INSERT INTO `spread_recharge` VALUES (10, 'G7603995819442103117', 200.00, 0.00, 0, 10002, '2022-08-13 22:06:21', 5, 1);
 
 -- ----------------------------
 -- Table structure for spread_ticket
@@ -4696,8 +4729,14 @@ CREATE TABLE `spread_ticket`  (
   `annex` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '一般纳税人证明-附件',
   `is_deleted` tinyint(1) NULL DEFAULT 0 COMMENT '删除(1删除,0未删)',
   `create_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `user_id` int(20) NULL DEFAULT NULL COMMENT '用户ID',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员-开票信息' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8 COLLATE = utf8_general_ci COMMENT = '会员-开票信息' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of spread_ticket
+-- ----------------------------
+INSERT INTO `spread_ticket` VALUES (1, NULL, '发票抬头', 'sd132123313213213', '张三', '17823617122', '大萨达撒发懂法守法社发大水防守打法水电费', '重庆银行111', '453451323213213213', '地址', NULL, NULL, 0, '2022-08-14 17:09:25', 10002);
 
 -- ----------------------------
 -- Table structure for system_auth
@@ -4714,7 +4753,12 @@ CREATE TABLE `system_auth`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_system_auth_status`(`status`) USING BTREE,
   INDEX `idx_system_auth_title`(`title`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统-权限' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统-权限' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of system_auth
+-- ----------------------------
+INSERT INTO `system_auth` VALUES (1, '公司', '', '', 0, 1, '2022-08-13 14:08:29');
 
 -- ----------------------------
 -- Table structure for system_auth_node
@@ -4727,7 +4771,48 @@ CREATE TABLE `system_auth_node`  (
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_system_auth_auth`(`auth`) USING BTREE,
   INDEX `idx_system_auth_node`(`node`(191)) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统-授权' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 96 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统-授权' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of system_auth_node
+-- ----------------------------
+INSERT INTO `system_auth_node` VALUES (59, 1, 'spread');
+INSERT INTO `system_auth_node` VALUES (60, 1, 'spread/android');
+INSERT INTO `system_auth_node` VALUES (61, 1, 'spread/android/index');
+INSERT INTO `system_auth_node` VALUES (62, 1, 'spread/android/add');
+INSERT INTO `system_auth_node` VALUES (63, 1, 'spread/android/edit');
+INSERT INTO `system_auth_node` VALUES (64, 1, 'spread/android/intelligence');
+INSERT INTO `system_auth_node` VALUES (65, 1, 'spread/android/files');
+INSERT INTO `system_auth_node` VALUES (66, 1, 'spread/android/state');
+INSERT INTO `system_auth_node` VALUES (67, 1, 'spread/android/remove');
+INSERT INTO `system_auth_node` VALUES (68, 1, 'spread/company');
+INSERT INTO `system_auth_node` VALUES (69, 1, 'spread/company/balance');
+INSERT INTO `system_auth_node` VALUES (70, 1, 'spread/company/editpassword');
+INSERT INTO `system_auth_node` VALUES (71, 1, 'spread/invoicing');
+INSERT INTO `system_auth_node` VALUES (72, 1, 'spread/invoicing/index');
+INSERT INTO `system_auth_node` VALUES (73, 1, 'spread/invoicing/add');
+INSERT INTO `system_auth_node` VALUES (74, 1, 'spread/invoicing/edit');
+INSERT INTO `system_auth_node` VALUES (75, 1, 'spread/invoicing/state');
+INSERT INTO `system_auth_node` VALUES (76, 1, 'spread/invoicing/remove');
+INSERT INTO `system_auth_node` VALUES (77, 1, 'spread/order');
+INSERT INTO `system_auth_node` VALUES (78, 1, 'spread/order/index');
+INSERT INTO `system_auth_node` VALUES (79, 1, 'spread/order/add');
+INSERT INTO `system_auth_node` VALUES (80, 1, 'spread/order/edit');
+INSERT INTO `system_auth_node` VALUES (81, 1, 'spread/order/state');
+INSERT INTO `system_auth_node` VALUES (82, 1, 'spread/order/remove');
+INSERT INTO `system_auth_node` VALUES (83, 1, 'spread/recharge');
+INSERT INTO `system_auth_node` VALUES (84, 1, 'spread/recharge/index');
+INSERT INTO `system_auth_node` VALUES (85, 1, 'spread/recharge/add');
+INSERT INTO `system_auth_node` VALUES (86, 1, 'spread/recharge/edit');
+INSERT INTO `system_auth_node` VALUES (87, 1, 'spread/recharge/state');
+INSERT INTO `system_auth_node` VALUES (88, 1, 'spread/recharge/remove');
+INSERT INTO `system_auth_node` VALUES (89, 1, 'spread/ticket');
+INSERT INTO `system_auth_node` VALUES (90, 1, 'spread/ticket/index');
+INSERT INTO `system_auth_node` VALUES (91, 1, 'spread/ticket/invoice');
+INSERT INTO `system_auth_node` VALUES (92, 1, 'spread/ticket/add');
+INSERT INTO `system_auth_node` VALUES (93, 1, 'spread/ticket/edit');
+INSERT INTO `system_auth_node` VALUES (94, 1, 'spread/ticket/state');
+INSERT INTO `system_auth_node` VALUES (95, 1, 'spread/ticket/remove');
 
 -- ----------------------------
 -- Table structure for system_base
@@ -4799,12 +4884,14 @@ CREATE TABLE `system_data`  (
   `value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NULL COMMENT '配置值',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_system_data_name`(`name`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 2 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统-数据' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统-数据' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of system_data
 -- ----------------------------
 INSERT INTO `system_data` VALUES (1, 'price', 'a:2:{s:9:\"ios_price\";s:3:\"1.2\";s:13:\"android_price\";s:3:\"1.1\";}');
+INSERT INTO `system_data` VALUES (2, 'release', 'a:1:{s:8:\"download\";s:3:\"100\";}');
+INSERT INTO `system_data` VALUES (3, 'account', 'a:8:{s:7:\"company\";s:42:\"四川云思相纵网络科技有限公司\";s:4:\"code\";s:19:\"4402205009100320628\";s:4:\"bank\";s:24:\"工行成都芷泉支行\";s:7:\"account\";s:19:\"4402205009100320628\";s:4:\"type\";s:12:\"企业类型\";s:5:\"state\";s:12:\"企业类型\";s:6:\"mobile\";s:11:\"17823617122\";s:7:\"address\";s:6:\"地址\";}');
 
 -- ----------------------------
 -- Table structure for system_file
@@ -4834,7 +4921,7 @@ CREATE TABLE `system_file`  (
   INDEX `idx_system_file_status`(`status`) USING BTREE,
   INDEX `idx_system_file_issafe`(`issafe`) USING BTREE,
   INDEX `idx_system_file_isfast`(`isfast`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 15 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统-文件' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 21 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统-文件' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of system_file
@@ -4853,6 +4940,12 @@ INSERT INTO `system_file` VALUES (11, 'local', '73cd700b35b9fc70fa1cc5389781a690
 INSERT INTO `system_file` VALUES (12, 'local', 'e3422573c05e2820c300f9be34e2dca5', '推广网站建设系统需求说明.docx', 'docx', 'e3/422573c05e2820c300f9be34e2dca5.docx', 'e3/422573c05e2820c300f9be34e2dca5.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 14043, 10000, 0, 1, 1, '2022-08-06 15:52:22', '2022-08-06 15:52:22');
 INSERT INTO `system_file` VALUES (13, 'local', 'e3422573c05e2820c300f9be34e2dca5', '推广网站建设系统需求说明.docx', 'docx', 'e3/422573c05e2820c300f9be34e2dca5.docx', 'e3/422573c05e2820c300f9be34e2dca5.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 14043, 10000, 0, 1, 2, '2022-08-06 15:53:52', '2022-08-06 15:53:52');
 INSERT INTO `system_file` VALUES (14, 'local', '4d0560202495f1da31699c45683b1225', '1.jpg', 'jpg', 'http://0.0.0.0:8000/upload/4d/0560202495f1da31699c45683b1225.jpg', '4d/0560202495f1da31699c45683b1225.jpg', 'image/jpeg', 21633, 10000, 0, 0, 2, '2022-08-08 20:45:07', '2022-08-08 20:45:07');
+INSERT INTO `system_file` VALUES (15, 'local', '0ed8fe0c88190f394366f1e983641895', 'd8fe0c88190f394366f1e983641895.jpg', 'jpg', 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg', '0e/d8fe0c88190f394366f1e983641895.jpg', 'image/jpeg', 204714, 10000, 1, 0, 2, '2022-08-13 16:51:08', '2022-08-13 16:51:08');
+INSERT INTO `system_file` VALUES (16, 'local', '0ed8fe0c88190f394366f1e983641895', 'd8fe0c88190f394366f1e983641895.jpg', 'jpg', 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg', '0e/d8fe0c88190f394366f1e983641895.jpg', 'image/jpeg', 204714, 10000, 1, 0, 2, '2022-08-13 16:58:16', '2022-08-13 16:58:16');
+INSERT INTO `system_file` VALUES (17, 'local', 'e3422573c05e2820c300f9be34e2dca5', '推广网站建设系统需求说明.docx', 'docx', 'e3/422573c05e2820c300f9be34e2dca5.docx', 'e3/422573c05e2820c300f9be34e2dca5.docx', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 14043, 10000, 1, 1, 2, '2022-08-13 17:17:07', '2022-08-13 17:17:07');
+INSERT INTO `system_file` VALUES (18, 'local', '0ed8fe0c88190f394366f1e983641895', 'd8fe0c88190f394366f1e983641895.jpg', 'jpg', 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg', '0e/d8fe0c88190f394366f1e983641895.jpg', 'image/jpeg', 204714, 10002, 1, 0, 2, '2022-08-13 18:48:32', '2022-08-13 18:48:32');
+INSERT INTO `system_file` VALUES (19, 'local', '0ed8fe0c88190f394366f1e983641895', 'd8fe0c88190f394366f1e983641895.jpg', 'jpg', 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg', '0e/d8fe0c88190f394366f1e983641895.jpg', 'image/jpeg', 204714, 10002, 1, 0, 2, '2022-08-13 18:49:45', '2022-08-13 18:49:45');
+INSERT INTO `system_file` VALUES (20, 'local', '0ed8fe0c88190f394366f1e983641895', 'd8fe0c88190f394366f1e983641895.jpg', 'jpg', 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg', '0e/d8fe0c88190f394366f1e983641895.jpg', 'image/jpeg', 204714, 10002, 1, 0, 2, '2022-08-13 18:51:38', '2022-08-13 18:51:38');
 
 -- ----------------------------
 -- Table structure for system_menu
@@ -4872,7 +4965,7 @@ CREATE TABLE `system_menu`  (
   `create_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_system_menu_status`(`status`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 59 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统-菜单' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 67 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统-菜单' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of system_menu
@@ -4933,8 +5026,16 @@ INSERT INTO `system_menu` VALUES (53, 38, '下载单价规则', 'layui-icon layu
 INSERT INTO `system_menu` VALUES (54, 38, '投放规则', 'layui-icon layui-icon-cols', 'spread/config/release', 'spread/config/release', '', '_self', 0, 1, '2022-08-09 21:48:24');
 INSERT INTO `system_menu` VALUES (55, 38, '对公账户', 'layui-icon layui-icon-cols', 'spread/config/account', 'spread/config/account', '', '_self', 0, 1, '2022-08-09 21:49:51');
 INSERT INTO `system_menu` VALUES (56, 1, '记录管理', 'layui-icon layui-icon-cols', '', '#', '', '_self', 0, 1, '2022-08-10 21:31:20');
-INSERT INTO `system_menu` VALUES (57, 56, '开票记录', 'layui-icon layui-icon-cols', 'spread/invoicing/index', 'spread/invoicing/index', '', '_self', 0, 1, '2022-08-10 21:32:09');
-INSERT INTO `system_menu` VALUES (58, 56, '充值记录', 'layui-icon layui-icon-cols', 'spread/recharge/index', 'spread/recharge/index', '', '_self', 0, 1, '2022-08-10 21:33:04');
+INSERT INTO `system_menu` VALUES (57, 56, '开票记录', 'layui-icon layui-icon-cols', 'spread/invoicing/admin', 'spread/invoicing/admin', '', '_self', 0, 1, '2022-08-10 21:32:09');
+INSERT INTO `system_menu` VALUES (58, 56, '充值记录', 'layui-icon layui-icon-cols', 'spread/recharge/admin', 'spread/recharge/admin', '', '_self', 0, 1, '2022-08-10 21:33:04');
+INSERT INTO `system_menu` VALUES (59, 1, '应用管理', 'layui-icon layui-icon-cols', '', '#', '', '_self', 0, 1, '2022-08-13 17:32:20');
+INSERT INTO `system_menu` VALUES (60, 59, '安卓应用管理', 'layui-icon layui-icon-cols', 'spread/android/admin', 'spread/android/admin', '', '_self', 0, 1, '2022-08-13 17:34:06');
+INSERT INTO `system_menu` VALUES (61, 1, '发票管理', 'layui-icon layui-icon-cols', '', '#', '', '_self', 0, 1, '2022-08-13 18:20:59');
+INSERT INTO `system_menu` VALUES (62, 61, '申请开票', 'layui-icon layui-icon-cols', 'spread/ticket/invoice', 'spread/ticket/invoice', '', '_self', 0, 1, '2022-08-13 18:24:29');
+INSERT INTO `system_menu` VALUES (63, 61, '发票记录', 'layui-icon layui-icon-cols', 'spread/invoicing/index', 'spread/invoicing/index', '', '_self', 0, 1, '2022-08-13 18:25:06');
+INSERT INTO `system_menu` VALUES (64, 1, '账户管理', 'layui-icon layui-icon-cols', '', '#', '', '_self', 0, 1, '2022-08-13 18:25:52');
+INSERT INTO `system_menu` VALUES (65, 64, '我的账户', 'layui-icon layui-icon-cols', 'spread/company/balance', 'spread/company/balance', '', '_self', 0, 1, '2022-08-13 18:29:28');
+INSERT INTO `system_menu` VALUES (66, 64, '修改密码', 'layui-icon layui-icon-cols', 'spread/company/editpassword', 'spread/company/editpassword', '', '_self', 0, 1, '2022-08-13 18:32:39');
 
 -- ----------------------------
 -- Table structure for system_oplog
@@ -4949,7 +5050,7 @@ CREATE TABLE `system_oplog`  (
   `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT '' COMMENT '操作人用户名',
   `create_at` timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
   PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 28 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统-日志' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 58 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统-日志' ROW_FORMAT = Dynamic;
 
 -- ----------------------------
 -- Records of system_oplog
@@ -4981,6 +5082,36 @@ INSERT INTO `system_oplog` VALUES (24, 'admin/menu/add', '127.0.0.1', '系统菜
 INSERT INTO `system_oplog` VALUES (25, 'admin/menu/add', '127.0.0.1', '系统菜单管理', '增加系统菜单[58]成功', 'admin', '2022-08-10 21:33:04');
 INSERT INTO `system_oplog` VALUES (26, 'admin/menu/edit', '127.0.0.1', '系统菜单管理', '更新系统菜单[58]记录', 'admin', '2022-08-10 21:34:36');
 INSERT INTO `system_oplog` VALUES (27, 'admin/menu/edit', '127.0.0.1', '系统菜单管理', '更新系统菜单[57]记录', 'admin', '2022-08-10 21:34:53');
+INSERT INTO `system_oplog` VALUES (28, 'admin/login/index', '127.0.0.1', '系统用户登录', '登录系统后台成功', 'admin', '2022-08-11 21:26:08');
+INSERT INTO `system_oplog` VALUES (29, 'admin/api.plugs/optimize', '127.0.0.1', '系统运维管理', '创建数据库优化任务', 'admin', '2022-08-11 22:38:43');
+INSERT INTO `system_oplog` VALUES (30, 'admin/login/index', '127.0.0.1', '系统用户登录', '登录系统后台成功', 'admin', '2022-08-13 13:21:49');
+INSERT INTO `system_oplog` VALUES (31, 'admin/auth/add', '127.0.0.1', '系统权限管理', '增加系统权限[1]成功', 'admin', '2022-08-13 14:08:29');
+INSERT INTO `system_oplog` VALUES (32, 'admin/auth/apply', '127.0.0.1', '系统权限管理', '配置系统权限[1]授权成功', 'admin', '2022-08-13 14:08:57');
+INSERT INTO `system_oplog` VALUES (33, 'admin/user/edit', '127.0.0.1', '系统用户管理', '更新系统用户[10001]记录', 'admin', '2022-08-13 14:09:15');
+INSERT INTO `system_oplog` VALUES (34, 'admin/user/edit', '127.0.0.1', '系统用户管理', '更新系统用户[10000]记录', 'admin', '2022-08-13 15:40:10');
+INSERT INTO `system_oplog` VALUES (35, 'spread/company/add', '127.0.0.1', '系统用户管理', '增加系统用户[10003]成功', 'admin', '2022-08-13 16:58:17');
+INSERT INTO `system_oplog` VALUES (36, 'spread/company/price', '127.0.0.1', '系统用户管理', '更新系统用户[10002]记录', 'admin', '2022-08-13 17:15:27');
+INSERT INTO `system_oplog` VALUES (37, 'spread/company/price', '127.0.0.1', '系统用户管理', '更新系统用户[10002]记录', 'admin', '2022-08-13 17:16:45');
+INSERT INTO `system_oplog` VALUES (38, 'spread/company/files', '127.0.0.1', '系统用户管理', '更新系统用户[10002]记录', 'admin', '2022-08-13 17:17:10');
+INSERT INTO `system_oplog` VALUES (39, 'admin/menu/add', '127.0.0.1', '系统菜单管理', '增加系统菜单[59]成功', 'admin', '2022-08-13 17:32:20');
+INSERT INTO `system_oplog` VALUES (40, 'admin/menu/add', '127.0.0.1', '系统菜单管理', '增加系统菜单[60]成功', 'admin', '2022-08-13 17:34:06');
+INSERT INTO `system_oplog` VALUES (41, 'admin/auth/edit', '127.0.0.1', '系统权限管理', '更新系统权限[1]记录', 'admin', '2022-08-13 18:11:11');
+INSERT INTO `system_oplog` VALUES (42, 'admin/login/index', '127.0.0.1', '系统用户登录', '登录系统后台成功', 'admin', '2022-08-13 18:13:34');
+INSERT INTO `system_oplog` VALUES (43, 'admin/login/index', '127.0.0.1', '系统用户登录', '登录系统后台成功', '17823617122', '2022-08-13 18:14:27');
+INSERT INTO `system_oplog` VALUES (44, 'admin/login/index', '127.0.0.1', '系统用户登录', '登录系统后台成功', 'admin', '2022-08-13 18:17:44');
+INSERT INTO `system_oplog` VALUES (45, 'admin/menu/add', '127.0.0.1', '系统菜单管理', '增加系统菜单[61]成功', 'admin', '2022-08-13 18:20:59');
+INSERT INTO `system_oplog` VALUES (46, 'admin/menu/add', '127.0.0.1', '系统菜单管理', '增加系统菜单[62]成功', 'admin', '2022-08-13 18:24:29');
+INSERT INTO `system_oplog` VALUES (47, 'admin/menu/add', '127.0.0.1', '系统菜单管理', '增加系统菜单[63]成功', 'admin', '2022-08-13 18:25:06');
+INSERT INTO `system_oplog` VALUES (48, 'admin/menu/add', '127.0.0.1', '系统菜单管理', '增加系统菜单[64]成功', 'admin', '2022-08-13 18:25:52');
+INSERT INTO `system_oplog` VALUES (49, 'admin/menu/add', '127.0.0.1', '系统菜单管理', '增加系统菜单[65]成功', 'admin', '2022-08-13 18:29:28');
+INSERT INTO `system_oplog` VALUES (50, 'admin/menu/add', '127.0.0.1', '系统菜单管理', '增加系统菜单[66]成功', 'admin', '2022-08-13 18:32:39');
+INSERT INTO `system_oplog` VALUES (51, 'admin/auth/apply', '127.0.0.1', '系统权限管理', '配置系统权限[1]授权成功', 'admin', '2022-08-13 18:33:26');
+INSERT INTO `system_oplog` VALUES (52, 'admin/auth/apply', '127.0.0.1', '系统权限管理', '配置系统权限[1]授权成功', 'admin', '2022-08-13 21:08:10');
+INSERT INTO `system_oplog` VALUES (53, 'admin/login/index', '127.0.0.1', '系统用户登录', '登录系统后台成功', '17823617122', '2022-08-14 10:56:28');
+INSERT INTO `system_oplog` VALUES (54, 'admin/login/index', '127.0.0.1', '系统用户登录', '登录系统后台成功', 'admin', '2022-08-14 13:31:40');
+INSERT INTO `system_oplog` VALUES (55, 'admin/menu/edit', '127.0.0.1', '系统菜单管理', '更新系统菜单[58]记录', 'admin', '2022-08-14 13:32:27');
+INSERT INTO `system_oplog` VALUES (56, 'admin/login/index', '127.0.0.1', '系统用户登录', '登录系统后台成功', 'admin', '2022-08-14 20:01:27');
+INSERT INTO `system_oplog` VALUES (57, 'admin/menu/edit', '127.0.0.1', '系统菜单管理', '更新系统菜单[57]记录', 'admin', '2022-08-14 20:55:18');
 
 -- ----------------------------
 -- Table structure for system_queue
@@ -5009,7 +5140,14 @@ CREATE TABLE `system_queue`  (
   INDEX `idx_system_queue_rscript`(`rscript`) USING BTREE,
   INDEX `idx_system_queue_create_at`(`create_at`) USING BTREE,
   INDEX `idx_system_queue_exec_time`(`exec_time`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 1 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统-任务' ROW_FORMAT = Dynamic;
+) ENGINE = InnoDB AUTO_INCREMENT = 4 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_unicode_ci COMMENT = '系统-任务' ROW_FORMAT = Dynamic;
+
+-- ----------------------------
+-- Records of system_queue
+-- ----------------------------
+INSERT INTO `system_queue` VALUES (1, 'Q202208116534402', '提现到微信余额定时处理', 'xdata:UserTransfer', 0, '[]', 1660225474, '', 0.0000, 0.0000, 50, 0, 0, 1, '2022-08-11 21:44:34');
+INSERT INTO `system_queue` VALUES (2, 'Q202208115943094', '重新计算所有用户等级', 'xdata:UserUpgrade', 0, '[]', 1660228663, '', 0.0000, 0.0000, 0, 0, 0, 1, '2022-08-11 22:37:43');
+INSERT INTO `system_queue` VALUES (3, 'Q202208116043497', '优化数据库所有数据表', 'xadmin:database optimize', 0, '[]', 1660228723, '', 0.0000, 0.0000, 0, 0, 0, 1, '2022-08-11 22:38:43');
 
 -- ----------------------------
 -- Table structure for system_user
@@ -5017,7 +5155,7 @@ CREATE TABLE `system_queue`  (
 DROP TABLE IF EXISTS `system_user`;
 CREATE TABLE `system_user`  (
   `id` bigint(20) NOT NULL AUTO_INCREMENT,
-  `usertype` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '用户类型',
+  `usertype` tinyint(1) NULL DEFAULT 0 COMMENT '用户类型(0：后台，1公司)',
   `username` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '用户账号',
   `password` varchar(32) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '用户密码',
   `nickname` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NULL DEFAULT '' COMMENT '用户昵称',
@@ -5034,17 +5172,25 @@ CREATE TABLE `system_user`  (
   `sort` bigint(20) NULL DEFAULT 0 COMMENT '排序权重',
   `is_deleted` tinyint(1) NULL DEFAULT 0 COMMENT '删除(1删除,0未删)',
   `create_at` timestamp(0) NULL DEFAULT CURRENT_TIMESTAMP(0) COMMENT '创建时间',
+  `code` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT '1' COMMENT '社会统一信用代码',
+  `total` float(20, 2) NULL DEFAULT 0.00 COMMENT '总流水',
+  `balance` float(20, 2) NULL DEFAULT 0.00 COMMENT '余额',
+  `ios_price` float(20, 2) NULL DEFAULT NULL COMMENT 'IOS下载价格',
+  `android_price` float(20, 2) NULL DEFAULT NULL COMMENT 'Android下载价格',
+  `license` longtext CHARACTER SET utf8 COLLATE utf8_general_ci NULL COMMENT '营业执照',
+  `contacts` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL COMMENT '联系人',
+  `frozen` float(20, 2) NULL DEFAULT NULL COMMENT '冻结金额',
   PRIMARY KEY (`id`) USING BTREE,
   INDEX `idx_system_user_status`(`status`) USING BTREE,
   INDEX `idx_system_user_username`(`username`) USING BTREE,
   INDEX `idx_system_user_deleted`(`is_deleted`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 10002 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统-用户' ROW_FORMAT = Compact;
+) ENGINE = InnoDB AUTO_INCREMENT = 10003 CHARACTER SET = utf8mb4 COLLATE = utf8mb4_general_ci COMMENT = '系统-用户' ROW_FORMAT = Compact;
 
 -- ----------------------------
 -- Records of system_user
 -- ----------------------------
-INSERT INTO `system_user` VALUES (10000, '', 'admin', '21232f297a57a5a743894a0e4a801fc3', '系统管理员', '', ',,', '', '', '', '127.0.0.1', '2022-08-09 20:00:40', 6, '', 1, 1, 0, '2022-03-08 10:00:00');
-INSERT INTO `system_user` VALUES (10001, '', '17823617122', 'a66abb5684c45962d887564f08346e8d', '测试', '', ',,', '', '', '', '127.0.0.1', '2022-08-04 20:16:45', 1, '', 1, 0, 0, '2022-08-04 20:15:23');
+INSERT INTO `system_user` VALUES (10000, 0, 'admin', '21232f297a57a5a743894a0e4a801fc3', '系统管理员', 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg', ',,', '', '', '', '127.0.0.1', '2022-08-14 20:01:27', 12, '', 1, 1, 0, '2022-03-08 10:00:00', '1', 0.00, 0.00, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `system_user` VALUES (10002, 1, '17823617122', 'e10adc3949ba59abbe56e057f20f883e', '重庆魔女科技有限公司', '', ',1,', '', '', '', '127.0.0.1', '2022-08-14 10:56:28', 2, '', 1, 0, 0, '2022-08-13 16:58:17', '4635435132313212132132', 1100.00, 200.00, 1.20, 1.20, 'http://127.0.0.1:8000/upload/0e/d8fe0c88190f394366f1e983641895.jpg', '张三', NULL);
 
 -- ----------------------------
 -- Table structure for wechat_auto

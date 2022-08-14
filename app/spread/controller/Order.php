@@ -7,6 +7,7 @@ use app\spread\model\SpreadAndroid;
 use app\spread\model\SpreadCompany;
 use app\spread\model\SpreadOrder;
 use think\admin\Controller;
+use think\admin\extend\CodeExtend;
 use think\admin\extend\DataExtend;
 use think\admin\helper\QueryHelper;
 use think\admin\model\SystemUser;
@@ -100,6 +101,63 @@ class Order extends Controller
     {
         if ($this->request->isGet()) {
             $this->android = SpreadAndroid::items();
+        }
+    }
+
+    /**
+     * 创建订单
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public function createOrder()
+    {
+        if ($this->request->isPost()) {
+            [$post] = [$this->request->post()];
+            $company = SystemUser::mk()->find(AdminService::getUserId());
+            $speed = (int)$post['speed'];
+            $total_consumption = 0;
+            $time = $post['time'] || 0;
+            if ($company['android_price']) {
+                $android_price = $company['android_price'];
+            } else {
+                $opt = sysdata('price');
+                $android_price = $opt['android_price'];
+            }
+            if ($speed === 1) {
+                $total_consumption = $post['number'] * $time * $android_price;
+            } else if ($speed === 0) {
+                $opt = sysdata('release');
+                $download = $opt['download'];
+                $total_consumption = $download * $time * $android_price;
+            } else {
+                $this->error('请选择是否匀速', '', 400);
+            }
+
+            $total_volume = 0;
+            foreach ($post['keywords'] as $item) {
+                $total_volume = $total_volume + $item['number'];
+            }
+
+            $order = SpreadOrder::create([
+                'sn' => CodeExtend::uniqidNumber(20, 'O'),
+                'keywords' => $post['keywords'],
+                'url' => $post['url'],
+                'speed' => $post['speed'],
+                'start_at' => $post['start_at'],
+                'end_at' => $post['end_at'],
+                'total_amount' => $total_consumption,
+                'total_volume' => $total_volume,
+                'price' => $android_price,
+                'consume' => 0,
+                'finish_volume' => 0,
+                'type' => $post['type'],
+                'user_id' => AdminService::getUserId(),
+                'status' => 0,
+            ]);
+            if ($order) {
+                $this->success('下单成功', '', 200);
+            }
         }
     }
 

@@ -20,4 +20,19 @@ class SpreadRecharge extends Model {
    public function getCreateAtAttr(string $value): string {
       return format_datetime($value);
    }
+
+
+    /**
+     * 获取单条业务数据
+     * @param $code
+     * @return SpreadCategory|array|mixed|\think\Model|null
+     * @throws \think\db\exception\DataNotFoundException
+     * @throws \think\db\exception\DbException
+     * @throws \think\db\exception\ModelNotFoundException
+     */
+    public static function getInfo($code)
+    {
+        $map = ['code' => $code];
+        return static::mk()->where($map)->order('id desc')->find();
+    }
 }

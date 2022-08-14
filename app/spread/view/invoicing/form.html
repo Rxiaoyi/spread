@@ -2,33 +2,12 @@
     <div class="layui-card-body padding-left-40">
 
         <label class="layui-form-item relative block">
-            <span class="help-label"><b>产品名称</b>Android Name</span>
-            <input class="layui-input" name="name" placeholder="请输入产品名称" required value='{$vo.name|default=""}'>
-            <span class="help-block"><b>必填，</b>请填写产品名称，建议字符不要太长，一般 4-6 个汉字</span>
+            <span class="help-label"><b>快递公司</b></span>
+            <input class="layui-input" name="company" placeholder="请输入快递公司" required value='{$vo.company|default=""}'>
         </label>
-
-        <div class="layui-form-item label-required-prev">
-            <span class="help-label"><b>产品类别</b>Android Parent</span>
-            <select class='layui-select' name='categoryId' lay-search>
-                {foreach $category as $cate}
-                <option value='{$cate.id}'>{$cate.name}</option>
-                {/foreach}
-            </select>
-        </div>
-
-        <div class="layui-form-item relative block">
-            <span class="help-label"><b>产品LOGO</b>Android Icon</span>
-            <label class="relative block">
-                <input class="layui-input think-bg-gray" readonly name="icon" placeholder="请上传应用名称图标" value='{$vo.icon|default=""}'>
-                <a class="input-right-icon layui-icon layui-icon-upload" data-field="icon" data-file data-type="png,jpg,jpeg,gif"></a>
-            </label>
-            <span class="help-block"><b>可选，</b>请上传产品LOGO，需要是http可访问的图片资源链接</span>
-        </div>
-
         <label class="layui-form-item relative block">
-            <span class="color-green font-w7">产品包名</span>
-            <span class="color-desc margin-left-5">Android Package</span>
-            <textarea class="layui-textarea" name="packageName" placeholder="请输入产品包名">{$vo.packageName|default=''}</textarea>
+            <span class="help-label"><b>快递单号</b></span>
+            <input class="layui-input" name="numbers" placeholder="请输入快递单号" required value='{$vo.numbers|default=""}'>
         </label>
     </div>
 

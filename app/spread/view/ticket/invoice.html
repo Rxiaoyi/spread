@@ -1,33 +1,122 @@
 {extend name="../../admin/view/main"}
-
 {block name="content"}
 <div class="think-box-shadow">
-    <form action="{:sysuri()}" method="post" data-auto="true" class="layui-form layui-card" style="width:850px">
-        <div class="layui-card-header margin-10">
-            <b>资产信息</b>
+    <div class="layui-card-header margin-10">
+        <b>第一步：选择开票信息</b>
+    </div>
+    {empty name="invoice"}
+    您尚未设置有效的开票信息，暂时无法开票，请先
+    <a class="layui-btn layui-btn-sm" data-dbclick data-open="{:url('add')}"
+       data-title="设置开票信息">设置开票信息</a>
+    当前仅支持企业开票
+    {/empty}
+    {notempty name="invoice"}
+    <table class="layui-table margin-top-10 margin-right-30" lay-skin="line">
+        <thead>
+        <tr>
+            <th class="text-left nowrap"></th>
+            <th class="text-left nowrap">发票抬头</th>
+            <th class="text-left nowrap">开票类型</th>
+            <th class="text-left nowrap">收票人</th>
+            <th class="text-left nowrap">联系电话</th>
+            <th class="text-left nowrap">收件地址</th>
+            <th class="text-left nowrap">操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        {foreach $invoice as $key=>$vo}
+        <tr>
+            <td class='list-table-check-td'>
+                <input type="radio" name="ticket_id" value="{$vo.id}">
+            </td>
+            <td class="text-left nowrap">{$vo.invoice|default=''}</td>
+            <td class="text-left nowrap">
+                {if $vo.type eq 0}
+                <span class="color-red">增值税普通发票</span>
+                {elseif $vo.status eq 1}
+                <span class="color-green">增值税专用发票</span>
+                {/if}
+            </td>
+            <td class="text-left nowrap">{$vo.collector|default=''}</td>
+            <td class="text-left nowrap">{$vo.mobile|default=''}</td>
+            <td class="text-left nowrap">{$vo.address|default=''}</td>
+            <td class='text-left nowrap'>
+                <a class="layui-btn layui-btn-sm" data-dbclick data-open="{:url('edit')}?id={$vo.id}"
+                   data-title="修改">修 改</a>
+            </td>
+        </tr>
+        {/foreach}
+        </tbody>
+    </table>
+    {/notempty}
+    <div class="layui-card-header margin-10">
+        <b>第二步：选择开票结算单</b>
+    </div>
+    <div class="think-box-shadow">
+        <table class="layui-table margin-top-10" lay-skin="line" id="ment">
+            {notempty name='mentLisst'}
+            <thead>
+            <tr>
+                <th class='list-table-check-td think-checkbox'>
+                    <label><input data-auto-none data-check-target='.list-check-box' type='checkbox'></label>
+                </th>
+                <th class="text-left nowrap">结算月份</th>
+                <th class="text-left nowrap">订单号</th>
+                <th class="text-left nowrap">可开票金额</th>
+            </tr>
+            </thead>
+            {/notempty}
+            <tbody>
+            {foreach $mentLisst as $key=>$vo}
+            <tr>
+                <td class='list-table-check-td think-checkbox'>
+                    <label><input class="list-check-box" type='checkbox' name="ment_id" value='{$vo.id}'></label>
+                </td>
+                <td class="text-left nowrap">{$vo.month|default=''}月</td>
+                <td class="text-left nowrap">{$vo.code|default=''}</td>
+                <td class="text-left nowrap">{$vo.amount|default=''}</td>
+            </tr>
+            {/foreach}
+            </tbody>
+        </table>
+        {empty name='mentLisst'}<span class="notdata">暂无可开票结算单</span>{else}{$pagehtml|raw|default=''}{/empty}
+    </div>
+    <div class="margin-top-20 margin-left-20">
+        <div class="margin-10">
+            <b>可开票金额:{$amount}</b>
         </div>
-
-        <div class="layui-card-body  margin-left-30 margin-top-10 margin-bottom-30">
-            账户余额：<span class="font-s20">000</span>
-            <a class="layui-btn" style="margin-left: 150px" data-dbclick  data-open="{:url('/spread/recharge/add')}" data-title="充值">充 值</a>
-            <a class="layui-btn" style="margin-left: 30px" data-dbclick data-open="{:url('/spread/recharge/index')}" data-title="充值记录">充值记录</a>
-            <a class="layui-btn" style="margin-left: 30px" data-dbclick data-open="{:url('/spread/order/index')}" data-title="收支记录">收支记录</a>
-        </div>
-
-        <div class="layui-card-header margin-10">
-            <b>账号信息</b>
-        </div>
-
-        <div class="layui-card-body  margin-left-30 margin-top-10 margin-bottom-30">
-            <div style="display: flex;flex-direction: column;">
-                <span class="font-s16 margin-top-20">企业名称：00</span>
-                <span class="font-s16 margin-top-20">社会统一信用代码：00</span>
-                <span class="font-s16 margin-top-20">联系人：00</span>
-                <span class="font-s16 margin-top-20">联系电话：00</span>
-                <span class="font-s16 margin-top-20">营业执照：00
-                </span>
-            </div>
-        </div>
-    </form>
+        <a class="layui-btn layui-btn-sm" id="submit">提交开票</a>
+    </div>
 </div>
+{/block}
+{block name='script'}
+<script>
+    $('#submit').click(function () {
+        console.log('12312332')
+        let ticket_id = $('input[name="ticket_id"]:checked').val();
+        var length = $("#ment .think-checkbox [name=ment_id]:checked").length
+        let launch_num_arr = [];
+        for (let i = 0; i < length; i++) {
+            if ($("#ment .think-checkbox [name=ment_id]:checked").eq(i).val() != "") {
+                launch_num_arr.push($("#ment .think-checkbox [name=ment_id]:checked").eq(i).val())
+            }
+        }
+        $.ajax({
+            url: "/spread/Invoicing/createInvoicing",
+            type: "post",
+            data: {
+                ticket_id: ticket_id,
+                orderIds: launch_num_arr,
+            },
+            success: function (res) {
+                if(res.code === 200){
+                    layer.msg(res.info, {time: 3500})
+                    window.location.reload();
+                }else{
+                    layer.msg(res.info, {time: 3500})
+                }
+            }
+        })
+    });
+</script>
 {/block}

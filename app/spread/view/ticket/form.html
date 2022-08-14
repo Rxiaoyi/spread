@@ -1,34 +1,53 @@
+{extend name="../../admin/view/main"}
+{block name="content"}
 <form action="{:sysuri()}" data-table-id="FormTable" class="layui-form layui-card" data-auto="true" method="post">
     <div class="layui-card-body padding-left-40">
 
-        <label class="layui-form-item relative block">
-            <span class="help-label"><b>产品名称</b>Android Name</span>
-            <input class="layui-input" name="name" placeholder="请输入产品名称" required value='{$vo.name|default=""}'>
-            <span class="help-block"><b>必填，</b>请填写产品名称，建议字符不要太长，一般 4-6 个汉字</span>
-        </label>
-
         <div class="layui-form-item label-required-prev">
-            <span class="help-label"><b>产品类别</b>Android Parent</span>
-            <select class='layui-select' name='categoryId' lay-search>
-                {foreach $category as $cate}
-                <option value='{$cate.id}'>{$cate.name}</option>
-                {/foreach}
-            </select>
-        </div>
-
-        <div class="layui-form-item relative block">
-            <span class="help-label"><b>产品LOGO</b>Android Icon</span>
-            <label class="relative block">
-                <input class="layui-input think-bg-gray" readonly name="icon" placeholder="请上传应用名称图标" value='{$vo.icon|default=""}'>
-                <a class="input-right-icon layui-icon layui-icon-upload" data-field="icon" data-file data-type="png,jpg,jpeg,gif"></a>
-            </label>
-            <span class="help-block"><b>可选，</b>请上传产品LOGO，需要是http可访问的图片资源链接</span>
+            <span class="help-label"><b>开票类型：</b></span>
+            <div class="flex flex-wrap">
+                <fieldset class="layui-bg-gray">
+                    {foreach ['增值税普通发票','增值税专用发票'] as $k => $v}
+                    {if (isset($vo.type) and $vo.type eq $k) or (empty($vo.type) and $k eq 0)}
+                    <input checked name="type_id" title="{$v}" type="radio" value="{$k}">
+                    {else}
+                    <input name="type_id" title="{$v}" type="radio" value="{$k}">
+                    {/if}{/foreach}
+                </fieldset>
+            </div>
         </div>
 
         <label class="layui-form-item relative block">
-            <span class="color-green font-w7">产品包名</span>
-            <span class="color-desc margin-left-5">Android Package</span>
-            <textarea class="layui-textarea" name="packageName" placeholder="请输入产品包名">{$vo.packageName|default=''}</textarea>
+            <span class="help-label"><b>发票抬头</b></span>
+            <input class="layui-input" name="invoice" placeholder="请输入发票抬头" required value='{$vo.invoice|default=""}'>
+        </label>
+        <label class="layui-form-item relative block">
+            <span class="help-label"><b>纳税人识别号</b></span>
+            <input class="layui-input" name="number" placeholder="请输入纳税人识别号" required value='{$vo.number|default=""}'>
+        </label>
+        <label class="layui-form-item relative block">
+            <span class="help-label"><b>地址</b></span>
+            <input class="layui-input" name="place" placeholder="请输入地址" required value='{$vo.place|default=""}'>
+        </label>
+        <label class="layui-form-item relative block">
+            <span class="help-label"><b>开户行</b></span>
+            <input class="layui-input" name="bank" placeholder="请输入开户行" required value='{$vo.bank|default=""}'>
+        </label>
+        <label class="layui-form-item relative block">
+            <span class="help-label"><b>银行卡账号</b></span>
+            <input class="layui-input" name="card" placeholder="请输入账号" required value='{$vo.card|default=""}'>
+        </label>
+        <label class="layui-form-item relative block">
+            <span class="help-label"><b>收票人</b></span>
+            <input class="layui-input" name="collector" placeholder="请输入收票人" required value='{$vo.collector|default=""}'>
+        </label>
+        <label class="layui-form-item relative block">
+            <span class="help-label"><b>联系电话</b></span>
+            <input class="layui-input" name="mobile" placeholder="请输入联系电话" required value='{$vo.mobile|default=""}'>
+        </label>
+        <label class="layui-form-item relative block">
+            <span class="help-label"><b>收件地址</b></span>
+            <input class="layui-input" name="address" placeholder="请输入收件地址" required value='{$vo.address|default=""}'>
         </label>
     </div>
 
@@ -41,3 +60,4 @@
     </div>
 
 </form>
+{/block}

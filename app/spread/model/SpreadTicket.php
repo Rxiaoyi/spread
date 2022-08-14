@@ -24,7 +24,7 @@ class SpreadTicket extends Model {
    public static function getInfo($androidId)
    {
       $map = ['id' => $androidId];
-      return static::mk()->where($map)->order('id desc')->field('id,name,icon,packageName')->find();
+      return static::mk()->where($map)->order('id desc')->field('id,invoice,number,collector,mobile,address')->find();
    }
 
    /**
