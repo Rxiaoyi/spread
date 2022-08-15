@@ -1,0 +1,68 @@
+{extend name="../../admin/view/main"}
+
+{block name="button"}
+<button class='layui-btn layui-btn-sm layui-btn-primary' data-modal='{:url("add")}'>添加应用</button>
+{/block}
+
+{block name='content'}
+<div class="think-box-shadow">
+   {include file='ios/index_search'}
+   <table class="layui-table margin-top-10" lay-skin="line">
+      {notempty name='list'}
+      <thead>
+      <tr>
+         <th class='list-table-check-td think-checkbox'>
+            <label><input data-auto-none data-check-target='.list-check-box' type='checkbox'></label>
+         </th>
+         <th class='list-table-sort-td'>
+            <button class="layui-btn layui-btn-xs" data-reload type="button">刷 新</button>
+         </th>
+         <th class="text-left nowrap">产品名称</th>
+         <th class="text-left nowrap">产品LOGO</th>
+         <th class="text-left nowrap">产品状态</th>
+         <th class="text-left nowrap">排序权重</th>
+         <th class="text-left nowrap">创建时间</th>
+         <th class="text-left nowrap"></th>
+      </tr>
+      </thead>
+      {/notempty}
+      <tbody>
+      {foreach $list as $key=>$vo}
+      <tr>
+         <td class='list-table-check-td think-checkbox'>
+            <label><input class="list-check-box" type='checkbox' value='{$vo.id}'></label>
+         </td>
+         <td class='list-table-sort-td'>
+            <label><input class="list-sort-input" data-action-blur="{:sysuri()}" data-loading="false"
+                          data-value="id#{$vo.id};action#sort;sort#{value}" value="{$vo.sort}"></label>
+         </td>
+         <td class="text-left nowrap">{$vo.name|default=''}</td>
+         <td class="text-left nowrap">
+            <div class="headimg headimg-no" data-tips-hover data-tips-image data-lazy-src="{$vo.icon}"></div>
+         </td>
+         <td class="text-left nowrap">
+            {if $vo.status eq 0}
+            <span class="color-red">待审核</span>
+            {elseif $vo.status eq 1}
+            <span class="color-green">审核完成</span>
+            {elseif $vo.status eq 2}
+            <span class="color-green">审核拒绝</span>
+            {/if}
+         </td>
+         <td class="text-left nowrap">{$vo.sort|default=''}</td>
+         <td class="text-left nowrap">{$vo.create_at}</td>
+         <td class='text-left nowrap'>
+            <a class="layui-btn layui-btn-sm" data-dbclick data-modal="{:url('edit')}?id={$vo.id}"
+               data-title="编辑产品">编 辑</a>
+            <a class="layui-btn layui-btn-sm" data-dbclick data-modal="{:url('intelligence')}?id={$vo.id}"
+               data-title="上传资质">上传资质</a>
+            <a class="layui-btn layui-btn-sm" data-dbclick data-modal="{:url('files')}?id={$vo.id}"
+               data-title="重排重入库">重排重入库</a>
+         </td>
+      </tr>
+      {/foreach}
+      </tbody>
+   </table>
+   {empty name='list'}<span class="notdata">没有记录哦</span>{else}{$pagehtml|raw|default=''}{/empty}
+</div>
+{/block}

@@ -1,0 +1,23 @@
+<form action="{:sysuri()}" data-table-id="FormTable" class="layui-form layui-card" data-auto="true" method="post">
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <div data-mch-type="files" class="padding-top-15 padding-bottom-15">
+                <input name="files" value="{$files|default=''}" type="hidden">
+                <button data-file="btn" data-uptype="local" data-safe="true"  data-type="excel,docx" data-field="files"
+                        type="button" class="layui-btn layui-btn-primary">
+                    <i class="layui-icon layui-icon-vercode"></i> 选择文件
+                </button>
+                <p class="help-block margin-top-10">注意：请上传excel,word文件</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="hr-line-dashed"></div>
+    {notempty name='vo.id'}<input name='id' type='hidden' value='{$vo.id}'>{/notempty}
+
+    <div class="layui-form-item text-center">
+        <button class="layui-btn" type='submit'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" data-close type='button' data-confirm="确定要取消编辑吗？">取消编辑</button>
+    </div>
+</form>
+

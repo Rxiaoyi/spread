@@ -1,0 +1,18 @@
+<form action="{:sysuri()}" data-table-id="FormTable" class="layui-form layui-card" data-auto="true" method="post">
+    <div class="layui-card-body padding-left-40">
+        <label class="layui-form-item relative block">
+            <input name="slider" data-max-width="2048" data-max-height="1024" type="hidden" value="{$vo.slider|default=''}">
+            <script>$('[name="slider"]').uploadMultipleImage();</script>
+        </label>
+
+    </div>
+
+    <div class="hr-line-dashed"></div>
+    {notempty name='vo.id'}<input name='id' type='hidden' value='{$vo.id}'>{/notempty}
+
+    <div class="layui-form-item text-center">
+        <button class="layui-btn" type='submit'>保存数据</button>
+        <button class="layui-btn layui-btn-danger" data-close type='button' data-confirm="确定要取消编辑吗？">取消编辑</button>
+    </div>
+
+</form>
